@@ -10,7 +10,7 @@
                     <b-form-input
                         id="key"
                         v-model="key"
-                        @keyup="encrypt"
+                        @keyup="doEncrypt"
                     ></b-form-input>
                 </b-form-group>
             </b-col>
@@ -28,7 +28,7 @@
                         rows="3"
                         max-rows="6"
                         v-model="plainText"
-                        @keyup="encrypt"
+                        @keyup="doEncrypt"
                     ></b-form-textarea>
                 </b-form-group>
             </b-col>
@@ -46,25 +46,32 @@
                         rows="3"
                         max-rows="6"
                         v-model="cipherText"
-                        @keyup="decrypt"
+                        @keyup="doDecrypt"
                     ></b-form-textarea>
                 </b-form-group>
             </b-col>
         </b-row>
-        {{ key }}
-        {{ plainText }}
-        {{ cipherText }}
     </div>
 </template>
 
 <script>
+    import columnarCipher from '../mixins/columnarCipher'
     export default {
         name: 'columnar',
+        mixins: [columnarCipher],
         data() {
             return {
                 key: '',
                 plainText: '',
                 cipherText: ''
+            }
+        },
+        methods: {
+            doEncrypt() {
+                this.cipherText = this.encrypt(this.key, this.plainText)
+            },
+            doDecrypt() {
+                this.plainText = this.decrypt(this.key, this.cipherText)
             }
         }
     }
