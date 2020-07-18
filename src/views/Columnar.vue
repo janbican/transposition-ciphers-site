@@ -6,11 +6,11 @@
 </template>
 
 <script>
-import NavTabs from "@/components/common/NavTabs";
+import NavTabs from '@/components/common/NavTabs'
 
 export default {
   components: {
-    NavTabs
-  }
-};
+    NavTabs,
+  },
+}
 </script>

@@ -11,9 +11,9 @@
 <script>
 export default {
   props: {
-    cipher: String
-  }
-};
+    cipher: String,
+  },
+}
 </script>
 
 <style>

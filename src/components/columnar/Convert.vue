@@ -35,29 +35,29 @@
 </template>
 
 <script>
-import columnarCipher from "@/mixins/columnarCipher";
+import columnarCipher from '@/mixins/columnarCipher'
 
 export default {
-  name: "Columnar",
+  name: 'Columnar',
   mixins: [columnarCipher],
   data() {
     return {
-      keyValue: "",
-      plainText: "",
-      cipherText: ""
-    };
+      keyValue: '',
+      plainText: '',
+      cipherText: '',
+    }
   },
   methods: {
     keyValueChanged() {
-      this.keyValue = this.keyValue.replace(/[^A-Za-z]/g, "").toLowerCase();
-      this.doEncrypt();
+      this.keyValue = this.keyValue.replace(/[^A-Za-z]/g, '').toLowerCase()
+      this.doEncrypt()
     },
     doEncrypt() {
-      this.cipherText = this.encrypt(this.keyValue, this.plainText);
+      this.cipherText = this.encrypt(this.keyValue, this.plainText)
     },
     doDecrypt() {
-      this.plainText = this.decrypt(this.keyValue, this.cipherText);
-    }
-  }
-};
+      this.plainText = this.decrypt(this.keyValue, this.cipherText)
+    },
+  },
+}
 </script>
