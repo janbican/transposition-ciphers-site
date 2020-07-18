@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="nav-tabs">
     <b-nav tabs>
       <b-nav-item :to="{ name: 'ColumnarDescription' }">Popis</b-nav-item>
       <b-nav-item :to="{ name: 'ColumnarConvert' }">Převod</b-nav-item>
@@ -12,4 +12,8 @@
 export default {};
 </script>
 
-<style></style>
+<style>
+.nav-tabs {
+  margin-bottom: 2em;
+}
+</style>
