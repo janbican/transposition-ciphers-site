@@ -1,13 +1,5 @@
 <template>
   <footer class="fixed-bottom bg-light">
-    <b-container>
-      2020, bakalářská práce
-    </b-container>
+    <b-container>2020, bakalářská práce</b-container>
   </footer>
 </template>
-
-<script>
-export default {};
-</script>
-
-<style></style>

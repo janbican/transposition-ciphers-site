@@ -1,5 +1,5 @@
 <template>
-  <b-navbar toggleable="lg" type="dark" variant="info">
+  <b-navbar class="navbar" toggleable="lg" type="dark" variant="info">
     <b-container>
       <b-navbar-brand :to="{ name: 'Home' }">Transpoziční šifry</b-navbar-brand>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -18,8 +18,8 @@
   </b-navbar>
 </template>
 
-<script>
-export default {};
-</script>
-
-<style></style>
+<style scoped>
+.navbar {
+  min-height: 80px;
+}
+</style>

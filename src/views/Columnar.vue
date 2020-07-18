@@ -1,18 +1,16 @@
 <template>
   <div>
-    <NavTabs />
+    <NavTabs cipher="Columnar" />
     <router-view />
   </div>
 </template>
 
 <script>
-import NavTabs from "../components/columnar/NavTabs";
+import NavTabs from "@/components/common/NavTabs";
 
 export default {
   components: {
-    NavTabs,
-  },
+    NavTabs
+  }
 };
 </script>
-
-<style></style>
