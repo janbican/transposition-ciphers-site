@@ -1,7 +1,16 @@
 <template>
   <div>
-    <b-form-group description="2 a více malých písmen" label="Klíč" label-for="key">
-      <b-form-input id="key" type="text" v-model="keyValue" @keyup="keyValueChanged"></b-form-input>
+    <b-form-group
+      description="2 a více malých písmen"
+      label="Klíč"
+      label-for="key"
+    >
+      <b-form-input
+        id="key"
+        type="text"
+        v-model="keyValue"
+        @keyup="keyValueChanged"
+      ></b-form-input>
     </b-form-group>
 
     <b-form-group
@@ -14,7 +23,7 @@
         placeholder="zadej otevřený text"
         rows="5"
         v-model="plainText"
-        @input="doEncrypt"
+        @keyup="plainTextChanged"
       ></b-form-textarea>
     </b-form-group>
 
@@ -28,7 +37,7 @@
         placeholder="zadej šifrovaný text"
         rows="5"
         v-model="cipherText"
-        @input="doDecrypt"
+        @keyup="cipherTextChanged"
       ></b-form-textarea>
     </b-form-group>
   </div>
@@ -48,9 +57,20 @@ export default {
     }
   },
   methods: {
+    getAdjustedText(text) {
+      return text.replace(/[^A-Za-z]/g, '')
+    },
     keyValueChanged() {
-      this.keyValue = this.keyValue.replace(/[^A-Za-z]/g, '').toLowerCase()
+      this.keyValue = this.getAdjustedText(this.keyValue).toLowerCase()
       this.doEncrypt()
+    },
+    plainTextChanged() {
+      this.plainText = this.getAdjustedText(this.plainText).toLowerCase()
+      this.doEncrypt()
+    },
+    cipherTextChanged() {
+      this.cipherText = this.getAdjustedText(this.cipherText).toUpperCase()
+      this.doDecrypt()
     },
     doEncrypt() {
       this.cipherText = this.encrypt(this.keyValue, this.plainText)
