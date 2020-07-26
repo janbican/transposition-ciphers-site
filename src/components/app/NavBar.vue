@@ -6,7 +6,6 @@
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
           <b-nav-item :to="{ name: 'ColumnarDescription' }">Sloupcová</b-nav-item>
-          <b-nav-item>Rail Fence</b-nav-item>
           <b-nav-item>Fleissnerova mřížka</b-nav-item>
           <b-nav-item>Myszkowskiho transpozice</b-nav-item>
           <b-nav-item>Rail Fence</b-nav-item>

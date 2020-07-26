@@ -2,7 +2,11 @@
   <div id="app">
     <NavBar />
     <b-container class="content">
-      <router-view />
+      <b-row class="justify-content-md-center">
+        <b-col cols="8">
+          <router-view />
+        </b-col>
+      </b-row>
     </b-container>
     <Footer />
   </div>

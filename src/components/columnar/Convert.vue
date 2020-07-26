@@ -1,16 +1,7 @@
 <template>
   <div>
-    <b-form-group
-      description="2 a více malých písmen"
-      label="Klíč"
-      label-for="key"
-    >
-      <b-form-input
-        id="key"
-        type="text"
-        v-model="keyValue"
-        @keyup="keyValueChanged"
-      ></b-form-input>
+    <b-form-group description="2 a více malých písmen" label="Klíč" label-for="key">
+      <b-form-input id="key" type="text" v-model="keyValue" @keyup="keyValueChanged"></b-form-input>
     </b-form-group>
 
     <b-form-group
@@ -73,10 +64,10 @@ export default {
       this.doDecrypt()
     },
     doEncrypt() {
-      this.cipherText = this.encrypt(this.keyValue, this.plainText)
+      this.cipherText = this.columnarEncrypt(this.keyValue, this.plainText)
     },
     doDecrypt() {
-      this.plainText = this.decrypt(this.keyValue, this.cipherText)
+      this.plainText = this.columnarDecrypt(this.keyValue, this.cipherText)
     },
   },
 }

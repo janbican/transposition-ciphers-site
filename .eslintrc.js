@@ -1,5 +1,5 @@
 module.exports = {
-  parser: 'babel-eslint',
+  parser: 'vue-eslint-parser',
   root: true,
   env: {
     node: true,
@@ -12,6 +12,7 @@ module.exports = {
   ],
   parserOptions: {
     parser: 'babel-eslint',
+    ecmaVersion: 2020,
     sourceTyoe: 'module',
   },
   rules: {
