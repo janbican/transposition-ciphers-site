@@ -15,16 +15,15 @@ const routes = [
   },
   {
     path: '/columnar',
-    name: 'Columnar',
     component: Columnar,
     children: [
       {
-        path: 'description',
+        path: '/columnar/description',
         name: 'ColumnarDescription',
         component: ColumnarDescription,
       },
       {
-        path: 'convert',
+        path: '/columnar/convert',
         name: 'ColumnarConvert',
         component: ColumnarConvert,
       },

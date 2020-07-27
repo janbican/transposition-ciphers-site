@@ -3,11 +3,11 @@
     <b-card>
       <b-card-text>
         Transpozice je základní
-        <b>kryptografická operace</b>. Princip spočívá ve
-        změně pořadí písmen otevřeného textu. Šifrovaný text je pak přesmyčkou
-        otevřeného textu vytvořené podle pravidel dané transpoziční šifry.
-        Narozdíl od substitučních šifer je frekvence písmen po zašifrovaní
-        totožná a pro prolomení není možné použít frekvenční analýzu.
+        <b>kryptografická operace</b>. Princip spočívá ve změně pořadí písmen
+        otevřeného textu. Šifrovaný text je pak přesmyčkou otevřeného textu
+        vytvořené podle pravidel dané transpoziční šifry. Narozdíl od
+        substitučních šifer je frekvence písmen po zašifrovaní totožná a pro
+        prolomení není možné použít frekvenční analýzu.
       </b-card-text>
 
       <b-card-text>
@@ -23,5 +23,4 @@
   </div>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

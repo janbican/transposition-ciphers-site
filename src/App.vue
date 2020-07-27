@@ -2,11 +2,7 @@
   <div id="app">
     <NavBar />
     <b-container class="content">
-      <b-row class="justify-content-md-center">
-        <b-col cols="8">
-          <router-view />
-        </b-col>
-      </b-row>
+      <router-view />
     </b-container>
     <Footer />
   </div>
@@ -27,6 +23,12 @@ export default {
 <style>
 .content {
   padding: 2em 0;
+}
+input:focus,
+textarea:focus {
+  outline: 0px !important;
+  -webkit-appearance: none;
+  box-shadow: none !important;
 }
 footer {
   text-align: center;
