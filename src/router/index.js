@@ -7,34 +7,36 @@ import ColumnarConvert from '@/components/columnar/Convert.vue'
 
 Vue.use(VueRouter)
 
-const routes = [
-  {
+const routes = [{
     path: '/',
-    name: 'Home',
-    component: Home,
+    name: 'home',
+    component: Home
   },
   {
     path: '/columnar',
     component: Columnar,
-    children: [
-      {
-        path: '/columnar/description',
-        name: 'ColumnarDescription',
-        component: ColumnarDescription,
+    name: 'columnar',
+    redirect: {
+      name: 'columnar.description'
+    },
+    children: [{
+        path: 'description',
+        name: 'columnar.description',
+        component: ColumnarDescription
       },
       {
-        path: '/columnar/convert',
-        name: 'ColumnarConvert',
-        component: ColumnarConvert,
-      },
-    ],
-  },
+        path: 'convert',
+        name: 'columnar.convert',
+        component: ColumnarConvert
+      }
+    ]
+  }
 ]
 
 const router = new VueRouter({
   mode: 'history',
-  linkExactActiveClass: 'active',
-  routes,
+  linkActiveClass: 'active',
+  routes
 })
 
 export default router

@@ -44,10 +44,10 @@ export default {
     getColumnPositions(key) {
       const keyPermutation = this.getKeyPermutation(key)
       let positions = [...Array(key.length).keys()]
-      positions.sort(function (x, y) {
+      positions.sort(function(x, y) {
         return keyPermutation[x] - keyPermutation[y]
       })
       return positions
-    },
-  },
+    }
+  }
 }

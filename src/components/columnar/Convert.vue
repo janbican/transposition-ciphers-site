@@ -2,13 +2,17 @@
   <div>
     <b-row>
       <b-col col lg="6">
-        <b-form-group description="2 a více malých písmen" label="Klíč" label-for="key">
+        <b-form-group
+          description="2 a více malých písmen"
+          label="Klíč"
+          label-for="key"
+        >
           <b-form-input
             id="key"
-            type="text"
             v-model="keyValue"
-            @keyup="keyValueChanged"
+            type="text"
             autocomplete="off"
+            @keyup="keyValueChanged"
           ></b-form-input>
         </b-form-group>
       </b-col>
@@ -23,9 +27,9 @@
         >
           <b-form-textarea
             id="plainText"
+            v-model="plainText"
             placeholder="zadej otevřený text"
             rows="5"
-            v-model="plainText"
             @keyup="plainTextChanged"
           ></b-form-textarea>
         </b-form-group>
@@ -38,9 +42,9 @@
         >
           <b-form-textarea
             id="cipherText"
+            v-model="cipherText"
             placeholder="zadej šifrovaný text"
             rows="5"
-            v-model="cipherText"
             @keyup="cipherTextChanged"
           ></b-form-textarea>
         </b-form-group>
@@ -59,7 +63,7 @@ export default {
     return {
       keyValue: '',
       plainText: '',
-      cipherText: '',
+      cipherText: ''
     }
   },
   methods: {
@@ -101,8 +105,8 @@ export default {
     },
     doDecrypt() {
       this.plainText = this.columnarDecrypt(this.keyValue, this.cipherText)
-    },
-  },
+    }
+  }
 }
 </script>
 

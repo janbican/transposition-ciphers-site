@@ -1,8 +1,8 @@
 <template>
   <div class="navtabs">
     <b-nav tabs>
-      <b-nav-item :to="{ name: cipher + 'Description', params: { section: 'description' } }">Popis</b-nav-item>
-      <b-nav-item :to="{ name: cipher + 'Convert', params: { section: 'convert' } }">Převod</b-nav-item>
+      <b-nav-item :to="{ name: cipher + '.description' }">Popis</b-nav-item>
+      <b-nav-item :to="{ name: cipher + '.convert' }">Převod</b-nav-item>
       <b-nav-item disabled>Prolomit</b-nav-item>
     </b-nav>
   </div>
@@ -11,8 +11,8 @@
 <script>
 export default {
   props: {
-    cipher: String,
-  },
+    cipher: String
+  }
 }
 </script>
 

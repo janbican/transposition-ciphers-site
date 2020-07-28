@@ -26,6 +26,6 @@ export default {
         keyPermutationArray[i] = charMap.get(key.charAt(i))
       }
       return keyPermutationArray
-    },
-  },
+    }
+  }
 }

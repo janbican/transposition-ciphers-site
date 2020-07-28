@@ -1,6 +1,6 @@
 <template>
   <div>
-    <NavTabs cipher="Columnar" />
+    <NavTabs cipher="columnar" />
     <router-view />
   </div>
 </template>
@@ -10,7 +10,7 @@ import NavTabs from '@/components/common/NavTabs'
 
 export default {
   components: {
-    NavTabs,
-  },
+    NavTabs
+  }
 }
 </script>
