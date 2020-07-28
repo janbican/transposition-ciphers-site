@@ -7,7 +7,8 @@ import ColumnarConvert from '@/components/columnar/Convert.vue'
 
 Vue.use(VueRouter)
 
-const routes = [{
+const routes = [
+  {
     path: '/',
     name: 'home',
     component: Home
@@ -19,7 +20,8 @@ const routes = [{
     redirect: {
       name: 'columnar.description'
     },
-    children: [{
+    children: [
+      {
         path: 'description',
         name: 'columnar.description',
         component: ColumnarDescription

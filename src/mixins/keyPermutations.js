@@ -2,7 +2,7 @@ export default {
   methods: {
     getKeyPermutation(key) {
       let keyIndices = [...Array(key.length).keys()]
-      keyIndices.sort(function (x, y) {
+      keyIndices.sort(function(x, y) {
         return key.charCodeAt(x) - key.charCodeAt(y)
       })
       let keyPermutation = new Array(key.length)
