@@ -50,6 +50,12 @@
         </b-form-group>
       </b-col>
     </b-row>
+
+    <b-row>
+      <b-col>
+        <b-table striped hover :items="tableData"></b-table>
+      </b-col>
+    </b-row>
   </div>
 </template>
 
@@ -63,9 +69,21 @@ export default {
     return {
       keyValue: '',
       plainText: '',
-      cipherText: ''
+      cipherText: '',
+      tableData: []
     }
   },
+  // computed: {
+  //   tableData() {
+  //     const keyPermutation = this.getKeyPermutation(this.keyValue)
+  //     const data = {}
+  //     for (let i = 0; i < this.keyValue.length; i++) {
+  //       const letter = this.keyValue.charAt(i)
+  //       data[letter] = keyPermutation[i] + 1
+  //     }
+  //     return data
+  //   }
+  // },
   methods: {
     getAdjustedText(text) {
       return text.replace(/[^A-Za-z]/g, '')
@@ -86,6 +104,7 @@ export default {
       this.keyValue = this.getAdjustedText(this.keyValue).toLowerCase()
       if (this.canEncrypt()) {
         this.doEncrypt()
+        this.calcTableData()
       }
     },
     plainTextChanged() {
@@ -105,6 +124,15 @@ export default {
     },
     doDecrypt() {
       this.plainText = this.columnarDecrypt(this.keyValue, this.cipherText)
+    },
+    calcTableData() {
+      const keyPermutation = this.getKeyPermutation(this.keyValue)
+      const data = {}
+      for (let i = 0; i < this.keyValue.length; i++) {
+        const letter = this.keyValue.charAt(i)
+        data[letter] = keyPermutation[i] + 1
+      }
+      this.tableData = [data]
     }
   }
 }
