@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '@/views/Home.vue'
 import Columnar from '@/views/Columnar.vue'
 import ColumnarDescription from '@/components/columnar/Description.vue'
-import ColumnarConvert from '@/components/columnar/Convert.vue'
+import ColumnarConvert from '@/components/columnar/convert/Convert.vue'
 
 Vue.use(VueRouter)
 
