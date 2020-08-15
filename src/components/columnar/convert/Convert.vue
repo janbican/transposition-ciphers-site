@@ -1,6 +1,10 @@
 <template>
   <div id="convert">
-    <conversion-choice v-model="convertChoice" :choice="convertChoice" />
+    <b-row>
+      <b-col>
+        <conversion-choice v-model="convertChoice" :choice="convertChoice" />
+      </b-col>
+    </b-row>
 
     <b-row class="justify-content-md-center">
       <b-col col lg="6">
@@ -8,46 +12,93 @@
           v-model="keyValue"
           :value="keyValue"
           :isValid="isKeyValueValid"
+          @valueChanged="keyValueChanged"
         />
       </b-col>
     </b-row>
 
     <b-row v-show="isKeyValueValid">
-      <b-col>
-        <h5 v-if="convertChoice === 'encrypt'">zašifrovat</h5>
-        <h5 v-else>dešifrovat</h5>
+      <b-col lg="6">
+        <plain-text-area
+          v-model="plainText"
+          :value="plainText"
+          :isValid="isPlainTextValid"
+          :isDisabled="!isEncrypting"
+          @valueChanged="plainTextChanged"
+        />
+      </b-col>
+
+      <b-col lg="6">
+        <cipher-text-area
+          v-model="cipherText"
+          :value="cipherText"
+          :isValid="isCipherTextValid"
+          :isDisabled="isEncrypting"
+          @valueChanged="cipherTextChanged"
+        />
       </b-col>
     </b-row>
   </div>
 </template>
 
 <script>
+import ColumnarCipher from '@/mixins/ColumnarCipher'
 import ConversionChoice from '@/components/common/convert/ConversionChoice'
 import KeyInput from '@/components/common/convert/KeyInput'
+import PlainTextArea from '@/components/common/convert/PlainTextArea'
+import CipherTextArea from '@/components/common/convert/CipherTextArea'
 
 export default {
   name: 'Convert',
+  mixins: [ColumnarCipher],
   components: {
     'conversion-choice': ConversionChoice,
-    'key-input': KeyInput
+    'key-input': KeyInput,
+    'plain-text-area': PlainTextArea,
+    'cipher-text-area': CipherTextArea
   },
   data() {
     return {
       convertChoice: 'encrypt',
-      keyValue: ''
+      keyValue: '',
+      plainText: '',
+      cipherText: ''
+    }
+  },
+  methods: {
+    keyValueChanged() {
+      if (this.isKeyValueValid) this.convert()
+    },
+    plainTextChanged() {
+      this.convert()
+    },
+    cipherTextChanged() {
+      this.convert()
+    },
+    convert() {
+      if (this.isEncrypting) this.encrypt()
+      else this.decrypt()
+    },
+    encrypt() {
+      this.cipherText = this.columnarEncrypt(this.keyValue, this.plainText)
+    },
+    decrypt() {
+      this.plainText = this.columnarDecrypt(this.keyValue, this.cipherText)
     }
   },
   computed: {
     isKeyValueValid: function() {
       return this.keyValue.length > 1
+    },
+    isPlainTextValid: function() {
+      return this.plainText.length >= this.keyValue.length * 2
+    },
+    isCipherTextValid: function() {
+      return this.cipherText.length >= this.keyValue.length * 2
+    },
+    isEncrypting: function() {
+      return this.convertChoice == 'encrypt'
     }
   }
 }
 </script>
-
-<style scoped>
-.choice {
-  display: flex;
-  justify-content: center;
-}
-</style>

@@ -1,16 +1,18 @@
 <template>
-  <div id="key-input">
-    <b-form-group label="Klíč" label-for="key">
-      <b-form-input
-        id="key"
-        type="text"
+  <div id="plain-text-area">
+    <b-form-group label="Otevřený text" label-for="plainText">
+      <b-form-textarea
+        id="plainText"
         :value="value"
-        :state="isValid"
+        :state="isValid || isDisabled"
+        :disabled="isDisabled"
+        placeholder="zadej otevřený text"
+        rows="5"
         @keyup="valueChanged"
-      ></b-form-input>
+      ></b-form-textarea>
 
       <b-form-invalid-feedback>
-        Klíč musí mít alespoň 2 písmena
+        Otevřený text musí mít alespoň dvojnásobný počet znaků klíče
       </b-form-invalid-feedback>
     </b-form-group>
   </div>
@@ -18,10 +20,11 @@
 
 <script>
 export default {
-  name: 'KeyInput',
+  name: 'PlainTextArea',
   props: {
     value: String,
-    isValid: Boolean
+    isValid: Boolean,
+    isDisabled: Boolean
   },
   methods: {
     valueChanged(event) {

@@ -1,5 +1,5 @@
 <template>
-  <div class="choice">
+  <div id="conversion-choice">
     <b-form-radio-group
       :checked="choice"
       :options="options"
@@ -25,3 +25,11 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+#conversion-choice {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1em;
+}
+</style>
