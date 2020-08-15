@@ -1,6 +1,7 @@
 import keyPermutations from './keyPermutations'
 
 export default {
+  name: 'ColumnarCipher',
   mixins: [keyPermutations],
   methods: {
     columnarEncrypt(key, text) {
