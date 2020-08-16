@@ -6,6 +6,7 @@
         type="text"
         :value="value"
         :state="isValid"
+        :formatter="formatter"
         @keyup="valueChanged"
       ></b-form-input>
 
@@ -25,13 +26,14 @@ export default {
   },
   methods: {
     valueChanged(event) {
-      let value = this.getAdjustedText(event.target.value)
-      event.target.value = value
-      this.$emit('input', value)
+      this.$emit('input', event.target.value)
       this.$emit('valueChanged', event)
     },
     getAdjustedText(text) {
       return text.replace(/[^A-Za-z]/g, '').toLowerCase()
+    },
+    formatter(value) {
+      return this.getAdjustedText(value)
     }
   }
 }

@@ -22,7 +22,6 @@
         <plain-text-area
           v-model="plainText"
           :value="plainText"
-          :isValid="isPlainTextValid"
           :isDisabled="!isEncrypting"
           @valueChanged="plainTextChanged"
         />
@@ -32,7 +31,6 @@
         <cipher-text-area
           v-model="cipherText"
           :value="cipherText"
-          :isValid="isCipherTextValid"
           :isDisabled="isEncrypting"
           @valueChanged="cipherTextChanged"
         />
@@ -111,12 +109,6 @@ export default {
     },
     isKeyValueValid: function() {
       return this.keyValue.length > 1
-    },
-    isPlainTextValid: function() {
-      return this.plainText.length >= this.keyValue.length * 2
-    },
-    isCipherTextValid: function() {
-      return this.cipherText.length >= this.keyValue.length * 2
     },
     isEncrypting: function() {
       return this.convertChoice == 'encrypt'
