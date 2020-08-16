@@ -38,6 +38,16 @@
         />
       </b-col>
     </b-row>
+
+    <b-row v-show="isKeyValueValid" class="justify-content-md-center">
+      <b-col col lg="4">
+        <columnar-table
+          :keyValue="keyValue"
+          :keyPermutation="keyPermutation"
+          :text="plainText"
+        />
+      </b-col>
+    </b-row>
   </div>
 </template>
 
@@ -47,6 +57,7 @@ import ConversionChoice from '@/components/common/convert/ConversionChoice'
 import KeyInput from '@/components/common/convert/KeyInput'
 import PlainTextArea from '@/components/common/convert/PlainTextArea'
 import CipherTextArea from '@/components/common/convert/CipherTextArea'
+import ColumnarTable from '@/components/columnar/ColumnarTable'
 
 export default {
   name: 'Convert',
@@ -55,7 +66,8 @@ export default {
     'conversion-choice': ConversionChoice,
     'key-input': KeyInput,
     'plain-text-area': PlainTextArea,
-    'cipher-text-area': CipherTextArea
+    'cipher-text-area': CipherTextArea,
+    'columnar-table': ColumnarTable
   },
   data() {
     return {
@@ -87,6 +99,9 @@ export default {
     }
   },
   computed: {
+    keyPermutation: function() {
+      return this.getKeyPermutation(this.keyValue)
+    },
     isKeyValueValid: function() {
       return this.keyValue.length > 1
     },
