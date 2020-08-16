@@ -1,5 +1,5 @@
 <template>
-  <b-navbar class="navbar" toggleable="lg" type="dark">
+  <b-navbar toggleable="lg" type="dark">
     <b-container>
       <b-navbar-brand :to="{ name: 'home' }">Transpoziční šifry</b-navbar-brand>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -19,8 +19,18 @@
 </template>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
 .navbar {
   min-height: 80px;
   background-color: #679b9b;
+}
+
+.navbar-brand {
+  font-family: 'Pacifico', cursive;
+}
+
+.navbar-collapse {
+  justify-content: flex-end;
 }
 </style>

@@ -1,25 +1,27 @@
 <template>
-  <div>
-    <b-card>
-      <b-card-text>
-        Transpozice je základní
-        <b>kryptografická operace</b>. Princip spočívá ve změně pořadí písmen
-        otevřeného textu. Šifrovaný text je pak přesmyčkou otevřeného textu
-        vytvořené podle pravidel dané transpoziční šifry. Narozdíl od
-        substitučních šifer je frekvence písmen po zašifrovaní totožná a pro
-        prolomení není možné použít frekvenční analýzu.
-      </b-card-text>
+  <div class="home">
+    <b-row class="justify-content-md-center">
+      <b-col col lg="8">
+        <p>
+          Transpozice je základní
+          <b>kryptografická operace</b>. Princip spočívá ve změně pořadí písmen
+          otevřeného textu. Šifrovaný text je pak přesmyčkou otevřeného textu
+          vytvořené podle pravidel dané transpoziční šifry. Narozdíl od
+          substitučních šifer je frekvence písmen po zašifrovaní totožná a pro
+          prolomení není možné použít frekvenční analýzu.
+        </p>
 
-      <b-card-text>
-        Jednou z nejjednodušších variant transpozice je psaní otevřeného textu
-        opačně.
-      </b-card-text>
+        <p>
+          Jednou z nejjednodušších variant transpozice je psaní otevřeného textu
+          opačně.
+        </p>
 
-      <b-card-text>
-        Tato bakalářská práce se zabývá zásadními transpozičními šiframi,
-        popisuje je a zkoumá možnost jejich prolomení.
-      </b-card-text>
-    </b-card>
+        <p>
+          Tato bakalářská práce se zabývá zásadními transpozičními šiframi,
+          popisuje je a zkoumá možnost jejich prolomení.
+        </p>
+      </b-col>
+    </b-row>
   </div>
 </template>
 

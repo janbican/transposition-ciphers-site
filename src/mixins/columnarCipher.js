@@ -13,6 +13,7 @@ export default {
 
       return cipherCols.join('').toUpperCase()
     },
+
     columnarDecrypt(keyPermutation, cipher) {
       const keyLength = keyPermutation.length
       const numOfRows = Math.ceil(cipher.length / keyLength)
@@ -40,6 +41,7 @@ export default {
 
       return plainText.toLowerCase()
     },
+
     getColumnPositions(keyPermutation) {
       const keyLength = keyPermutation.length
       let positions = [...Array(keyLength).keys()]
