@@ -1,28 +1,26 @@
-import keyPermutations from './keyPermutations'
-
 export default {
   name: 'ColumnarCipher',
-  mixins: [keyPermutations],
   methods: {
-    columnarEncrypt(key, text) {
-      const keyPermutation = this.getKeyPermutation(key)
-      const cipherCols = new Array(key.length).fill('')
+    columnarEncrypt(keyPermutation, text) {
+      const keyLength = keyPermutation.length
+      const cipherCols = new Array(keyLength).fill('')
 
-      for (let col = 0; col < key.length; col++) {
+      for (let col = 0; col < keyLength; col++) {
         const colPosition = keyPermutation[col]
-        for (let i = col; i < text.length; i += key.length)
+        for (let i = col; i < text.length; i += keyLength)
           cipherCols[colPosition] += text.charAt(i)
       }
 
       return cipherCols.join('').toUpperCase()
     },
-    columnarDecrypt(key, cipher) {
-      const numOfRows = Math.ceil(cipher.length / key.length)
-      const numOfComplete = cipher.length - key.length * (numOfRows - 1)
-      const colPositions = this.getColumnPositions(key)
+    columnarDecrypt(keyPermutation, cipher) {
+      const keyLength = keyPermutation.length
+      const numOfRows = Math.ceil(cipher.length / keyLength)
+      const numOfComplete = cipher.length - keyLength * (numOfRows - 1)
+      const colPositions = this.getColumnPositions(keyPermutation)
 
       // vytvoreni slopcu sifrovaneho textu ve spravnem poradi
-      const cipherCols = new Array(key.length).fill('')
+      const cipherCols = new Array(keyLength).fill('')
       let i = 0
       for (let colPosition of colPositions) {
         let endIndex = i + numOfRows
@@ -35,16 +33,16 @@ export default {
       // zpracovani sloucu sifrovaneho textu do otevreneho
       let plainText = ''
       for (let row = 0; row < numOfRows; row++) {
-        for (let col = 0; col < key.length; col++) {
+        for (let col = 0; col < keyLength; col++) {
           plainText += cipherCols[col].charAt(row)
         }
       }
 
       return plainText.toLowerCase()
     },
-    getColumnPositions(key) {
-      const keyPermutation = this.getKeyPermutation(key)
-      let positions = [...Array(key.length).keys()]
+    getColumnPositions(keyPermutation) {
+      const keyLength = keyPermutation.length
+      let positions = [...Array(keyLength).keys()]
       positions.sort(function(x, y) {
         return keyPermutation[x] - keyPermutation[y]
       })

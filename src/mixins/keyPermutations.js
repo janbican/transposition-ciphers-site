@@ -1,4 +1,5 @@
 export default {
+  name: 'KeyPermutations',
   methods: {
     getKeyPermutation(key) {
       let keyIndices = [...Array(key.length).keys()]

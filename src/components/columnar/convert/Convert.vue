@@ -53,6 +53,7 @@
 
 <script>
 import ColumnarCipher from '@/mixins/ColumnarCipher'
+import KeyPermutations from '@/mixins/KeyPermutations'
 import ConversionChoice from '@/components/common/convert/ConversionChoice'
 import KeyInput from '@/components/common/convert/KeyInput'
 import PlainTextArea from '@/components/common/convert/PlainTextArea'
@@ -61,7 +62,7 @@ import ColumnarTable from '@/components/columnar/ColumnarTable'
 
 export default {
   name: 'Convert',
-  mixins: [ColumnarCipher],
+  mixins: [ColumnarCipher, KeyPermutations],
   components: {
     'conversion-choice': ConversionChoice,
     'key-input': KeyInput,
@@ -92,10 +93,16 @@ export default {
       else this.decrypt()
     },
     encrypt() {
-      this.cipherText = this.columnarEncrypt(this.keyValue, this.plainText)
+      this.cipherText = this.columnarEncrypt(
+        this.keyPermutation,
+        this.plainText
+      )
     },
     decrypt() {
-      this.plainText = this.columnarDecrypt(this.keyValue, this.cipherText)
+      this.plainText = this.columnarDecrypt(
+        this.keyPermutation,
+        this.cipherText
+      )
     }
   },
   computed: {
