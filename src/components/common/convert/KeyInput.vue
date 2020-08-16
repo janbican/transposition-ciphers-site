@@ -1,5 +1,5 @@
 <template>
-  <div id="key-input">
+  <div class="key-input">
     <b-form-group label="Klíč" label-for="key">
       <b-form-input
         id="key"
@@ -7,6 +7,7 @@
         :value="value"
         :state="isValid"
         :formatter="formatter"
+        autocomplete="off"
         @keyup="valueChanged"
       ></b-form-input>
 
@@ -38,3 +39,23 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.key-input input {
+  background-image: none;
+}
+
+.key-input .is-valid,
+.key-input .is-valid:focus {
+  border-color: inherit;
+}
+
+.key-input .is-invalid,
+.key-input .is-invalid:focus {
+  border-color: #9b6667;
+}
+
+.invalid-feedback {
+  color: #9b6667;
+}
+</style>

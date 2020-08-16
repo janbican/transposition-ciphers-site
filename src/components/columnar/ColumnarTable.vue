@@ -1,6 +1,11 @@
 <template>
   <div class="columnar-table">
-    <b-table-simple small fixed responsive class="text-center">
+    <b-table-simple small fixed responsive caption-top class="text-center">
+      <caption>
+        {{
+          caption
+        }}
+      </caption>
       <b-thead>
         <b-tr>
           <b-th
@@ -32,13 +37,15 @@
 export default {
   name: 'ColumnarTable',
   props: {
+    caption: String,
     keyValue: String,
     keyPermutation: Array,
+    isValid: Boolean,
     text: String
   },
   computed: {
     rows: function() {
-      if (this.keyValue < 2) return []
+      if (!this.isValid) return []
       const rowSize = this.keyValue.length
       return this.text.match(new RegExp('.{1,' + rowSize + '}', 'g'))
     }

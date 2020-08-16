@@ -1,12 +1,12 @@
 <template>
-  <div id="convert">
+  <div class="convert">
     <b-row>
       <b-col>
         <conversion-choice v-model="convertChoice" :choice="convertChoice" />
       </b-col>
     </b-row>
 
-    <b-row class="justify-content-md-center">
+    <b-row class="justify-content-md-center mb-3">
       <b-col col lg="6">
         <key-input
           v-model="keyValue"
@@ -37,11 +37,13 @@
       </b-col>
     </b-row>
 
-    <b-row v-show="isKeyValueValid" class="justify-content-md-center">
-      <b-col col lg="4">
+    <b-row v-show="isKeyValueValid" class="justify-content-md-center mt-5">
+      <b-col col md="4">
+        <h5>šifrovací tabulka</h5>
         <columnar-table
           :keyValue="keyValue"
           :keyPermutation="keyPermutation"
+          :isValid="isKeyValueValid"
           :text="plainText"
         />
       </b-col>
@@ -116,3 +118,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+h5 {
+  text-align: center;
+  border-bottom: 0;
+}
+</style>
