@@ -11,6 +11,7 @@
         <key-number-input
           v-model.number="keyValue"
           :value="keyValue"
+          :minimum="2"
           :isValid="isKeyValueValid"
           @valueChanged="keyValueChanged"
         />
@@ -40,6 +41,7 @@
     <b-row v-show="isKeyValueValid" class="justify-content-md-center mt-5">
       <b-col col md="4">
         <h5>šifrovací mřížka</h5>
+        <rail-fence-grid :keyValue="keyValue" :text="plainText" />
       </b-col>
     </b-row>
   </div>
@@ -51,6 +53,7 @@ import ConversionChoice from '@/components/common/convert/ConversionChoice'
 import KeyNumberInput from '@/components/common/convert/KeyNumberInput'
 import PlainTextArea from '@/components/common/convert/PlainTextArea'
 import CipherTextArea from '@/components/common/convert/CipherTextArea'
+import RailFenceGrid from '@/components/railfence/RailFenceGrid'
 
 export default {
   name: 'Convert',
@@ -59,7 +62,8 @@ export default {
     'conversion-choice': ConversionChoice,
     'key-number-input': KeyNumberInput,
     'plain-text-area': PlainTextArea,
-    'cipher-text-area': CipherTextArea
+    'cipher-text-area': CipherTextArea,
+    'rail-fence-grid': RailFenceGrid
   },
   data() {
     return {

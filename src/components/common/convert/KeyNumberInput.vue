@@ -4,8 +4,10 @@
       <b-form-input
         id="key"
         type="number"
+        min="minimum"
         :value="value"
         @input="valueChanged"
+        @keydown="$event.preventDefault()"
       ></b-form-input>
 
       <b-form-invalid-feedback>
@@ -20,36 +22,14 @@ export default {
   name: 'KeyNumberInput',
   props: {
     value: Number,
+    minimum: Number,
     isValid: Boolean
   },
   methods: {
     valueChanged(value) {
       this.$emit('input', value)
       this.$emit('valueChanged', event)
-    },
-    formatter(value) {
-      return this.isValid ? value : 2
     }
   }
 }
 </script>
-
-<style scoped>
-.key-input input {
-  background-image: none;
-}
-
-.key-input .is-valid,
-.key-input .is-valid:focus {
-  border-color: inherit;
-}
-
-.key-input .is-invalid,
-.key-input .is-invalid:focus {
-  border-color: #9b6667;
-}
-
-.invalid-feedback {
-  color: #9b6667;
-}
-</style>
