@@ -1,13 +1,7 @@
 <template>
   <div class="convert">
-    <b-row>
+    <b-row class="mb-3">
       <b-col>
-        <conversion-choice v-model="convertChoice" :choice="convertChoice" />
-      </b-col>
-    </b-row>
-
-    <b-row class="justify-content-md-center mb-3">
-      <b-col col lg="6">
         <key-input
           v-model="keyValue"
           :value="keyValue"
@@ -17,54 +11,52 @@
       </b-col>
     </b-row>
 
-    <b-row v-show="isKeyValueValid">
-      <b-col lg="6">
-        <plain-text-area
-          v-model="plainText"
-          :value="plainText"
-          :isDisabled="!isEncrypting"
-          @valueChanged="plainTextChanged"
-        />
-      </b-col>
+    <div v-show="isKeyValueValid">
+      <b-row>
+        <b-col lg="6">
+          <plain-text-area
+            v-model="plainText"
+            :value="plainText"
+            @valueChanged="plainTextChanged"
+          />
+        </b-col>
 
-      <b-col lg="6">
-        <cipher-text-area
-          v-model="cipherText"
-          :value="cipherText"
-          :isDisabled="isEncrypting"
-          @valueChanged="cipherTextChanged"
-        />
-      </b-col>
-    </b-row>
+        <b-col lg="6">
+          <cipher-text-area
+            v-model="cipherText"
+            :value="cipherText"
+            @valueChanged="cipherTextChanged"
+          />
+        </b-col>
+      </b-row>
 
-    <b-row v-show="isKeyValueValid" class="justify-content-md-center mt-5">
-      <b-col col md="4">
-        <h5>šifrovací tabulka</h5>
-        <columnar-table
-          :keyValue="keyValue"
-          :keyPermutation="keyPermutation"
-          :isValid="isKeyValueValid"
-          :text="plainText"
-        />
-      </b-col>
-    </b-row>
+      <b-row class="justify-content-md-center mt-5">
+        <b-col col md="4">
+          <h5>šifrovací tabulka</h5>
+          <columnar-table
+            :keyValue="keyValue"
+            :keyPermutation="keyPermutation"
+            :isValid="isKeyValueValid"
+            :text="plainText"
+          />
+        </b-col>
+      </b-row>
+    </div>
   </div>
 </template>
 
 <script>
 import ColumnarCipher from '@/mixins/ColumnarCipher'
 import KeyPermutations from '@/mixins/KeyPermutations'
-import ConversionChoice from '@/components/common/convert/ConversionChoice'
 import KeyInput from '@/components/common/convert/KeyInput'
 import PlainTextArea from '@/components/common/convert/PlainTextArea'
 import CipherTextArea from '@/components/common/convert/CipherTextArea'
 import ColumnarTable from '@/components/columnar/ColumnarTable'
 
 export default {
-  name: 'Convert',
+  name: 'ColumnarConvert',
   mixins: [ColumnarCipher, KeyPermutations],
   components: {
-    'conversion-choice': ConversionChoice,
     'key-input': KeyInput,
     'plain-text-area': PlainTextArea,
     'cipher-text-area': CipherTextArea,
@@ -72,7 +64,7 @@ export default {
   },
   data() {
     return {
-      convertChoice: 'encrypt',
+      isEncrypting: true,
       keyValue: '',
       plainText: '',
       cipherText: ''
@@ -80,17 +72,18 @@ export default {
   },
   methods: {
     keyValueChanged() {
-      if (this.isKeyValueValid) this.convert()
+      if (this.isKeyValueValid) {
+        if (this.isEncrypting) this.encrypt()
+        else this.decrypt()
+      }
     },
     plainTextChanged() {
-      this.convert()
+      this.isEncrypting = true
+      this.encrypt()
     },
     cipherTextChanged() {
-      this.convert()
-    },
-    convert() {
-      if (this.isEncrypting) this.encrypt()
-      else this.decrypt()
+      this.isEncrypting = false
+      this.decrypt()
     },
     encrypt() {
       this.cipherText = this.columnarEncrypt(
@@ -111,9 +104,6 @@ export default {
     },
     isKeyValueValid: function() {
       return this.keyValue.length > 1
-    },
-    isEncrypting: function() {
-      return this.convertChoice == 'encrypt'
     }
   }
 }
@@ -123,5 +113,6 @@ export default {
 h5 {
   text-align: center;
   border-bottom: 0;
+  font-weight: 400;
 }
 </style>

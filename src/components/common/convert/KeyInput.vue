@@ -47,7 +47,7 @@ export default {
 
 .key-input .is-valid,
 .key-input .is-valid:focus {
-  border-color: inherit;
+  border-color: #ced4da;
 }
 
 .key-input .is-invalid,

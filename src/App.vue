@@ -25,8 +25,8 @@ export default {
 
 body {
   font-family: 'Open Sans', sans-serif;
+  padding-bottom: 2em;
 }
-
 .content {
   padding: 2em 0;
 }
