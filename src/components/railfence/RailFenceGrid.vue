@@ -1,5 +1,5 @@
 <template>
-  <div class="grid">
+  <div class="rail-fence-grid">
     <div v-html="htmlGrid"></div>
   </div>
 </template>
@@ -9,10 +9,15 @@ export default {
   name: 'RailFenceGrid',
   props: {
     keyValue: Number,
-    text: String
+    text: String,
+    isValid: Boolean
   },
   computed: {
     htmlGrid: function() {
+      if (!this.isValid) {
+        return ''
+      }
+
       const lines = new Array(this.keyValue).fill('<tr>')
       let currentLine = 0
       let offset = 1
@@ -20,9 +25,9 @@ export default {
       for (const letter of this.text) {
         for (let i = 0; i < this.keyValue; i++) {
           if (currentLine == i) {
-            lines[i] += '<td>' + letter + '</td>'
+            lines[i] += '<td class="marked">' + letter + '</td>'
           } else {
-            lines[i] += '<td>-</td>'
+            lines[i] += '<td></td>'
           }
         }
 
@@ -43,3 +48,24 @@ export default {
   }
 }
 </script>
+
+<style>
+.rail-fence-grid {
+  overflow-x: auto;
+  padding-bottom: 2em;
+}
+
+.rail-fence-grid table {
+  display: inline-block;
+  margin: 0 auto;
+  font-size: 1.2em;
+}
+
+.rail-fence-grid td {
+  padding: 0.4em 0.6em 0;
+}
+
+.rail-fence-grid .marked {
+  border-bottom: 1px solid black;
+}
+</style>

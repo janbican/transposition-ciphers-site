@@ -31,10 +31,14 @@
         </b-col>
       </b-row>
 
-      <b-row class="justify-content-md-center mt-5">
-        <b-col col md="4">
+      <b-row class="justify-content-md-center mt-5 text-center">
+        <b-col col>
           <h5>šifrovací mřížka</h5>
-          <rail-fence-grid :keyValue="keyValue" :text="plainText" />
+          <rail-fence-grid
+            :keyValue="keyValue"
+            :text="plainText"
+            :isValid="isKeyValueValid"
+          />
         </b-col>
       </b-row>
     </div>
