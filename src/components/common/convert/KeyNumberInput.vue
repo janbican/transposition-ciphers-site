@@ -35,23 +35,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.key-number-input input {
-  background-image: none;
-}
-
-.key-number-input .is-valid,
-.key-number-input .is-valid:focus {
-  border-color: #ced4da;
-}
-
-.key-number-input .is-invalid,
-.key-number-input .is-invalid:focus {
-  border-color: #9b6667;
-}
-
-.invalid-feedback {
-  color: #9b6667;
-}
-</style>

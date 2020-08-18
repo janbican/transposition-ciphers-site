@@ -1,12 +1,12 @@
 <template>
-  <div class="rail-fence-grid">
+  <div class="encryption-grid">
     <div v-html="htmlGrid"></div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'RailFenceGrid',
+  name: 'EncryptionGrid',
   props: {
     keyValue: Number,
     text: String,
@@ -49,23 +49,23 @@ export default {
 }
 </script>
 
-<style>
-.rail-fence-grid {
+<style scoped>
+.encryption-grid {
   overflow-x: auto;
   padding-bottom: 2em;
 }
 
-.rail-fence-grid table {
+.encryption-grid >>> table {
   display: inline-block;
   margin: 0 auto;
   font-size: 1.2em;
 }
 
-.rail-fence-grid td {
-  padding: 0.4em 0.6em 0;
+.encryption-grid >>> td {
+  padding: 0.4em 0.6em 0.2em;
 }
 
-.rail-fence-grid .marked {
+.encryption-grid >>> .marked {
   border-bottom: 1px solid black;
 }
 </style>

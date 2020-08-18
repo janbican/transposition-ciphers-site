@@ -1,0 +1,42 @@
+
+/* General Styles */
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  padding-bottom: 2em;
+}
+
+input:focus,
+textarea:focus {
+  outline: 0px !important;
+  -webkit-appearance: none;
+  box-shadow: none !important;
+}
+
+/* Layout Styles */
+
+.content {
+  padding: 2em 0;
+}
+
+/* Components Styles */
+
+.form-control.is-valid,
+.form-control.is-invalid {
+  background-image: none;
+  padding-right: 0.75em;
+}
+
+.form-control.is-valid,
+.form-control.is-valid:focus {
+  border-color: #ced4da;
+}
+
+.form-control.is-invalid,
+.form-control.is-invalid:focus {
+  border-color: #9b6667;
+}
+
+.invalid-feedback {
+  color: #9b6667;
+}

@@ -31,10 +31,13 @@
         </b-col>
       </b-row>
 
-      <b-row class="justify-content-md-center mt-5 text-center">
+      <b-row
+        v-show="plainText.length > 0"
+        class="justify-content-md-center mt-5 text-center"
+      >
         <b-col col>
           <h5>šifrovací mřížka</h5>
-          <rail-fence-grid
+          <encryption-grid
             :keyValue="keyValue"
             :text="plainText"
             :isValid="isKeyValueValid"
@@ -50,7 +53,7 @@ import RailFenceCipher from '@/mixins/RailFenceCipher'
 import KeyNumberInput from '@/components/common/convert/KeyNumberInput'
 import PlainTextArea from '@/components/common/convert/PlainTextArea'
 import CipherTextArea from '@/components/common/convert/CipherTextArea'
-import RailFenceGrid from '@/components/railfence/RailFenceGrid'
+import EncryptionGrid from '@/components/railfence/EncryptionGrid'
 
 export default {
   name: 'Convert',
@@ -59,12 +62,12 @@ export default {
     'key-number-input': KeyNumberInput,
     'plain-text-area': PlainTextArea,
     'cipher-text-area': CipherTextArea,
-    'rail-fence-grid': RailFenceGrid
+    'encryption-grid': EncryptionGrid
   },
   data() {
     return {
       isEncrypting: true,
-      keyValue: 2,
+      keyValue: 3,
       plainText: '',
       cipherText: ''
     }
