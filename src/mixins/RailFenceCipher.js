@@ -45,7 +45,7 @@ export default {
         }
       }
 
-      return plainText
+      return plainText.toLowerCase()
     },
 
     getLinesStartIndices(numOfLayers, length) {
