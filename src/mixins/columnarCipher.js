@@ -20,22 +20,31 @@ export default {
       const numOfComplete = cipher.length - keyLength * (numOfRows - 1)
       const colPositions = this.getColumnPositions(keyPermutation)
 
-      // vytvoreni slopcu sifrovaneho textu ve spravnem poradi
-      const cipherCols = new Array(keyLength).fill('')
+      // získání sloupců reprezentovaných písmenkovou array
+      const cipherCols = this.createTwoDimArray(keyLength)
       let i = 0
       for (let colPosition of colPositions) {
         let endIndex = i + numOfRows
-        if (colPosition >= numOfComplete) endIndex -= 1
+
+        // je-li sloupec neúplný, snížit počet písmen
+        const isIncomplete = colPosition >= numOfComplete
+        if (isIncomplete) endIndex -= 1
+
+        // zaplnění sloupce
         while (i < endIndex) {
-          cipherCols[colPosition] += cipher[i++]
+          cipherCols[colPosition].push(cipher[i++])
         }
+
+        // přidání 'prázdného znaku', aby se v šifrovaném textu
+        // neojevovalo undefined
+        if (isIncomplete) cipherCols[colPosition].push('')
       }
 
-      // zpracovani sloucu sifrovaneho textu do otevreneho
+      //zpracovani sloucu sifrovaneho textu do otevreneho
       let plainText = ''
       for (let row = 0; row < numOfRows; row++) {
         for (let col = 0; col < keyLength; col++) {
-          plainText += cipherCols[col].charAt(row)
+          plainText += cipherCols[col][row]
         }
       }
 
@@ -49,6 +58,16 @@ export default {
         return keyPermutation[x] - keyPermutation[y]
       })
       return positions
+    },
+
+    createTwoDimArray(length) {
+      const array = new Array(length)
+
+      for (let i = 0; i < length; i++) {
+        array[i] = new Array()
+      }
+
+      return array
     }
   }
 }
