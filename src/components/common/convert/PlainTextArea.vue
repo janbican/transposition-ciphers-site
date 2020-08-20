@@ -4,7 +4,6 @@
       <b-form-textarea
         id="plainText"
         :value="value"
-        :disabled="isDisabled"
         :formatter="formatter"
         placeholder="zadej otevřený text"
         rows="5"
@@ -18,8 +17,7 @@
 export default {
   name: 'PlainTextArea',
   props: {
-    value: String,
-    isDisabled: Boolean
+    value: String
   },
   methods: {
     valueChanged(event) {

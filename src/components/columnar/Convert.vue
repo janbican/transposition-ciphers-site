@@ -31,14 +31,22 @@
       </b-row>
 
       <b-row class="justify-content-md-center mt-5">
-        <b-col col md="4">
-          <h5>šifrovací tabulka</h5>
-          <columnar-table
-            :keyValue="keyValue"
-            :keyPermutation="keyPermutation"
-            :isValid="isKeyValueValid"
-            :text="plainText"
-          />
+        <b-col col md="4" class="text-center">
+          <b-button
+            v-if="!isTableDisplayed"
+            variant="outline-info"
+            @click="displayTable"
+            >Ukázat šifrovací tabulku</b-button
+          >
+          <div v-else>
+            <h5>šifrovací tabulka</h5>
+            <columnar-table
+              :keyValue="keyValue"
+              :keyPermutation="keyPermutation"
+              :isValid="isKeyValueValid"
+              :text="plainText"
+            />
+          </div>
         </b-col>
       </b-row>
     </div>
@@ -65,6 +73,7 @@ export default {
   data() {
     return {
       isEncrypting: true,
+      isTableDisplayed: true,
       keyValue: '',
       plainText: '',
       cipherText: ''
@@ -86,16 +95,24 @@ export default {
       this.decrypt()
     },
     encrypt() {
+      this.isTableDisplayed = this.plainText.length < 200
       this.cipherText = this.columnarEncrypt(
         this.keyPermutation,
         this.plainText
       )
     },
     decrypt() {
+      this.isTableDisplayed = this.cipherText.length < 200
       this.plainText = this.columnarDecrypt(
         this.keyPermutation,
         this.cipherText
       )
+    },
+    displayTable() {
+      const message = 'Zobrazení může chvíli trvat. Pokračovat?'
+      if (confirm(message)) {
+        this.isTableDisplayed = true
+      }
     }
   },
   computed: {

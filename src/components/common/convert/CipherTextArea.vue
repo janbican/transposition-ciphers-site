@@ -4,7 +4,6 @@
       <b-form-textarea
         id="cipherText"
         :value="value"
-        :disabled="isDisabled"
         :formatter="formatter"
         placeholder="zadej šifrovaný text"
         rows="5"
@@ -18,8 +17,7 @@
 export default {
   name: 'CipherTextArea',
   props: {
-    value: String,
-    isDisabled: Boolean
+    value: String
   },
   methods: {
     valueChanged(event) {
