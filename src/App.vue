@@ -2,7 +2,11 @@
   <div id="app">
     <NavBar />
     <b-container class="content">
-      <router-view />
+      <b-row class="justify-content-md-center">
+        <b-col col md="10">
+          <router-view />
+        </b-col>
+      </b-row>
     </b-container>
   </div>
 </template>
