@@ -406,11 +406,6 @@ export default {
 </script>
 
 <style scoped>
-h5 {
-  margin: 1.4em 0;
-  color: #9b6667;
-}
-
 .marked {
   background-color: #9bc467;
 }

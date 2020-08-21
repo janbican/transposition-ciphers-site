@@ -49,23 +49,4 @@ export default {
 }
 </script>
 
-<style scoped>
-.encryption-grid {
-  overflow-x: auto;
-  padding-bottom: 2em;
-}
-
-.encryption-grid >>> table {
-  display: inline-block;
-  margin: 0 auto;
-  font-size: 1.2em;
-}
-
-.encryption-grid >>> td {
-  padding: 0.4em 0.6em 0.2em;
-}
-
-.encryption-grid >>> .marked {
-  border-bottom: 1px solid black;
-}
-</style>
+<style scoped></style>

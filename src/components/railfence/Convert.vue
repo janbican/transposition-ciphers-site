@@ -31,17 +31,22 @@
         </b-col>
       </b-row>
 
-      <b-row
-        v-show="plainText.length > 0"
-        class="justify-content-md-center mt-5 text-center"
-      >
+      <b-row class="justify-content-md-center mt-5 text-center">
         <b-col col>
-          <h5>šifrovací mřížka</h5>
-          <encryption-grid
-            :keyValue="keyValue"
-            :text="plainText"
-            :isValid="isKeyValueValid"
-          />
+          <b-button
+            v-if="!isGridDisplayed"
+            variant="outline-info"
+            @click="displayGrid"
+            >Ukázat šifrovací mřížku</b-button
+          >
+          <div v-else>
+            <h5 v-show="plainText.length > 0">šifrovací mřížka</h5>
+            <encryption-grid
+              :keyValue="keyValue"
+              :text="plainText"
+              :isValid="isKeyValueValid"
+            />
+          </div>
         </b-col>
       </b-row>
     </div>
@@ -67,6 +72,7 @@ export default {
   data() {
     return {
       isEncrypting: true,
+      isGridDisplayed: true,
       keyValue: 3,
       plainText: '',
       cipherText: ''
@@ -87,15 +93,19 @@ export default {
       this.isEncrypting = false
       this.decrypt()
     },
-    convert() {
-      if (this.isEncrypting) this.encrypt()
-      else this.decrypt()
-    },
     encrypt() {
+      this.isGridDisplayed = this.plainText.length < 200
       this.cipherText = this.railFenceEncrypt(this.keyValue, this.plainText)
     },
     decrypt() {
+      this.isGridDisplayed = this.cipherText.length < 200
       this.plainText = this.railFenceDecrypt(this.keyValue, this.cipherText)
+    },
+    displayGrid() {
+      const message = 'Zobrazení může chvíli trvat. Pokračovat?'
+      if (confirm(message)) {
+        this.isGridDisplayed = true
+      }
     }
   },
   computed: {
