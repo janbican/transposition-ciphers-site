@@ -1,6 +1,6 @@
 <template>
   <div class="columnar-table">
-    <b-table-simple small fixed responsive caption-top class="text-center">
+    <b-table-simple small caption-top class="text-center">
       <caption>
         {{
           caption
@@ -52,3 +52,13 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.columnar-table {
+  overflow-x: auto;
+}
+
+.columnar-table table td {
+  max-width: 20px;
+}
+</style>

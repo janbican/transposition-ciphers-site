@@ -7,10 +7,10 @@
         <b-navbar-nav>
           <b-nav-item :to="{ name: 'columnar' }">Sloupcová</b-nav-item>
           <b-nav-item :to="{ name: 'railfence' }">Rail Fence</b-nav-item>
-          <b-nav-item>Myszkowskiho</b-nav-item>
-          <b-nav-item>Fleissnerova</b-nav-item>
-          <b-nav-item>Route</b-nav-item>
           <b-nav-item>ÜBCHI</b-nav-item>
+          <b-nav-item>Myszkowskiho</b-nav-item>
+          <b-nav-item>Route</b-nav-item>
+          <b-nav-item>Fleissnerova</b-nav-item>
           <b-nav-item></b-nav-item>
         </b-navbar-nav>
       </b-collapse>

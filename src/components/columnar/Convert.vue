@@ -31,7 +31,7 @@
       </b-row>
 
       <b-row class="justify-content-md-center mt-5">
-        <b-col col md="4" class="text-center">
+        <b-col col lg="6" class="text-center">
           <b-button
             v-if="!isTableDisplayed"
             variant="outline-info"
