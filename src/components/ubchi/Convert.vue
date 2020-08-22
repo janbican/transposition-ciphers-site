@@ -2,7 +2,7 @@
   <div class="convert">
     <b-row class="mb-3">
       <b-col>
-        <key-input
+        <multiple-key-input
           v-model="keyValue"
           :value="keyValue"
           :isValid="isKeyValueValid"
@@ -39,13 +39,13 @@
             >Ukázat šifrovací tabulku</b-button
           >
           <div v-else>
-            <h5>šifrovací tabulka</h5>
+            <!-- <h5>šifrovací tabulka</h5>
             <columnar-table
               :keyValue="keyValue"
               :keyPermutation="keyPermutation"
               :isValid="isKeyValueValid"
               :text="plainText"
-            />
+            /> -->
           </div>
         </b-col>
       </b-row>
@@ -54,21 +54,21 @@
 </template>
 
 <script>
-import ColumnarCipher from '@/mixins/ColumnarCipher'
+import UbchiCipher from '@/mixins/UbchiCipher'
 import KeyPermutations from '@/mixins/KeyPermutations'
-import KeyInput from '@/components/common/convert/KeyInput'
+import MultipleKeyInput from '@/components/common/convert/MultipleKeyInput'
 import PlainTextArea from '@/components/common/convert/PlainTextArea'
 import CipherTextArea from '@/components/common/convert/CipherTextArea'
-import ColumnarTable from '@/components/columnar/ColumnarTable'
+// import ColumnarTable from '@/components/columnar/ColumnarTable'
 
 export default {
-  name: 'ColumnarConvert',
-  mixins: [ColumnarCipher, KeyPermutations],
+  name: 'UchiConvert',
+  mixins: [UbchiCipher, KeyPermutations],
   components: {
-    'key-input': KeyInput,
+    'multiple-key-input': MultipleKeyInput,
     'plain-text-area': PlainTextArea,
-    'cipher-text-area': CipherTextArea,
-    'columnar-table': ColumnarTable
+    'cipher-text-area': CipherTextArea
+    // 'columnar-table': ColumnarTable
   },
   data() {
     return {
@@ -96,15 +96,17 @@ export default {
     },
     encrypt() {
       this.isTableDisplayed = this.plainText.length < 200
-      this.cipherText = this.columnarEncrypt(
+      this.cipherText = this.ubchiEncrypt(
         this.keyPermutation,
+        this.numOfKeyWords,
         this.plainText
       )
     },
     decrypt() {
       this.isTableDisplayed = this.cipherText.length < 200
-      this.plainText = this.columnarDecrypt(
+      this.plainText = this.ubchiDecrypt(
         this.keyPermutation,
+        this.numOfKeyWords,
         this.cipherText
       )
     },
@@ -116,8 +118,14 @@ export default {
     }
   },
   computed: {
+    keyArray: function() {
+      return this.keyValue.trim().split(' ')
+    },
+    numOfKeyWords: function() {
+      return this.keyArray.length
+    },
     keyPermutation: function() {
-      return this.getKeyPermutation(this.keyValue)
+      return this.getKeyPermutation(this.keyArray.join(''))
     },
     isKeyValueValid: function() {
       return this.keyValue.length > 1

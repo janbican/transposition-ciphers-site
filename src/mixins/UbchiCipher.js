@@ -5,6 +5,8 @@ export default {
   mixins: [ColumnarCipher],
   methods: {
     ubchiEncrypt(keyPermutation, numOfWords, text) {
+      if (text.length == 0) return ''
+
       // první transpozice
       let partCipher = this.columnarEncrypt(keyPermutation, text)
 
