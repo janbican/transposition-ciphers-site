@@ -1,12 +1,18 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/views/Home.vue'
+
 import Columnar from '@/views/Columnar.vue'
 import ColumnarDescription from '@/components/columnar/Description.vue'
 import ColumnarConvert from '@/components/columnar/Convert.vue'
+
 import RailFence from '@/views/RailFence.vue'
 import RailFenceDescription from '@/components/railfence/Description.vue'
 import RailFenceConvert from '@/components/railfence/Convert.vue'
+
+import Ubchi from '@/views/Ubchi.vue'
+import UbchiDescription from '@/components/ubchi/Description.vue'
+import UbchiConvert from '@/components/ubchi/Convert.vue'
 
 Vue.use(VueRouter)
 
@@ -53,6 +59,26 @@ const routes = [
         path: 'convert',
         name: 'railfence.convert',
         component: RailFenceConvert
+      }
+    ]
+  },
+  {
+    path: '/ubchi',
+    component: Ubchi,
+    name: 'ubchi',
+    redirect: {
+      name: 'ubchi.description'
+    },
+    children: [
+      {
+        path: 'description',
+        name: 'ubchi.description',
+        component: UbchiDescription
+      },
+      {
+        path: 'convert',
+        name: 'ubchi.convert',
+        component: UbchiConvert
       }
     ]
   }
