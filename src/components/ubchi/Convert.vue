@@ -39,13 +39,19 @@
             >Ukázat šifrovací tabulku</b-button
           >
           <div v-else>
-            <!-- <h5>šifrovací tabulka</h5>
+            <h5>šifrovací tabulky</h5>
             <columnar-table
-              :keyValue="keyValue"
+              :keyValue="keyWithoutSpaces"
               :keyPermutation="keyPermutation"
               :isValid="isKeyValueValid"
               :text="plainText"
-            /> -->
+            />
+            <columnar-table
+              :keyValue="keyWithoutSpaces"
+              :keyPermutation="keyPermutation"
+              :isValid="isKeyValueValid"
+              :text="partCipherText"
+            />
           </div>
         </b-col>
       </b-row>
@@ -59,7 +65,7 @@ import KeyPermutations from '@/mixins/KeyPermutations'
 import MultipleKeyInput from '@/components/common/convert/MultipleKeyInput'
 import PlainTextArea from '@/components/common/convert/PlainTextArea'
 import CipherTextArea from '@/components/common/convert/CipherTextArea'
-// import ColumnarTable from '@/components/columnar/ColumnarTable'
+import ColumnarTable from '@/components/columnar/ColumnarTable'
 
 export default {
   name: 'UchiConvert',
@@ -67,8 +73,8 @@ export default {
   components: {
     'multiple-key-input': MultipleKeyInput,
     'plain-text-area': PlainTextArea,
-    'cipher-text-area': CipherTextArea
-    // 'columnar-table': ColumnarTable
+    'cipher-text-area': CipherTextArea,
+    'columnar-table': ColumnarTable
   },
   data() {
     return {
@@ -76,7 +82,8 @@ export default {
       isTableDisplayed: true,
       keyValue: '',
       plainText: '',
-      cipherText: ''
+      cipherText: '',
+      partCipherText: ''
     }
   },
   methods: {
@@ -96,19 +103,23 @@ export default {
     },
     encrypt() {
       this.isTableDisplayed = this.plainText.length < 200
-      this.cipherText = this.ubchiEncrypt(
+      const encryptResult = this.ubchiEncrypt(
         this.keyPermutation,
         this.numOfKeyWords,
         this.plainText
       )
+      this.partCipherText = encryptResult[0]
+      this.cipherText = encryptResult[1]
     },
     decrypt() {
       this.isTableDisplayed = this.cipherText.length < 200
-      this.plainText = this.ubchiDecrypt(
+      const decryptResult = this.ubchiDecrypt(
         this.keyPermutation,
         this.numOfKeyWords,
         this.cipherText
       )
+      this.partCipherText = decryptResult[0]
+      this.plainText = decryptResult[1]
     },
     displayTable() {
       const message = 'Zobrazení může chvíli trvat. Pokračovat?'
@@ -121,14 +132,17 @@ export default {
     keyArray: function() {
       return this.keyValue.trim().split(' ')
     },
+    keyWithoutSpaces: function() {
+      return this.keyArray.join('')
+    },
     numOfKeyWords: function() {
       return this.keyArray.length
     },
     keyPermutation: function() {
-      return this.getKeyPermutation(this.keyArray.join(''))
+      return this.getKeyPermutation(this.keyWithoutSpaces)
     },
     isKeyValueValid: function() {
-      return this.keyValue.length > 1
+      return this.keyWithoutSpaces.length > 1
     }
   }
 }
