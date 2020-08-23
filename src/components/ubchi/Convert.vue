@@ -33,7 +33,7 @@
       <b-row class="justify-content-md-center mt-5">
         <b-col col lg="6" class="text-center">
           <b-button
-            v-if="!isTableDisplayed"
+            v-if="!areTablesVisible"
             variant="outline-info"
             @click="displayTable"
             >Ukázat šifrovací tabulky</b-button
@@ -80,7 +80,7 @@ export default {
   data() {
     return {
       isEncrypting: true,
-      isTableDisplayed: true,
+      areTablesVisible: true,
       keyValue: '',
       plainText: '',
       cipherText: '',
@@ -103,7 +103,7 @@ export default {
       this.decrypt()
     },
     encrypt() {
-      this.isTableDisplayed = this.plainText.length < 200
+      this.areTablesVisible = this.plainText.length < 200
       const encryptResult = this.ubchiEncrypt(
         this.keyPermutation,
         this.numOfKeyWords,
@@ -113,7 +113,7 @@ export default {
       this.cipherText = encryptResult[1]
     },
     decrypt() {
-      this.isTableDisplayed = this.cipherText.length < 200
+      this.areTablesVisible = this.cipherText.length < 200
       const decryptResult = this.ubchiDecrypt(
         this.keyPermutation,
         this.numOfKeyWords,
@@ -125,7 +125,7 @@ export default {
     displayTable() {
       const message = 'Zobrazení může chvíli trvat. Pokračovat?'
       if (confirm(message)) {
-        this.isTableDisplayed = true
+        this.areTablesVisible = true
       }
     }
   },

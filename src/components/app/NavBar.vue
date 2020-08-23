@@ -19,7 +19,7 @@
 </template>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
 
 .navbar {
   min-height: 80px;
@@ -27,7 +27,7 @@
 }
 
 .navbar-brand {
-  font-family: 'Pacifico', cursive;
+  font-family: 'Josefin Sans', sans-serif;
 }
 
 .navbar-collapse {
