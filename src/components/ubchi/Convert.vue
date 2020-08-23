@@ -36,16 +36,17 @@
             v-if="!isTableDisplayed"
             variant="outline-info"
             @click="displayTable"
-            >Ukázat šifrovací tabulku</b-button
+            >Ukázat šifrovací tabulky</b-button
           >
           <div v-else>
-            <h5>šifrovací tabulky</h5>
+            <h5>tabulka první transpozice</h5>
             <columnar-table
               :keyValue="keyWithoutSpaces"
               :keyPermutation="keyPermutation"
               :isValid="isKeyValueValid"
               :text="plainText"
             />
+            <h5>tabulka druhé transpozice</h5>
             <columnar-table
               :keyValue="keyWithoutSpaces"
               :keyPermutation="keyPermutation"
@@ -150,8 +151,6 @@ export default {
 
 <style scoped>
 h5 {
-  text-align: center;
-  border-bottom: 0;
-  font-weight: 400;
+  margin-top: 1em;
 }
 </style>

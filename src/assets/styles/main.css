@@ -6,9 +6,14 @@ body {
   padding-bottom: 2em;
 }
 
-h5 {
+h4 {
   margin: 1.4em 0;
   color: #9b6667;
+}
+
+h5 {
+  text-align: center;
+  border-bottom: 0;
 }
 
 input:focus,

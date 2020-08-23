@@ -43,7 +43,7 @@
       </b-col>
     </b-row>
 
-    <h5>Postup zašifrování</h5>
+    <h4>Postup zašifrování</h4>
     <p><strong>otevřený text</strong>: "Byli jste odhaleni, utečte."</p>
 
     <p>
@@ -227,7 +227,7 @@
 
     <br />
 
-    <h5>Postup dešifrování</h5>
+    <h4>Postup dešifrování</h4>
     <p><strong>šifrovaný text</strong>: "YTAUELELTJDNCBSHITIOEE"</p>
     <p><strong>klíč</strong>: "slovo"</p>
 

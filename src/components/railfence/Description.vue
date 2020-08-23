@@ -9,7 +9,9 @@
 
     <p>Klíč představuje počet řádků, které budou pro zašifrování použity.</p>
 
-    <h5>Příklad zašifrování</h5>
+    <br />
+
+    <h4>Příklad zašifrování</h4>
     <p><strong>otevřený text</strong>: "Nepřítel nás odhalil."</p>
     <p><strong>klíč (počet řádků)</strong>: 3</p>
     <p>
@@ -163,7 +165,7 @@
 
     <br />
 
-    <h5>Příklad dešifrování</h5>
+    <h4>Příklad dešifrování</h4>
     <p><strong>šifrovaný text</strong>: "NINDIERTLAOHLLPESA"</p>
     <p><strong>klíč (počet řádků)</strong>: 3</p>
 

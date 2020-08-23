@@ -115,10 +115,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-h5 {
-  text-align: center;
-  border-bottom: 0;
-}
-</style>
