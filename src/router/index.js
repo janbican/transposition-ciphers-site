@@ -14,6 +14,10 @@ import Ubchi from '@/views/Ubchi.vue'
 import UbchiDescription from '@/components/ubchi/Description.vue'
 import UbchiConvert from '@/components/ubchi/Convert.vue'
 
+import Myszkowski from '@/views/Myszkowski.vue'
+import MyszkowskiDescription from '@/components/myszkowski/Description.vue'
+import MyszkowskiConvert from '@/components/myszkowski/Convert.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -79,6 +83,26 @@ const routes = [
         path: 'convert',
         name: 'ubchi.convert',
         component: UbchiConvert
+      }
+    ]
+  },
+  {
+    path: '/myszkowski',
+    component: Myszkowski,
+    name: 'myszkowski',
+    redirect: {
+      name: 'myszkowski.description'
+    },
+    children: [
+      {
+        path: 'description',
+        name: 'myszkowski.description',
+        component: MyszkowskiDescription
+      },
+      {
+        path: 'convert',
+        name: 'myszkowski.convert',
+        component: MyszkowskiConvert
       }
     ]
   }
