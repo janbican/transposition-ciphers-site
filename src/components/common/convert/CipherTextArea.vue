@@ -14,8 +14,11 @@
 </template>
 
 <script>
+import Utils from '@/mixins/Utils'
+
 export default {
   name: 'CipherTextArea',
+  mixins: [Utils],
   props: {
     value: String
   },
@@ -24,11 +27,8 @@ export default {
       this.$emit('input', event.target.value)
       this.$emit('valueChanged', event)
     },
-    getAdjustedText(text) {
-      return text.replace(/[^A-Za-z]/g, '').toUpperCase()
-    },
     formatter(value) {
-      return this.getAdjustedText(value)
+      return this.getNormalizedCipherText(value)
     }
   }
 }

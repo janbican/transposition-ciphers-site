@@ -14,8 +14,11 @@
 </template>
 
 <script>
+import Utils from '@/mixins/Utils'
+
 export default {
   name: 'PlainTextArea',
+  mixins: [Utils],
   props: {
     value: String
   },
@@ -24,15 +27,8 @@ export default {
       this.$emit('input', event.target.value)
       this.$emit('valueChanged', event)
     },
-    getAdjustedText(text) {
-      return text
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '')
-        .replace(/[^A-Za-z]/g, '')
-        .toLowerCase()
-    },
     formatter(value) {
-      return this.getAdjustedText(value)
+      return this.getNormalizedPlainText(value)
     }
   }
 }

@@ -19,8 +19,11 @@
 </template>
 
 <script>
+import Utils from '@/mixins/Utils'
+
 export default {
   name: 'MultipleKeyInput',
+  mixins: [Utils],
   props: {
     value: String,
     isValid: Boolean
@@ -31,7 +34,7 @@ export default {
       this.$emit('valueChanged', event)
     },
     getAdjustedText(text) {
-      return text
+      return this.getNormalizedText(text)
         .trimLeft()
         .replace(/[^A-Za-z ]/g, '')
         .replace(/\s\s+/g, ' ')
