@@ -1,5 +1,8 @@
+import Utils from '@/mixins/Utils'
+
 export default {
   name: 'MyszkowskiCipher',
+  mixins: [Utils],
   methods: {
     myszkowskiEncrypt(keyPermutation, text) {
       const keyLength = keyPermutation.length
@@ -27,16 +30,6 @@ export default {
       }
 
       return cipherCols.join('').toUpperCase()
-    },
-
-    createTwoDimArray(length) {
-      const array = new Array(length)
-
-      for (let i = 0; i < length; i++) {
-        array[i] = new Array()
-      }
-
-      return array
     },
 
     mergeStringsInArray(strings) {

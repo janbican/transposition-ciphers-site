@@ -1,5 +1,8 @@
+import Utils from '@/mixins/Utils'
+
 export default {
   name: 'ColumnarCipher',
+  mixins: [Utils],
   methods: {
     columnarEncrypt(keyPermutation, text) {
       const keyLength = keyPermutation.length
@@ -58,16 +61,6 @@ export default {
         return keyPermutation[x] - keyPermutation[y]
       })
       return positions
-    },
-
-    createTwoDimArray(length) {
-      const array = new Array(length)
-
-      for (let i = 0; i < length; i++) {
-        array[i] = new Array()
-      }
-
-      return array
     }
   }
 }
