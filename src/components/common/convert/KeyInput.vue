@@ -31,7 +31,11 @@ export default {
       this.$emit('valueChanged', event)
     },
     getAdjustedText(text) {
-      return text.replace(/[^A-Za-z]/g, '').toLowerCase()
+      return text
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^A-Za-z]/g, '')
+        .toLowerCase()
     },
     formatter(value) {
       return this.getAdjustedText(value)
