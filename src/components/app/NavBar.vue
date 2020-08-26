@@ -8,10 +8,9 @@
           <b-nav-item :to="{ name: 'columnar' }">Sloupcová</b-nav-item>
           <b-nav-item :to="{ name: 'railfence' }">Rail Fence</b-nav-item>
           <b-nav-item :to="{ name: 'ubchi' }">ÜBCHI</b-nav-item>
-          <b-nav-item :to="{ name: 'myszkowski' }">Myszkowskiho</b-nav-item>
+          <b-nav-item :to="{ name: 'myszkowski' }">Myszkowski</b-nav-item>
+          <b-nav-item :to="{ name: 'fleissner' }">Fleissner</b-nav-item>
           <b-nav-item>Route</b-nav-item>
-          <b-nav-item>Fleissnerova</b-nav-item>
-          <b-nav-item></b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-container>

@@ -18,6 +18,10 @@ import Myszkowski from '@/views/Myszkowski.vue'
 import MyszkowskiDescription from '@/components/myszkowski/Description.vue'
 import MyszkowskiConvert from '@/components/myszkowski/Convert.vue'
 
+import Fleissner from '@/views/Fleissner.vue'
+import FleissnerDescription from '@/components/fleissner/Description.vue'
+import FleissnerConvert from '@/components/fleissner/Convert.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -103,6 +107,26 @@ const routes = [
         path: 'convert',
         name: 'myszkowski.convert',
         component: MyszkowskiConvert
+      }
+    ]
+  },
+  {
+    path: '/fleissner',
+    component: Fleissner,
+    name: 'fleissner',
+    redirect: {
+      name: 'fleissner.description'
+    },
+    children: [
+      {
+        path: 'description',
+        name: 'fleissner.description',
+        component: FleissnerDescription
+      },
+      {
+        path: 'convert',
+        name: 'fleissner.convert',
+        component: FleissnerConvert
       }
     ]
   }
