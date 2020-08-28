@@ -5,7 +5,8 @@
         <key-number-input
           v-model.number="keyValue"
           :value="keyValue"
-          :minimum="2"
+          label="Klíč (počet řádků)"
+          invalidFeedback="Počet řádků musí být alespoň 2"
           :isValid="isKeyValueValid"
           @valueChanged="keyValueChanged"
         />

@@ -1,6 +1,6 @@
 <template>
   <div class="key-number-input">
-    <b-form-group label="Klíč (počet řádků)" label-for="key">
+    <b-form-group :label="label" label-for="key">
       <b-form-input
         id="key"
         type="number"
@@ -10,7 +10,7 @@
       ></b-form-input>
 
       <b-form-invalid-feedback>
-        Počet řádků musí být alespoň 2
+        {{ invalidFeedback }}
       </b-form-invalid-feedback>
     </b-form-group>
   </div>
@@ -21,8 +21,9 @@ export default {
   name: 'KeyNumberInput',
   props: {
     value: Number,
-    minimum: Number,
-    isValid: Boolean
+    isValid: Boolean,
+    label: String,
+    invalidFeedback: String
   },
   methods: {
     valueChanged(value) {

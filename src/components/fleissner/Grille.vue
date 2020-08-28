@@ -5,7 +5,8 @@
         <size-input
           v-model.number="size"
           :value="size"
-          :minimum="4"
+          label="Velikost mřížky"
+          invalidFeedback="Velikost mřížky musí být alespoň 4"
           :isValid="isSizeValid"
           @valueChanged="sizeChanged"
         />
@@ -58,19 +59,24 @@ export default {
   },
   methods: {
     sizeChanged() {
-      console.log(this.size)
-      const newGrille = []
-      for (let i = 0; i < this.size; i++) {
-        newGrille.push(new Array(this.size).fill(0))
+      this.grille = this.createFreshGrille()
+
+      if (this.size % 2 == 1) {
+        const middle = Math.floor(this.size / 2)
+        this.grille[middle][middle] = 2
       }
-      this.grille = newGrille
+    },
+
+    createFreshGrille() {
+      const grille = []
+      for (let i = 0; i < this.size; i++) {
+        grille.push(new Array(this.size).fill(0))
+      }
+      return grille
     },
 
     cellClicked(row, col) {
       const value = this.grille[row][col]
-
-      console.log(row, col, value)
-
       if (value == 0) {
         this.cutOut(row, col)
       } else if (value == 1) {
@@ -80,7 +86,6 @@ export default {
 
     cutOut(row, col) {
       this.grille[row][col] = 1
-      //this.$set(this.grille[col], size - 1 - row, 2)
       this.grille[col][this.size - 1 - row] = 2
       this.grille[this.size - 1 - row][this.size - 1 - col] = 2
       this.grille[this.size - 1 - col][row] = 2
