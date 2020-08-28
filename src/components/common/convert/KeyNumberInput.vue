@@ -4,7 +4,6 @@
       <b-form-input
         id="key"
         type="number"
-        min="minimum"
         :value="value"
         :state="isValid"
         @input="valueChanged"
@@ -28,9 +27,7 @@ export default {
   methods: {
     valueChanged(value) {
       this.$emit('input', value)
-      if (this.isValid) {
-        this.$emit('valueChanged', event)
-      }
+      this.$emit('valueChanged', event)
     }
   }
 }

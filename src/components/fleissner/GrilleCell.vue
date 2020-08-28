@@ -10,25 +10,14 @@ export default {
     row: Number,
     col: Number
   },
-  data() {
-    return {
-      //activeClass: ''
-    }
-  },
   methods: {
     click() {
       this.$emit('click', this.row, this.col)
-      //this.activeClass = this.calcActiveClass()
     }
-    // calcActiveClass() {
-    //   const value = this.grille[this.row][this.col]
-    //   if (value === 0) return ''
-    //   return value === 1 ? 'activated' : 'deactivated'
-    // }
   },
   computed: {
     activeClass: function() {
-      console.log('calcActiveClass')
+      //console.log('activeClass: ' + this.row + ' ' + this.col)
       const value = this.grille[this.row][this.col]
       if (value === 0) return ''
       return value === 1 ? 'activated' : 'deactivated'
