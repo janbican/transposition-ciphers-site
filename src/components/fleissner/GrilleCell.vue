@@ -12,28 +12,28 @@ export default {
   },
   data() {
     return {
-      activeClass: ''
+      //activeClass: ''
     }
   },
   methods: {
     click() {
       this.$emit('click', this.row, this.col)
-      this.activeClass = this.calcActiveClass()
-    },
-    calcActiveClass() {
+      //this.activeClass = this.calcActiveClass()
+    }
+    // calcActiveClass() {
+    //   const value = this.grille[this.row][this.col]
+    //   if (value === 0) return ''
+    //   return value === 1 ? 'activated' : 'deactivated'
+    // }
+  },
+  computed: {
+    activeClass: function() {
+      console.log('calcActiveClass')
       const value = this.grille[this.row][this.col]
       if (value === 0) return ''
       return value === 1 ? 'activated' : 'deactivated'
     }
   }
-  // computed: {
-  //   activeClass: function() {
-  //     console.log('calcActiveClass')
-  //     const value = this.grille[this.row][this.col]
-  //     if (value === 0) return ''
-  //     return value === 1 ? 'activated' : 'deactivated'
-  //   }
-  // }
 }
 </script>
 
@@ -42,8 +42,7 @@ td {
   width: 50px;
   height: 50px;
   background-color: gray;
-  border-bottom: 2px solid white;
-  border-right: 2px solid white;
+  border: 2px solid black;
   cursor: pointer;
 }
 
@@ -53,5 +52,9 @@ td:hover {
 
 .activated {
   background-color: white;
+}
+
+.deactivated {
+  background-color: tomato;
 }
 </style>

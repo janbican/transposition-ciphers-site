@@ -40,14 +40,14 @@ export default {
 
     fleissnerDecrypt(grille, cipher) {
       const size = grille.length
-      let text = ''
+      let plainText = ''
 
       for (let rotateCount = 0; rotateCount < 4; rotateCount++) {
         for (let row = 0; row < size; row++) {
           for (let col = 0; col < size; col++) {
             if (grille[row][col]) {
-              const position = row * size + col
-              text += cipher.charAt(position)
+              const index = row * size + col
+              plainText += cipher.charAt(index)
             }
           }
         }
@@ -56,7 +56,7 @@ export default {
         this.rotate(grille)
       }
 
-      return text.toLowerCase()
+      return plainText.toLowerCase()
     }
   }
 }
