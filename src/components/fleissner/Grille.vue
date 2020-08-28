@@ -61,6 +61,7 @@ export default {
   methods: {
     sizeChanged() {
       this.grille = this.createFreshGrille()
+      this.count = 0
 
       if (this.size % 2 == 1) {
         const middle = Math.floor(this.size / 2)
@@ -92,6 +93,8 @@ export default {
     },
 
     isComplete() {
+      console.log(this.size)
+      console.log(this.count)
       return Math.floor((this.size * this.size) / 4) === this.count
     },
 
