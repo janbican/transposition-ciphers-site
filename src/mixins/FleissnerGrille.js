@@ -9,7 +9,7 @@ export default {
       for (let rotateCount = 0; rotateCount < 4; rotateCount++) {
         for (let row = 0; row < size; row++) {
           for (let col = 0; col < size; col++) {
-            if (grille[row][col]) {
+            if (grille[row][col] === 1) {
               const index = row * size + col
               cipherArray[index] = text.charAt(i++)
             }
@@ -45,7 +45,7 @@ export default {
       for (let rotateCount = 0; rotateCount < 4; rotateCount++) {
         for (let row = 0; row < size; row++) {
           for (let col = 0; col < size; col++) {
-            if (grille[row][col]) {
+            if (grille[row][col] === 1) {
               const index = row * size + col
               plainText += cipher.charAt(index)
             }

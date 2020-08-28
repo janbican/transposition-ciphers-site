@@ -54,7 +54,8 @@ export default {
         [0, 0, 0, 0],
         [0, 0, 0, 0],
         [0, 0, 0, 0]
-      ]
+      ],
+      count: 0
     }
   },
   methods: {
@@ -65,6 +66,8 @@ export default {
         const middle = Math.floor(this.size / 2)
         this.grille[middle][middle] = 2
       }
+
+      this.$emit('change', null)
     },
 
     createFreshGrille() {
@@ -79,9 +82,17 @@ export default {
       const value = this.grille[row][col]
       if (value == 0) {
         this.cutOut(row, col)
+        this.count += 1
       } else if (value == 1) {
         this.fill(row, col)
+        this.count -= 1
       }
+
+      this.$emit('change', this.isComplete() ? this.grille : null)
+    },
+
+    isComplete() {
+      return Math.floor((this.size * this.size) / 4) === this.count
     },
 
     cutOut(row, col) {
