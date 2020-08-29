@@ -1,13 +1,13 @@
 <template>
   <div>
-    <b-row class="mb-3">
+    <b-row>
       <b-col>
         <grille @change="grilleChanged" />
       </b-col>
     </b-row>
 
     <div v-show="completeGrille !== null">
-      <b-row>
+      <b-row class="mt-3">
         <b-col lg="6">
           <plain-text-area
             v-model="plainText"

@@ -17,7 +17,6 @@ export default {
   },
   computed: {
     activeClass: function() {
-      //console.log('activeClass: ' + this.row + ' ' + this.col)
       const value = this.grille[this.row][this.col]
       if (value === 0) return ''
       return value === 1 ? 'activated' : 'deactivated'
@@ -30,8 +29,8 @@ export default {
 td {
   width: 50px;
   height: 50px;
-  background-color: gray;
-  border: 2px solid black;
+  background: #dddddd;
+  border: 1px solid #999999;
   cursor: pointer;
 }
 
@@ -44,6 +43,6 @@ td:hover {
 }
 
 .deactivated {
-  background-color: tomato;
+  background-color: #9b6667;
 }
 </style>

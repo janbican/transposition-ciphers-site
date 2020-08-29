@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="grille">
     <b-row class="mb-3">
       <b-col>
         <size-input
@@ -14,22 +14,25 @@
     </b-row>
 
     <div v-show="isSizeValid">
-      <b-row class="mb-3">
+      <b-row class="justify-content-md-center mt-3 text-center">
         <b-col>
-          <table>
-            <tbody>
-              <tr v-for="(row, rowIndex) in grille" :key="rowIndex">
-                <grille-cell
-                  v-for="(cell, cellIndex) in row"
-                  :key="cellIndex"
-                  :grille="grille"
-                  :row="rowIndex"
-                  :col="cellIndex"
-                  @click="cellClicked"
-                ></grille-cell>
-              </tr>
-            </tbody>
-          </table>
+          <label>Mřížka</label>
+          <div class="grille-grid">
+            <table>
+              <tbody>
+                <tr v-for="(row, rowIndex) in grille" :key="rowIndex">
+                  <grille-cell
+                    v-for="(cell, cellIndex) in row"
+                    :key="cellIndex"
+                    :grille="grille"
+                    :row="rowIndex"
+                    :col="cellIndex"
+                    @click="cellClicked"
+                  ></grille-cell>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </b-col>
       </b-row>
     </div>
@@ -123,3 +126,13 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+table {
+  margin: 0 auto;
+}
+
+.grille-grid {
+  overflow-x: auto;
+}
+</style>
