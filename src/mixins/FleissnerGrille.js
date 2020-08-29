@@ -20,7 +20,7 @@ export default {
         this.rotate(grille)
       }
 
-      return cipherArray.join('').toLowerCase()
+      return cipherArray.join('').toUpperCase()
     },
 
     rotate(grille) {
@@ -40,13 +40,19 @@ export default {
 
     fleissnerDecrypt(grille, cipher) {
       const size = grille.length
+      const isOdd = size % 2 == 1
       let plainText = ''
 
       for (let rotateCount = 0; rotateCount < 4; rotateCount++) {
         for (let row = 0; row < size; row++) {
           for (let col = 0; col < size; col++) {
             if (grille[row][col] === 1) {
-              const index = row * size + col
+              let index = row * size + col
+
+              // pokud je tabulka o liché délce, prostřední pole se ignoruje
+              // pro další index je třeba odečíst 1
+              if (isOdd && index > cipher.length / 2) index -= 1
+
               plainText += cipher.charAt(index)
             }
           }
