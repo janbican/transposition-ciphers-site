@@ -6,6 +6,7 @@
         :value="value"
         :formatter="formatter"
         placeholder="zadej otevřený text"
+        :maxlength="maxLength"
         rows="5"
         @keyup="valueChanged"
       ></b-form-textarea>
@@ -20,7 +21,8 @@ export default {
   name: 'PlainTextArea',
   mixins: [Utils],
   props: {
-    value: String
+    value: String,
+    maxLength: Number
   },
   methods: {
     valueChanged(event) {

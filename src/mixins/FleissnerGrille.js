@@ -40,6 +40,7 @@ export default {
 
     fleissnerDecrypt(grille, cipher) {
       const size = grille.length
+      const middle = (size * size) / 2
       const isOdd = size % 2 == 1
       let plainText = ''
 
@@ -51,7 +52,7 @@ export default {
 
               // pokud je tabulka o liché délce, prostřední pole se ignoruje
               // pro další index je třeba odečíst 1
-              if (isOdd && index > cipher.length / 2) index -= 1
+              if (isOdd && index > middle) index -= 1
 
               plainText += cipher.charAt(index)
             }

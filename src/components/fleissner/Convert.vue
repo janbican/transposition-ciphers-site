@@ -12,6 +12,7 @@
           <plain-text-area
             v-model="plainText"
             :value="plainText"
+            :maxLength="maxTextLength"
             @valueChanged="plainTextChanged"
           />
         </b-col>
@@ -20,8 +21,15 @@
           <cipher-text-area
             v-model="cipherText"
             :value="cipherText"
+            :maxLength="maxTextLength"
             @valueChanged="cipherTextChanged"
           />
+        </b-col>
+      </b-row>
+
+      <b-row>
+        <b-col class="center">
+          <p>Maximální délka zprávy: {{ maxTextLength }}</p>
         </b-col>
       </b-row>
     </div>
@@ -83,6 +91,13 @@ export default {
         copy.push(row.slice(0))
       }
       return copy
+    }
+  },
+  computed: {
+    maxTextLength: function() {
+      if (this.completeGrille == null) return 0
+      const size = this.completeGrille.length
+      return size * size - (size % 2 == 1 ? 1 : 0)
     }
   }
 }
