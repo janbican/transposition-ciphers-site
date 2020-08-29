@@ -7,12 +7,13 @@
     </b-row>
 
     <div v-show="completeGrille !== null">
-      <b-row class="mt-3">
+      <b-row class="mt-5">
         <b-col lg="6">
           <plain-text-area
             v-model="plainText"
             :value="plainText"
             :maxLength="maxTextLength"
+            :isInvalid="isPlainTextInvalid"
             @valueChanged="plainTextChanged"
           />
         </b-col>
@@ -22,14 +23,17 @@
             v-model="cipherText"
             :value="cipherText"
             :maxLength="maxTextLength"
+            :isInvalid="isCipherTextInvalid"
             @valueChanged="cipherTextChanged"
           />
         </b-col>
       </b-row>
 
-      <b-row>
-        <b-col class="center">
-          <p>Maximální délka zprávy: {{ maxTextLength }}</p>
+      <b-row v-show="isPlainTextInvalid">
+        <b-col>
+          <b-button variant="outline-dark" @click="completePlainText"
+            >Doplnit otevřený text</b-button
+          >
         </b-col>
       </b-row>
     </div>
@@ -62,8 +66,8 @@ export default {
     grilleChanged(grille) {
       this.completeGrille = grille
       if (grille === null) return
-      if (this.isEncrypting) this.encrypt()
-      else this.decrypt()
+      this.plainText = ''
+      this.cipherText = ''
     },
     plainTextChanged() {
       this.isEncrypting = true
@@ -74,12 +78,16 @@ export default {
       this.decrypt()
     },
     encrypt() {
+      this.cipherText = ''
+      if (this.isPlainTextInvalid) return
       this.cipherText = this.fleissnerEncrypt(
         this.copyGrille(this.completeGrille),
         this.plainText
       )
     },
     decrypt() {
+      this.plainText = ''
+      if (this.isCipherTextInvalid) return
       this.plainText = this.fleissnerDecrypt(
         this.copyGrille(this.completeGrille),
         this.cipherText
@@ -91,6 +99,11 @@ export default {
         copy.push(row.slice(0))
       }
       return copy
+    },
+    completePlainText() {
+      const remainder = this.maxTextLength - this.plainText.length
+      this.plainText = this.plainText + 'x'.repeat(remainder)
+      this.encrypt()
     }
   },
   computed: {
@@ -98,6 +111,14 @@ export default {
       if (this.completeGrille == null) return 0
       const size = this.completeGrille.length
       return size * size - (size % 2 == 1 ? 1 : 0)
+    },
+
+    isPlainTextInvalid: function() {
+      return this.isEncrypting && this.maxTextLength != this.plainText.length
+    },
+
+    isCipherTextInvalid: function() {
+      return !this.isEncrypting && this.maxTextLength != this.cipherText.length
     }
   }
 }

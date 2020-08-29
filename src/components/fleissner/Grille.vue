@@ -9,9 +9,9 @@
       @valueChanged="sizeChanged"
     />
 
-    <div v-show="isSizeValid" class="mt-5">
+    <div v-show="isSizeValid" class="grille-grid mt-5">
       <label>Mřížka</label>
-      <div class="grille-grid">
+      <div>
         <table>
           <tbody>
             <tr v-for="(row, rowIndex) in grille" :key="rowIndex">
@@ -123,5 +123,9 @@ export default {
 <style scoped>
 table {
   margin: 0 auto;
+}
+
+.grille-grid {
+  text-align: center;
 }
 </style>

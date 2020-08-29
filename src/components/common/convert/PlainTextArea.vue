@@ -6,10 +6,15 @@
         :value="value"
         :formatter="formatter"
         placeholder="zadej otevřený text"
+        :state="!isInvalid"
         :maxlength="maxLength"
         rows="5"
         @keyup="valueChanged"
       ></b-form-textarea>
+
+      <b-form-invalid-feedback>
+        Nedostatečná délka - {{ value.length }}/{{ maxLength }} písmen
+      </b-form-invalid-feedback>
     </b-form-group>
   </div>
 </template>
@@ -22,7 +27,8 @@ export default {
   mixins: [Utils],
   props: {
     value: String,
-    maxLength: Number
+    maxLength: Number,
+    isInvalid: Boolean
   },
   methods: {
     valueChanged(event) {
