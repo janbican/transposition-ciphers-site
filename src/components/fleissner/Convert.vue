@@ -65,7 +65,6 @@ export default {
   methods: {
     grilleChanged(grille) {
       this.completeGrille = grille
-      if (grille === null) return
       this.plainText = ''
       this.cipherText = ''
     },
