@@ -6,7 +6,7 @@
       </b-col>
     </b-row>
 
-    <div v-show="completeGrille !== null">
+    <div v-show="isGrilleComplete">
       <b-row class="mt-5">
         <b-col lg="6">
           <plain-text-area
@@ -107,6 +107,10 @@ export default {
     }
   },
   computed: {
+    isGrilleComplete: function() {
+      return this.completeGrille !== null
+    },
+
     maxTextLength: function() {
       if (this.completeGrille == null) return 0
       const size = this.completeGrille.length

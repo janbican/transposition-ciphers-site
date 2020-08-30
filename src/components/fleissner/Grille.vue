@@ -11,22 +11,21 @@
 
     <div v-show="isSizeValid" class="grille-grid mt-5">
       <label>Mřížka</label>
-      <div>
-        <table>
-          <tbody>
-            <tr v-for="(row, rowIndex) in grille" :key="rowIndex">
-              <grille-cell
-                v-for="(cell, cellIndex) in row"
-                :key="cellIndex"
-                :grille="grille"
-                :row="rowIndex"
-                :col="cellIndex"
-                @click="cellClicked"
-              ></grille-cell>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+
+      <table>
+        <tbody>
+          <tr v-for="(row, rowIndex) in grille" :key="rowIndex">
+            <grille-cell
+              v-for="(cell, cellIndex) in row"
+              :key="cellIndex"
+              :grille="grille"
+              :row="rowIndex"
+              :col="cellIndex"
+              @click="cellClicked"
+            ></grille-cell>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </template>
@@ -56,6 +55,7 @@ export default {
       this.grille = this.createFreshGrille()
       this.count = 0
 
+      // parent dostává buď kompletní mřížku nebo null
       this.$emit('change', null)
     },
 
@@ -65,6 +65,7 @@ export default {
         grille.push(new Array(this.size).fill(0))
       }
 
+      // je-li size liché číslo, prostřední políčko se nedá vystřihnout
       if (this.size % 2 == 1) {
         const middle = Math.floor(this.size / 2)
         grille[middle][middle] = 2
@@ -75,14 +76,10 @@ export default {
 
     cellClicked(row, col) {
       const value = this.grille[row][col]
-      if (value === 0) {
-        this.cutCellOut(row, col)
-        this.count += 1
-      } else if (value == 1) {
-        this.fillCell(row, col)
-        this.count -= 1
-      }
+      if (value === 0) this.cutCellOut(row, col)
+      else if (value == 1) this.fillCell(row, col)
 
+      // parent dostává buď kompletní mřížku nebo null
       this.$emit('change', this.isComplete() ? this.grille : null)
     },
 
@@ -99,6 +96,9 @@ export default {
       // pro spustění automatické detekce změny
       // z důvodu překreslení mřížky
       this.$set(this.grille[row], col, 1)
+
+      // aktualizuje počet vystřihnutých políček
+      this.count += 1
     },
 
     fillCell(row, col) {
@@ -110,6 +110,9 @@ export default {
       // pro spustění automatické detekce změny
       // z důvodu překreslení mřížky
       this.$set(this.grille[row], col, 0)
+
+      // aktualizuje počet vystřihnutých políček
+      this.count -= 1
     }
   },
   computed: {
