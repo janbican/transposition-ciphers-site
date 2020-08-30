@@ -1,12 +1,16 @@
 export default {
   name: 'FleissnerGrille',
   methods: {
+    // mřížka je v průběhu výpočtu modifikována
     fleissnerEncrypt(grille, text) {
       const size = grille.length
       const cipherArray = new Array(size * size)
 
+      // provádí se 4 průchody a 3 rotace
+      let rotations = 0
       let i = 0
-      for (let rotateCount = 0; rotateCount < 4; rotateCount++) {
+      while (rotations < 4) {
+        console.log(rotations)
         for (let row = 0; row < size; row++) {
           for (let col = 0; col < size; col++) {
             if (grille[row][col] === 1) {
@@ -16,13 +20,18 @@ export default {
           }
         }
 
-        if (rotateCount === 3) break
-        this.rotate(grille)
+        // poslední rotace je zbytečná => návrat do původní podoby
+        if (rotations < 3) {
+          this.rotate(grille)
+        }
+        rotations += 1
       }
 
       return cipherArray.join('').toUpperCase()
     },
 
+    // pootočí mřížku o 90% ve směru hodinových ručiček
+    // operace se provádí na vstupní mřížce
     rotate(grille) {
       const size = grille.length
       const x = Math.floor(size / 2)
@@ -38,13 +47,16 @@ export default {
       }
     },
 
+    // mřížka je v průběhu výpočtu modifikována
     fleissnerDecrypt(grille, cipher) {
       const size = grille.length
       const middle = (size * size) / 2
       const isOdd = size % 2 == 1
       let plainText = ''
 
-      for (let rotateCount = 0; rotateCount < 4; rotateCount++) {
+      // provádí se 4 průchody a 3 rotace
+      let rotations = 0
+      while (rotations < 4) {
         for (let row = 0; row < size; row++) {
           for (let col = 0; col < size; col++) {
             if (grille[row][col] === 1) {
@@ -59,8 +71,11 @@ export default {
           }
         }
 
-        if (rotateCount === 3) break
-        this.rotate(grille)
+        // poslední rotace je zbytečná => návrat do původní podoby
+        if (rotations < 3) {
+          this.rotate(grille)
+        }
+        rotations += 1
       }
 
       return plainText.toLowerCase()
