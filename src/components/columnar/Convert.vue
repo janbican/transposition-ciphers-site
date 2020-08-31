@@ -11,7 +11,7 @@
       </b-col>
     </b-row>
 
-    <div v-show="isKeyValueValid">
+    <div class="convert-area" v-show="isKeyValueValid">
       <b-row>
         <b-col lg="6">
           <plain-text-area
