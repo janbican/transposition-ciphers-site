@@ -10,7 +10,6 @@ export default {
       let rotations = 0
       let i = 0
       while (rotations < 4) {
-        console.log(rotations)
         for (let row = 0; row < size; row++) {
           for (let col = 0; col < size; col++) {
             if (grille[row][col] === 1) {
