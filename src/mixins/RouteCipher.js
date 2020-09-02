@@ -1,6 +1,24 @@
 export default {
   name: 'RouteCipher',
   methods: {
+    // Common
+    encrypt(order, text) {
+      let cipher = ''
+      for (const index of order) {
+        cipher += text.charAt(index)
+      }
+      return cipher.toUpperCase()
+    },
+
+    decrypt(order, cipher) {
+      const plainArray = new Array(order.length)
+      for (let i = 0; i < order.length; i++) {
+        plainArray[order[i]] = cipher.charAt(i)
+      }
+      return plainArray.join('').toLowerCase()
+    },
+
+    // Vertical
     getOrderVerticalFromLeft(cols, rows, down) {
       const order = []
       let index = down ? 0 : cols * (rows - 1)
@@ -51,22 +69,6 @@ export default {
       return this.getOrderVerticalFromRight(cols, rows, false)
     },
 
-    encrypt(order, text) {
-      let cipher = ''
-      for (const index of order) {
-        cipher += text.charAt(index)
-      }
-      return cipher.toUpperCase()
-    },
-
-    decrypt(order, cipher) {
-      const plainArray = new Array(order.length)
-      for (let i = 0; i < order.length; i++) {
-        plainArray[order[i]] = cipher.charAt(i)
-      }
-      return plainArray.join('').toLowerCase()
-    },
-
     encryptVerticalFromTopLeft(cols, text) {
       const rows = text.length / cols
       return this.encrypt(this.getOrderVerticalFromLeftDown(cols, rows), text)
@@ -108,6 +110,52 @@ export default {
     decryptVerticalFromBottomRight(cols, cipher) {
       const rows = cipher.length / cols
       return this.decrypt(this.getOrderVerticalFromRightUp(cols, rows), cipher)
+    },
+
+    // Horizontal
+    getOrderHorizontalFromTop(rows, cols, left) {
+      const order = []
+      let index = left ? 0 : cols - 1
+      let offset = left ? 1 : -1
+
+      for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+          order.push(index)
+          index += offset
+        }
+        index += cols + (offset > 0 ? -1 : 1)
+        offset = -offset
+      }
+
+      return order
+    },
+
+    getOrderHorizontalFromTopLeft(rows, cols) {
+      return this.getOrderHorizontalFromTop(rows, cols, true)
+    },
+
+    getOrderHorizontalFromTopRight(rows, cols) {
+      return this.getOrderHorizontalFromTop(rows, cols, false)
+    },
+
+    encryptHorizontalFromTopLeft(cols, text) {
+      const rows = text.length / cols
+      return this.encrypt(this.getOrderHorizontalFromTopLeft(rows, cols), text)
+    },
+
+    decryptHorizontalFromTopLeft(cols, text) {
+      const rows = text.length / cols
+      return this.decrypt(this.getOrderHorizontalFromTopLeft(rows, cols), text)
+    },
+
+    encryptHorizontalFromTopRight(cols, text) {
+      const rows = text.length / cols
+      return this.encrypt(this.getOrderHorizontalFromTopRight(rows, cols), text)
+    },
+
+    decryptHorizontalFromTopRight(cols, text) {
+      const rows = text.length / cols
+      return this.decrypt(this.getOrderHorizontalFromTopRight(rows, cols), text)
     }
   }
 }

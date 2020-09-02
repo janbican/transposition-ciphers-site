@@ -10,6 +10,7 @@ const component = Vue.component('MockComponent', {
 const wrapper = shallowMount(component)
 
 describe('Route', () => {
+  // Vertical
   it('encryptVerticalFromTopLeft correctly', () => {
     expect(
       wrapper.vm.encryptVerticalFromTopLeft(5, 'enigmaisciphermachinexxxx')
@@ -62,5 +63,36 @@ describe('Route', () => {
     expect(wrapper.vm.decryptVerticalFromBottomRight(3, 'MTEUHDSRORNT')).toBe(
       'thunderstorm'
     )
+  })
+
+  //Horizontal
+  it('encryptHorizontalFromTopLeft correctly', () => {
+    expect(
+      wrapper.vm.encryptHorizontalFromTopLeft(5, 'thisistranspositionx')
+    ).toBe('THISINARTSSPOSIXNOIT')
+  })
+
+  it('decryptHorizontalFromTopLeft correctly', () => {
+    expect(
+      wrapper.vm.decryptHorizontalFromTopLeft(5, 'THISINARTSSPOSIXNOIT')
+    ).toBe('thisistranspositionx')
+  })
+
+  it('encryptHorizontalFromTopRight correctly', () => {
+    expect(
+      wrapper.vm.encryptHorizontalFromTopRight(
+        6,
+        'transpositionisamethodofencryptionxx'
+      )
+    ).toBe('PSNARTOSITIOEMASINTHODOFPYRCNETIONXX')
+  })
+
+  it('decryptHorizontalFromTopRight correctly', () => {
+    expect(
+      wrapper.vm.decryptHorizontalFromTopRight(
+        6,
+        'PSNARTOSITIOEMASINTHODOFPYRCNETIONXX'
+      )
+    ).toBe('transpositionisamethodofencryptionxx')
   })
 })
