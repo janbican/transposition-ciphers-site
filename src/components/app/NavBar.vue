@@ -10,7 +10,7 @@
           <b-nav-item :to="{ name: 'ubchi' }">ÜBCHI</b-nav-item>
           <b-nav-item :to="{ name: 'myszkowski' }">Myszkowski</b-nav-item>
           <b-nav-item :to="{ name: 'fleissner' }">Fleissner</b-nav-item>
-          <b-nav-item>Route</b-nav-item>
+          <b-nav-item :to="{ name: 'route' }">Route</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-container>

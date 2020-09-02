@@ -22,6 +22,10 @@ import Fleissner from '@/views/Fleissner.vue'
 import FleissnerDescription from '@/components/fleissner/Description.vue'
 import FleissnerConvert from '@/components/fleissner/Convert.vue'
 
+import Route from '@/views/Route.vue'
+import RouteDescription from '@/components/route/Description.vue'
+import RouteConvert from '@/components/route/Convert.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -127,6 +131,26 @@ const routes = [
         path: 'convert',
         name: 'fleissner.convert',
         component: FleissnerConvert
+      }
+    ]
+  },
+  {
+    path: '/route',
+    component: Route,
+    name: 'route',
+    redirect: {
+      name: 'route.description'
+    },
+    children: [
+      {
+        path: 'description',
+        name: 'route.description',
+        component: RouteDescription
+      },
+      {
+        path: 'convert',
+        name: 'route.convert',
+        component: RouteConvert
       }
     ]
   }
