@@ -62,7 +62,7 @@ import CipherTextArea from '@/components/common/convert/CipherTextArea'
 import EncryptionGrid from '@/components/railfence/EncryptionGrid'
 
 export default {
-  name: 'Convert',
+  name: 'RailFenceConvert',
   mixins: [RailFenceCipher],
   components: {
     'key-number-input': KeyNumberInput,

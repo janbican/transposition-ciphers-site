@@ -2,7 +2,7 @@ export default {
   name: 'RouteCipher',
   methods: {
     // Common
-    encrypt(order, text) {
+    routeEncrypt(order, text) {
       let cipher = ''
       for (const index of order) {
         cipher += text.charAt(index)
@@ -10,7 +10,7 @@ export default {
       return cipher.toUpperCase()
     },
 
-    decrypt(order, cipher) {
+    routeDecrypt(order, cipher) {
       const plainArray = new Array(order.length)
       for (let i = 0; i < order.length; i++) {
         plainArray[order[i]] = cipher.charAt(i)
@@ -71,22 +71,31 @@ export default {
 
     encryptVerticalFromTopLeft(cols, text) {
       const rows = text.length / cols
-      return this.encrypt(this.getOrderVerticalFromLeftDown(cols, rows), text)
+      return this.routeEncrypt(
+        this.getOrderVerticalFromLeftDown(cols, rows),
+        text
+      )
     },
 
     decryptVerticalFromTopLeft(cols, cipher) {
       const rows = cipher.length / cols
-      return this.decrypt(this.getOrderVerticalFromLeftDown(cols, rows), cipher)
+      return this.routeDecrypt(
+        this.getOrderVerticalFromLeftDown(cols, rows),
+        cipher
+      )
     },
 
     encryptVerticalFromTopRight(cols, text) {
       const rows = text.length / cols
-      return this.encrypt(this.getOrderVerticalFromRightDown(cols, rows), text)
+      return this.routeEncrypt(
+        this.getOrderVerticalFromRightDown(cols, rows),
+        text
+      )
     },
 
     decryptVerticalFromTopRight(cols, cipher) {
       const rows = cipher.length / cols
-      return this.decrypt(
+      return this.routeDecrypt(
         this.getOrderVerticalFromRightDown(cols, rows),
         cipher
       )
@@ -94,22 +103,34 @@ export default {
 
     encryptVerticalFromBottomLeft(cols, text) {
       const rows = text.length / cols
-      return this.encrypt(this.getOrderVerticalFromLeftUp(cols, rows), text)
+      return this.routeEncrypt(
+        this.getOrderVerticalFromLeftUp(cols, rows),
+        text
+      )
     },
 
     decryptVerticalFromBottomLeft(cols, cipher) {
       const rows = cipher.length / cols
-      return this.decrypt(this.getOrderVerticalFromLeftUp(cols, rows), cipher)
+      return this.routeDecrypt(
+        this.getOrderVerticalFromLeftUp(cols, rows),
+        cipher
+      )
     },
 
     encryptVerticalFromBottomRight(cols, text) {
       const rows = text.length / cols
-      return this.encrypt(this.getOrderVerticalFromRightUp(cols, rows), text)
+      return this.routeEncrypt(
+        this.getOrderVerticalFromRightUp(cols, rows),
+        text
+      )
     },
 
     decryptVerticalFromBottomRight(cols, cipher) {
       const rows = cipher.length / cols
-      return this.decrypt(this.getOrderVerticalFromRightUp(cols, rows), cipher)
+      return this.routeDecrypt(
+        this.getOrderVerticalFromRightUp(cols, rows),
+        cipher
+      )
     },
 
     // Horizontal
@@ -165,27 +186,39 @@ export default {
 
     encryptHorizontalFromTopLeft(cols, text) {
       const rows = text.length / cols
-      return this.encrypt(this.getOrderHorizontalFromTopLeft(rows, cols), text)
+      return this.routeEncrypt(
+        this.getOrderHorizontalFromTopLeft(rows, cols),
+        text
+      )
     },
 
     decryptHorizontalFromTopLeft(cols, text) {
       const rows = text.length / cols
-      return this.decrypt(this.getOrderHorizontalFromTopLeft(rows, cols), text)
+      return this.routeDecrypt(
+        this.getOrderHorizontalFromTopLeft(rows, cols),
+        text
+      )
     },
 
     encryptHorizontalFromTopRight(cols, text) {
       const rows = text.length / cols
-      return this.encrypt(this.getOrderHorizontalFromTopRight(rows, cols), text)
+      return this.routeEncrypt(
+        this.getOrderHorizontalFromTopRight(rows, cols),
+        text
+      )
     },
 
     decryptHorizontalFromTopRight(cols, text) {
       const rows = text.length / cols
-      return this.decrypt(this.getOrderHorizontalFromTopRight(rows, cols), text)
+      return this.routeDecrypt(
+        this.getOrderHorizontalFromTopRight(rows, cols),
+        text
+      )
     },
 
     encryptHorizontalFromBottomLeft(cols, text) {
       const rows = text.length / cols
-      return this.encrypt(
+      return this.routeEncrypt(
         this.getOrderHorizontalFromBottomLeft(rows, cols),
         text
       )
@@ -193,7 +226,7 @@ export default {
 
     decryptHorizontalFromBottomLeft(cols, text) {
       const rows = text.length / cols
-      return this.decrypt(
+      return this.routeDecrypt(
         this.getOrderHorizontalFromBottomLeft(rows, cols),
         text
       )
@@ -201,7 +234,7 @@ export default {
 
     encryptHorizontalFromBottomRight(cols, text) {
       const rows = text.length / cols
-      return this.encrypt(
+      return this.routeEncrypt(
         this.getOrderHorizontalFromBottomRight(rows, cols),
         text
       )
@@ -209,7 +242,7 @@ export default {
 
     decryptHorizontalFromBottomRight(cols, text) {
       const rows = text.length / cols
-      return this.decrypt(
+      return this.routeDecrypt(
         this.getOrderHorizontalFromBottomRight(rows, cols),
         text
       )
