@@ -138,6 +138,31 @@ export default {
       return this.getOrderHorizontalFromTop(rows, cols, false)
     },
 
+    getOrderHorizontalFromBottom(rows, cols, left) {
+      const order = []
+      let index = left ? cols * (rows - 1) : cols * rows - 1
+      let offset = left ? 1 : -1
+
+      for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+          order.push(index)
+          index += offset
+        }
+        index -= cols + (offset < 0 ? -1 : 1)
+        offset = -offset
+      }
+
+      return order
+    },
+
+    getOrderHorizontalFromBottomLeft(rows, cols) {
+      return this.getOrderHorizontalFromBottom(rows, cols, true)
+    },
+
+    getOrderHorizontalFromBottomRight(rows, cols) {
+      return this.getOrderHorizontalFromBottom(rows, cols, false)
+    },
+
     encryptHorizontalFromTopLeft(cols, text) {
       const rows = text.length / cols
       return this.encrypt(this.getOrderHorizontalFromTopLeft(rows, cols), text)
@@ -156,6 +181,38 @@ export default {
     decryptHorizontalFromTopRight(cols, text) {
       const rows = text.length / cols
       return this.decrypt(this.getOrderHorizontalFromTopRight(rows, cols), text)
+    },
+
+    encryptHorizontalFromBottomLeft(cols, text) {
+      const rows = text.length / cols
+      return this.encrypt(
+        this.getOrderHorizontalFromBottomLeft(rows, cols),
+        text
+      )
+    },
+
+    decryptHorizontalFromBottomLeft(cols, text) {
+      const rows = text.length / cols
+      return this.decrypt(
+        this.getOrderHorizontalFromBottomLeft(rows, cols),
+        text
+      )
+    },
+
+    encryptHorizontalFromBottomRight(cols, text) {
+      const rows = text.length / cols
+      return this.encrypt(
+        this.getOrderHorizontalFromBottomRight(rows, cols),
+        text
+      )
+    },
+
+    decryptHorizontalFromBottomRight(cols, text) {
+      const rows = text.length / cols
+      return this.decrypt(
+        this.getOrderHorizontalFromBottomRight(rows, cols),
+        text
+      )
     }
   }
 }

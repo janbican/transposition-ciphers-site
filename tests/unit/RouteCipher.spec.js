@@ -95,4 +95,34 @@ describe('Route', () => {
       )
     ).toBe('transpositionisamethodofencryptionxx')
   })
+
+  it('encryptHorizontalFromBottomLeft correctly', () => {
+    expect(
+      wrapper.vm.encryptHorizontalFromBottomLeft(5, 'thewinteriscomingxxx')
+    ).toBe('NGXXXIMOCSNTERIIWEHT')
+  })
+
+  it('decryptHorizontalFromBottomLeft correctly', () => {
+    expect(
+      wrapper.vm.decryptHorizontalFromBottomLeft(5, 'NGXXXIMOCSNTERIIWEHT')
+    ).toBe('thewinteriscomingxxx')
+  })
+
+  it('encryptHorizontalFromBottomRight correctly', () => {
+    expect(
+      wrapper.vm.encryptHorizontalFromBottomRight(
+        4,
+        'neverbendyourheadholdithighx'
+      )
+    ).toBe('XHGIDITHLOHDRHEAUOYDRBENEVEN')
+  })
+
+  it('decryptHorizontalFromBottomRight correctly', () => {
+    expect(
+      wrapper.vm.decryptHorizontalFromBottomRight(
+        4,
+        'XHGIDITHLOHDRHEAUOYDRBENEVEN'
+      )
+    ).toBe('neverbendyourheadholdithighx')
+  })
 })
