@@ -13,7 +13,7 @@
       ></b-form-textarea>
 
       <b-form-invalid-feedback>
-        Nedostatečná délka - {{ value.length }}/{{ maxLength }} písmen
+        {{ invalidFeedback }}
       </b-form-invalid-feedback>
     </b-form-group>
   </div>
@@ -28,7 +28,8 @@ export default {
   props: {
     value: String,
     maxLength: Number,
-    isInvalid: Boolean
+    isInvalid: Boolean,
+    invalidFeedback: String
   },
   methods: {
     valueChanged(event) {

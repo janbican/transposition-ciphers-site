@@ -31,6 +31,7 @@
           <plain-text-area
             v-model="plainText"
             :value="plainText"
+            :isInvalid="isPlainTextInvalid"
             @valueChanged="plainTextChanged"
           />
         </b-col>
@@ -134,6 +135,10 @@ export default {
   computed: {
     isNumOfColsValid() {
       return this.numOfCols > 1
+    },
+
+    isPlainTextInvalid() {
+      return this.isEncrypting && this.plainText.length % this.numOfCols !== 0
     }
   }
 }

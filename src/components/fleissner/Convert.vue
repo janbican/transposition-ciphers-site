@@ -14,6 +14,7 @@
             :value="plainText"
             :maxLength="maxTextLength"
             :isInvalid="isPlainTextInvalid"
+            :invalidFeedback="invalidPlainTextFeedback"
             @valueChanged="plainTextChanged"
           />
         </b-col>
@@ -24,6 +25,7 @@
             :value="cipherText"
             :maxLength="maxTextLength"
             :isInvalid="isCipherTextInvalid"
+            :invalidFeedback="invalidCipherTextFeedback"
             @valueChanged="cipherTextChanged"
           />
         </b-col>
@@ -122,6 +124,26 @@ export default {
 
     isCipherTextInvalid: function() {
       return !this.isEncrypting && this.maxTextLength != this.cipherText.length
+    },
+
+    invalidPlainTextFeedback: function() {
+      return (
+        'Nedostatečná délka - ' +
+        this.plainText.length +
+        '/' +
+        this.maxTextLength +
+        ' písmen'
+      )
+    },
+
+    invalidCipherTextFeedback: function() {
+      return (
+        'Nedostatečná délka - ' +
+        this.cipherText.length +
+        '/' +
+        this.maxTextLength +
+        ' písmen'
+      )
     }
   }
 }
