@@ -32,6 +32,7 @@
             v-model="plainText"
             :value="plainText"
             :isInvalid="isPlainTextInvalid"
+            :invalidFeedback="invalidPlainTextFeedback"
             @valueChanged="plainTextChanged"
           />
         </b-col>
@@ -40,8 +41,18 @@
           <cipher-text-area
             v-model="cipherText"
             :value="cipherText"
+            :isInvalid="isCipherTextInvalid"
+            :invalidFeedback="invalidCipherTextFeedback"
             @valueChanged="cipherTextChanged"
           />
+        </b-col>
+      </b-row>
+
+      <b-row v-show="isPlainTextInvalid">
+        <b-col>
+          <b-button variant="outline-dark" @click="completePlainText"
+            >Doplnit otevřený text</b-button
+          >
         </b-col>
       </b-row>
     </div>
@@ -124,12 +135,22 @@ export default {
       this.decrypt()
     },
     encrypt() {
+      this.cipherText = ''
+      if (this.isPlainTextInvalid) return
       const method = this.route.encrypt
       this.cipherText = this[method](this.numOfCols, this.plainText)
     },
     decrypt() {
+      this.plainText = ''
+      if (this.isCipherTextInvalid) return
       const method = this.route.decrypt
       this.plainText = this[method](this.numOfCols, this.cipherText)
+    },
+    completePlainText() {
+      const length = this.plainText.length
+      const remainder = this.numOfCols - (length % this.numOfCols)
+      this.plainText += 'x'.repeat(remainder)
+      this.encrypt()
     }
   },
   computed: {
@@ -139,6 +160,26 @@ export default {
 
     isPlainTextInvalid() {
       return this.isEncrypting && this.plainText.length % this.numOfCols !== 0
+    },
+
+    isCipherTextInvalid() {
+      return !this.isEncrypting && this.cipherText.length % this.numOfCols !== 0
+    },
+
+    invalidPlainTextFeedback() {
+      const length = this.plainText.length
+      const remainder = this.numOfCols - (length % this.numOfCols)
+      return (
+        'Neúplná tabulka - ' + length + '/' + (length + remainder) + ' písmen'
+      )
+    },
+
+    invalidCipherTextFeedback() {
+      const length = this.cipherText.length
+      const remainder = this.numOfCols - (length % this.numOfCols)
+      return (
+        'Neúplná tabulka - ' + length + '/' + (length + remainder) + ' písmen'
+      )
     }
   }
 }

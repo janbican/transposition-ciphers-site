@@ -103,7 +103,7 @@ export default {
     },
     completePlainText() {
       const remainder = this.maxTextLength - this.plainText.length
-      this.plainText = this.plainText + 'x'.repeat(remainder)
+      this.plainText += 'x'.repeat(remainder)
       this.encrypt()
     }
   },
