@@ -125,4 +125,16 @@ describe('Route', () => {
       )
     ).toBe('neverbendyourheadholdithighx')
   })
+
+  it('encryptSpiralFromToLeft correctly', () => {
+    expect(wrapper.vm.encryptSpiralFromToLeft(4, 'thisistranspositionx')).toBe(
+      'THISRPTXNOIOAISTSISN'
+    )
+  })
+
+  it('decryptSpiralFromToLeft correctly', () => {
+    expect(wrapper.vm.decryptSpiralFromToLeft(4, 'THISRPTXNOIOAISTSISN')).toBe(
+      'thisistranspositionx'
+    )
+  })
 })

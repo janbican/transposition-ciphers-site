@@ -246,6 +246,57 @@ export default {
         this.getOrderHorizontalFromBottomRight(rows, cols),
         text
       )
+    },
+
+    // Spiral
+    getOrderSpiralFromTopLeft(cols, rows) {
+      let order = []
+      let row = rows
+      let col = cols
+
+      while (row > rows / 2) {
+        // traverse row forward
+        for (let i = cols - col; i < col; i++) {
+          const index = (rows - row) * cols + i
+          order.push(index)
+        }
+
+        // traverse column downward
+        for (let i = rows - row + 1; i < row; i++) {
+          const index = i * cols + col - 1
+          order.push(index)
+        }
+
+        // traverse row backward
+        for (let i = col - 1; i > cols - col; i--) {
+          const index = (row - 1) * cols + i - 1
+          order.push(index)
+        }
+
+        // traverse column upward
+        for (let i = row - 1; i > rows - row + 1; i--) {
+          const index = (i - 1) * cols + cols - col
+          order.push(index)
+        }
+
+        row -= 1
+        col -= 1
+      }
+
+      return order
+    },
+
+    encryptSpiralFromToLeft(cols, text) {
+      const rows = text.length / cols
+      return this.routeEncrypt(this.getOrderSpiralFromTopLeft(cols, rows), text)
+    },
+
+    decryptSpiralFromToLeft(cols, cipher) {
+      const rows = cipher.length / cols
+      return this.routeDecrypt(
+        this.getOrderSpiralFromTopLeft(cols, rows),
+        cipher
+      )
     }
   }
 }
