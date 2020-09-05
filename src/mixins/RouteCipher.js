@@ -249,52 +249,58 @@ export default {
     },
 
     // Spiral
-    getOrderSpiralFromTopLeft(cols, rows) {
+    getOrderSpiralFromTopRight(cols, rows) {
+      let rowBegin = 0
+      let rowEnd = rows - 1
+      let colBegin = 0
+      let colEnd = cols - 1
       let order = []
-      let row = rows
-      let col = cols
 
-      while (row > rows / 2) {
-        // traverse row forward
-        for (let i = cols - col; i < col; i++) {
-          const index = (rows - row) * cols + i
-          order.push(index)
+      while (rowBegin <= rowEnd && colBegin <= colEnd) {
+        //move down
+        for (let i = rowBegin; i <= rowEnd; i++) {
+          order.push(i * cols + colEnd)
         }
+        colEnd--
 
-        // traverse column downward
-        for (let i = rows - row + 1; i < row; i++) {
-          const index = i * cols + col - 1
-          order.push(index)
+        //move left
+        for (let i = colEnd; i >= colBegin; i--) {
+          order.push(rowEnd * cols + i)
         }
+        rowEnd--
 
-        // traverse row backward
-        for (let i = col - 1; i > cols - col; i--) {
-          const index = (row - 1) * cols + i - 1
-          order.push(index)
+        //move up
+        if (colBegin <= colEnd) {
+          for (let i = rowEnd; i >= rowBegin; i--) {
+            order.push(i * cols + colBegin)
+          }
         }
+        colBegin++
 
-        // traverse column upward
-        for (let i = row - 1; i > rows - row + 1; i--) {
-          const index = (i - 1) * cols + cols - col
-          order.push(index)
+        if (rowBegin <= rowEnd) {
+          for (let i = colBegin; i <= colEnd; i++) {
+            const index = rowBegin * cols + i
+            order.push(index)
+          }
         }
-
-        row -= 1
-        col -= 1
+        rowBegin++
       }
 
       return order
     },
 
-    encryptSpiralFromToLeft(cols, text) {
+    encryptSpiralFromTopRight(cols, text) {
       const rows = text.length / cols
-      return this.routeEncrypt(this.getOrderSpiralFromTopLeft(cols, rows), text)
+      return this.routeEncrypt(
+        this.getOrderSpiralFromTopRight(cols, rows),
+        text
+      )
     },
 
-    decryptSpiralFromToLeft(cols, cipher) {
+    decryptSpiralFromTopRight(cols, cipher) {
       const rows = cipher.length / cols
       return this.routeDecrypt(
-        this.getOrderSpiralFromTopLeft(cols, rows),
+        this.getOrderSpiralFromTopRight(cols, rows),
         cipher
       )
     }

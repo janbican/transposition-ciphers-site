@@ -126,15 +126,23 @@ describe('Route', () => {
     ).toBe('neverbendyourheadholdithighx')
   })
 
-  it('encryptSpiralFromToLeft correctly', () => {
-    expect(wrapper.vm.encryptSpiralFromToLeft(4, 'thisistranspositionx')).toBe(
-      'THISRPTXNOIOAISTSISN'
-    )
+  it('encryptSpiralFromTopRight correctly', () => {
+    expect(
+      wrapper.vm.encryptSpiralFromTopRight(4, 'thisistranspositionx')
+    ).toBe('SRPTXNOIOAITHITSISNS')
+
+    expect(
+      wrapper.vm.encryptSpiralFromTopRight(5, 'thisistranspositionx')
+    ).toBe('INIXNOITSSTHISASOPTR')
   })
 
-  it('decryptSpiralFromToLeft correctly', () => {
-    expect(wrapper.vm.decryptSpiralFromToLeft(4, 'THISRPTXNOIOAISTSISN')).toBe(
-      'thisistranspositionx'
-    )
+  it('decryptSpiralFromTopRight correctly', () => {
+    expect(
+      wrapper.vm.decryptSpiralFromTopRight(4, 'SRPTXNOIOAITHITSISNS')
+    ).toBe('thisistranspositionx')
+
+    expect(
+      wrapper.vm.decryptSpiralFromTopRight(5, 'INIXNOITSSTHISASOPTR')
+    ).toBe('thisistranspositionx')
   })
 })
