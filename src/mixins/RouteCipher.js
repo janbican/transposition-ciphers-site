@@ -1,6 +1,56 @@
 export default {
   name: 'RouteCipher',
   methods: {
+    getRoutes() {
+      return [
+        {
+          encrypt: 'encryptVerticalFromTopLeft',
+          decrypt: 'decryptVerticalFromTopLeft',
+          text: 'Vertikální z levého horního rohu'
+        },
+        {
+          encrypt: 'encryptVerticalFromTopRight',
+          decrypt: 'decryptVerticalFromTopRight',
+          text: 'Vertikální z pravého horního rohu'
+        },
+        {
+          encrypt: 'encryptVerticalFromBottomLeft',
+          decrypt: 'decryptVerticalFromBottomLeft',
+          text: 'Vertikální z levého dolního rohu'
+        },
+        {
+          encrypt: 'encryptVerticalFromBottomRight',
+          decrypt: 'decryptVerticalFromBottomRight',
+          text: 'Vertikální z pravého dolního rohu'
+        },
+        {
+          encrypt: 'encryptHorizontalFromTopLeft',
+          decrypt: 'decryptHorizontalFromTopLeft',
+          text: 'Horizontální z levého horního rohu'
+        },
+        {
+          encrypt: 'encryptHorizontalFromTopRight',
+          decrypt: 'decryptHorizontalFromTopRight',
+          text: 'Horizontální z pravého horního rohu'
+        },
+        {
+          encrypt: 'encryptHorizontalFromBottomLeft',
+          decrypt: 'decryptHorizontalFromBottomLeft',
+          text: 'Horizontální z levého dolního rohu'
+        },
+        {
+          encrypt: 'encryptHorizontalFromBottomRight',
+          decrypt: 'decryptHorizontalFromBottomRight',
+          text: 'Horizontální z pravého dolního rohu'
+        },
+        {
+          encrypt: 'encryptSpiralFromTopRight',
+          decrypt: 'decryptSpiralFromTopRight',
+          text: 'Spirála z pravého horního rohu ve směru hodinových ručiček'
+        }
+      ]
+    },
+
     // Common
     routeEncrypt(order, text) {
       let cipher = ''

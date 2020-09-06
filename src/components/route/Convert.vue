@@ -14,29 +14,26 @@
     </b-row>
 
     <div v-show="isNumOfColsValid">
-      <b-row class="mb-3">
-        <b-col>
-          <b-form-group description="Vyber šifrovací cestu" label="Cesta">
-            <b-form-select
-              v-model="route"
-              :options="routes"
-              @change="routeChanged"
-            ></b-form-select>
-          </b-form-group>
-        </b-col>
-      </b-row>
-
       <b-row>
         <b-col col>
-          <route-picker
-            :routes="routes"
-            :selected="route"
-            @change="routeChanged"
-          />
+          <label>Cesta</label>
+          <p>
+            <strong>{{ route.text }}</strong>
+            <b-button v-b-toggle.pick-route variant="outline-dark" class="ml-3"
+              >Výběr cesty</b-button
+            >
+          </p>
+          <b-collapse id="pick-route" class="mt-3">
+            <route-picker
+              :routes="routes"
+              :selected="route"
+              @change="routeChanged"
+            />
+          </b-collapse>
         </b-col>
       </b-row>
 
-      <b-row>
+      <b-row class="mt-3">
         <b-col lg="6">
           <plain-text-area
             v-model="plainText"
@@ -89,50 +86,14 @@ export default {
     return {
       isEncrypting: true,
       numOfCols: 4,
-      route: {
-        encrypt: 'encryptVerticalFromTopLeft',
-        decrypt: 'decryptVerticalFromTopLeft'
-      },
-      routes: [
-        {
-          value: {
-            encrypt: 'encryptVerticalFromTopLeft',
-            decrypt: 'decryptVerticalFromTopLeft'
-          },
-          text: 'Vertikální z levého horního rohu'
-        },
-        {
-          value: {
-            encrypt: 'encryptVerticalFromTopRight',
-            decrypt: 'decryptVerticalFromTopRight'
-          },
-          text: 'Vertikální z pravého horního rohu'
-        },
-        {
-          value: {
-            encrypt: 'encryptVerticalFromBottomLeft',
-            decrypt: 'decryptVerticalFromBottomLeft'
-          },
-          text: 'Vertikální z levého dolního rohu'
-        },
-        {
-          value: {
-            encrypt: 'encryptVerticalFromBottomRight',
-            decrypt: 'decryptVerticalFromBottomRight'
-          },
-          text: 'Vertikální z pravého dolního rohu'
-        },
-        {
-          value: {
-            encrypt: 'encryptSpiralFromTopRight',
-            decrypt: 'decryptSpiralFromTopRight'
-          },
-          text: 'Spirální z pravého horního rohu'
-        }
-      ],
+      routes: this.getRoutes(),
+      route: null,
       plainText: '',
       cipherText: ''
     }
+  },
+  created() {
+    this.route = this.routes[0]
   },
   methods: {
     numOfColsChanged() {
@@ -141,7 +102,8 @@ export default {
         else this.decrypt()
       }
     },
-    routeChanged() {
+    routeChanged(route) {
+      this.route = route
       if (this.isEncrypting) this.encrypt()
       else this.decrypt()
     },

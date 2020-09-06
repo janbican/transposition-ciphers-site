@@ -4,9 +4,9 @@
       <b-card
         v-for="route in routes"
         :key="route.text"
-        bg-variant="dark"
-        text-variant="white"
-        class="text-center selected"
+        :bg-variant="route === selected ? 'secondary' : 'light'"
+        :text-variant="route === selected ? 'white' : 'black'"
+        class="text-center"
         @click="routeClicked(route)"
       >
         {{ route.text }}
@@ -24,22 +24,18 @@ export default {
   },
   methods: {
     routeClicked(route) {
-      console.log(route)
+      this.$emit('change', route)
     }
   }
 }
 </script>
 
 <style scoped>
-.card-body {
+.card {
   cursor: pointer;
 }
 
-.card-body:hover {
-  opacity: 0.8;
-}
-
-.selected {
-  background-color: tomato;
+.card:hover {
+  opacity: 0.9;
 }
 </style>
