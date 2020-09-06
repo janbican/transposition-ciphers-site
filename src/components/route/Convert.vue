@@ -27,6 +27,16 @@
       </b-row>
 
       <b-row>
+        <b-col col>
+          <route-picker
+            :routes="routes"
+            :selected="route"
+            @change="routeChanged"
+          />
+        </b-col>
+      </b-row>
+
+      <b-row>
         <b-col lg="6">
           <plain-text-area
             v-model="plainText"
@@ -62,6 +72,7 @@
 <script>
 import RouteCipher from '@/mixins/RouteCipher'
 import KeyNumberInput from '@/components/common/convert/KeyNumberInput'
+import RoutePicker from '@/components/route/RoutePicker'
 import PlainTextArea from '@/components/common/convert/PlainTextArea'
 import CipherTextArea from '@/components/common/convert/CipherTextArea'
 
@@ -70,6 +81,7 @@ export default {
   mixins: [RouteCipher],
   components: {
     'key-number-input': KeyNumberInput,
+    'route-picker': RoutePicker,
     'plain-text-area': PlainTextArea,
     'cipher-text-area': CipherTextArea
   },
@@ -87,28 +99,35 @@ export default {
             encrypt: 'encryptVerticalFromTopLeft',
             decrypt: 'decryptVerticalFromTopLeft'
           },
-          text: 'vertical from top left'
+          text: 'Vertikální z levého horního rohu'
         },
         {
           value: {
             encrypt: 'encryptVerticalFromTopRight',
             decrypt: 'decryptVerticalFromTopRight'
           },
-          text: 'vertical from top right'
+          text: 'Vertikální z pravého horního rohu'
         },
         {
           value: {
             encrypt: 'encryptVerticalFromBottomLeft',
             decrypt: 'decryptVerticalFromBottomLeft'
           },
-          text: 'vertical from bottom left'
+          text: 'Vertikální z levého dolního rohu'
         },
         {
           value: {
             encrypt: 'encryptVerticalFromBottomRight',
             decrypt: 'decryptVerticalFromBottomRight'
           },
-          text: 'vertical from bottom right'
+          text: 'Vertikální z pravého dolního rohu'
+        },
+        {
+          value: {
+            encrypt: 'encryptSpiralFromTopRight',
+            decrypt: 'decryptSpiralFromTopRight'
+          },
+          text: 'Spirální z pravého horního rohu'
         }
       ],
       plainText: '',
