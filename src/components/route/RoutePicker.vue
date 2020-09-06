@@ -9,7 +9,7 @@
         class="text-center"
         @click="routeClicked(route)"
       >
-        {{ route.text }}
+        <img src="@/assets/images/mrizka.png" alt="" />
       </b-card>
     </b-card-group>
   </div>
@@ -37,5 +37,9 @@ export default {
 
 .card:hover {
   opacity: 0.9;
+}
+
+img {
+  width: 60%;
 }
 </style>
