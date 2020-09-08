@@ -21,14 +21,14 @@ describe('Ubchi', () => {
       'RHINTWYIINHIAOSLEPSORNSWEDNMIPYORDWTASERBCSZRUAITOGTZ'
     )
 
-    result = wrapper.vm.ubchiEncrypt(
+    const [partCipherText, plainText] = wrapper.vm.ubchiEncrypt(
       [3, 1, 4, 0, 2, 5],
       2,
       'enigmaisciphermachine'
     )
 
-    expect(result[0]).toBe('giansrnmpceieiicmeahhzz')
-    expect(result[1]).toBe('NCCZIMIHSEMZGNEAAPIHRIE')
+    expect(partCipherText).toBe('giansrnmpceieiicmeahhzz')
+    expect(plainText).toBe('NCCZIMIHSEMZGNEAAPIHRIE')
 
     result = wrapper.vm.ubchiEncrypt(
       [6, 7, 0, 4, 1, 5, 3, 2],

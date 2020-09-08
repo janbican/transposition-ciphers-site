@@ -104,23 +104,23 @@ export default {
     },
     encrypt() {
       this.areTablesVisible = this.plainText.length < 200
-      const encryptResult = this.ubchiEncrypt(
+      const [partCipherText, cipherText] = this.ubchiEncrypt(
         this.keyPermutation,
         this.numOfKeyWords,
         this.plainText
       )
-      this.partCipherText = encryptResult[0]
-      this.cipherText = encryptResult[1]
+      this.partCipherText = partCipherText
+      this.cipherText = cipherText
     },
     decrypt() {
       this.areTablesVisible = this.cipherText.length < 200
-      const decryptResult = this.ubchiDecrypt(
+      const [partCipherText, plainText] = this.ubchiDecrypt(
         this.keyPermutation,
         this.numOfKeyWords,
         this.cipherText
       )
-      this.partCipherText = decryptResult[0]
-      this.plainText = decryptResult[1]
+      this.partCipherText = partCipherText
+      this.plainText = plainText
     },
     displayTable() {
       const message = 'Zobrazení může chvíli trvat. Pokračovat?'
