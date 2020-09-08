@@ -1,6 +1,7 @@
 export default {
   name: 'RouteCipher',
   methods: {
+    // seznam všech cest s popisem a názvem metod pro šifrování a dešifrování
     getRoutes() {
       return [
         {
@@ -44,14 +45,21 @@ export default {
           text: 'Horizontální z pravého dolního rohu'
         },
         {
-          encrypt: 'encryptSpiralFromTopRight',
-          decrypt: 'decryptSpiralFromTopRight',
+          encrypt: 'encryptSpiralClockwiseInwards',
+          decrypt: 'decryptSpiralClockwiseInwards',
           text: 'Spirála z pravého horního rohu ve směru hodinových ručiček'
+        },
+        {
+          encrypt: 'encryptSpiralAntiClockwiseOutwards',
+          decrypt: 'decryptSpiralAntiClockwiseOutwards',
+          text: 'Spirála zevnitř proti směru hodinových ručiček'
         }
       ]
     },
 
-    // Common
+    // Společné
+    // pracuje s array s číselným pořadím jednotlivých písmen
+    // na základě něj šifruje nebo dešifruje
     routeEncrypt(order, text) {
       let cipher = ''
       for (const index of order) {
@@ -68,7 +76,7 @@ export default {
       return plainArray.join('').toLowerCase()
     },
 
-    // Vertical
+    // Vertikální Route šifry
     getOrderVerticalFromLeft(cols, rows, down) {
       const order = []
       let index = down ? 0 : cols * (rows - 1)
@@ -183,7 +191,7 @@ export default {
       )
     },
 
-    // Horizontal
+    // Horizontální route šifry
     getOrderHorizontalFromTop(rows, cols, left) {
       const order = []
       let index = left ? 0 : cols - 1
@@ -298,8 +306,8 @@ export default {
       )
     },
 
-    // Spiral
-    getOrderSpiralFromTopRight(cols, rows) {
+    // Spirální Route šifry
+    getOrderSpiralClockwise(cols, rows) {
       let rowBegin = 0
       let rowEnd = rows - 1
       let colBegin = 0
@@ -307,19 +315,19 @@ export default {
       let order = []
 
       while (rowBegin <= rowEnd && colBegin <= colEnd) {
-        //move down
+        //průchod dolů
         for (let i = rowBegin; i <= rowEnd; i++) {
           order.push(i * cols + colEnd)
         }
         colEnd--
 
-        //move left
+        //průchod doleva
         for (let i = colEnd; i >= colBegin; i--) {
           order.push(rowEnd * cols + i)
         }
         rowEnd--
 
-        //move up
+        //průchod nahoru
         if (colBegin <= colEnd) {
           for (let i = rowEnd; i >= rowBegin; i--) {
             order.push(i * cols + colBegin)
@@ -327,6 +335,7 @@ export default {
         }
         colBegin++
 
+        //průchod doprava
         if (rowBegin <= rowEnd) {
           for (let i = colBegin; i <= colEnd; i++) {
             const index = rowBegin * cols + i
@@ -339,18 +348,28 @@ export default {
       return order
     },
 
-    encryptSpiralFromTopRight(cols, text) {
+    encryptSpiralClockwiseInwards(cols, text) {
+      const rows = text.length / cols
+      return this.routeEncrypt(this.getOrderSpiralClockwise(cols, rows), text)
+    },
+
+    decryptSpiralClockwiseInwards(cols, cipher) {
+      const rows = cipher.length / cols
+      return this.routeDecrypt(this.getOrderSpiralClockwise(cols, rows), cipher)
+    },
+
+    encryptSpiralAntiClockwiseOutwards(cols, text) {
       const rows = text.length / cols
       return this.routeEncrypt(
-        this.getOrderSpiralFromTopRight(cols, rows),
+        this.getOrderSpiralClockwise(cols, rows).reverse(),
         text
       )
     },
 
-    decryptSpiralFromTopRight(cols, cipher) {
+    decryptSpiralAntiClockwiseOutwards(cols, cipher) {
       const rows = cipher.length / cols
       return this.routeDecrypt(
-        this.getOrderSpiralFromTopRight(cols, rows),
+        this.getOrderSpiralClockwise(cols, rows).reverse(),
         cipher
       )
     }

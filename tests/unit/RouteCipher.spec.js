@@ -126,23 +126,49 @@ describe('Route', () => {
     ).toBe('neverbendyourheadholdithighx')
   })
 
-  it('encryptSpiralFromTopRight correctly', () => {
+  it('encryptSpiralClockwiseInwards correctly', () => {
     expect(
-      wrapper.vm.encryptSpiralFromTopRight(4, 'thisistranspositionx')
+      wrapper.vm.encryptSpiralClockwiseInwards(4, 'thisistranspositionx')
     ).toBe('SRPTXNOIOAITHITSISNS')
 
     expect(
-      wrapper.vm.encryptSpiralFromTopRight(5, 'thisistranspositionx')
+      wrapper.vm.encryptSpiralClockwiseInwards(5, 'thisistranspositionx')
     ).toBe('INIXNOITSSTHISASOPTR')
   })
 
-  it('decryptSpiralFromTopRight correctly', () => {
+  it('decryptSpiralClockwiseInwards correctly', () => {
     expect(
-      wrapper.vm.decryptSpiralFromTopRight(4, 'SRPTXNOIOAITHITSISNS')
+      wrapper.vm.decryptSpiralClockwiseInwards(4, 'SRPTXNOIOAITHITSISNS')
     ).toBe('thisistranspositionx')
 
     expect(
-      wrapper.vm.decryptSpiralFromTopRight(5, 'INIXNOITSSTHISASOPTR')
+      wrapper.vm.decryptSpiralClockwiseInwards(5, 'INIXNOITSSTHISASOPTR')
     ).toBe('thisistranspositionx')
+  })
+
+  it('encryptSpiralAntiClockwiseOutwards correctly', () => {
+    expect(
+      wrapper.vm.encryptSpiralAntiClockwiseOutwards(5, 'thisistranspositionx')
+    ).toBe('RTPOSASIHTSSTIONXINI')
+
+    expect(
+      wrapper.vm.encryptSpiralAntiClockwiseOutwards(
+        4,
+        'enigmaisciphermachinexxx'
+      )
+    ).toBe('AIRHIMPIINEMCECEXXXNAHSG')
+  })
+
+  it('decryptSpiralAntiClockwiseOutwards correctly', () => {
+    expect(
+      wrapper.vm.decryptSpiralAntiClockwiseOutwards(5, 'RTPOSASIHTSSTIONXINI')
+    ).toBe('thisistranspositionx')
+
+    expect(
+      wrapper.vm.decryptSpiralAntiClockwiseOutwards(
+        4,
+        'AIRHIMPIINEMCECEXXXNAHSG'
+      )
+    ).toBe('enigmaisciphermachinexxx')
   })
 })
