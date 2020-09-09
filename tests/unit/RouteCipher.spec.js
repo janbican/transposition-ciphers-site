@@ -171,4 +171,56 @@ describe('Route', () => {
       )
     ).toBe('enigmaisciphermachinexxx')
   })
+
+  it('encryptSpiralAntiClockwiseInwards correctly', () => {
+    expect(
+      wrapper.vm.encryptSpiralAntiClockwiseInwards(
+        6,
+        'relaxingsoundsofrainxxxx'
+      )
+    ).toBe('IXALERNDINXXXXANUOSGSOFR')
+
+    expect(
+      wrapper.vm.encryptSpiralAntiClockwiseInwards(4, 'playcodeonlineeditor')
+    ).toBe('YALPCONITORDIEDONEEL')
+  })
+
+  it('decryptSpiralAntiClockwiseInwards correctly', () => {
+    expect(
+      wrapper.vm.decryptSpiralAntiClockwiseInwards(
+        6,
+        'IXALERNDINXXXXANUOSGSOFR'
+      )
+    ).toBe('relaxingsoundsofrainxxxx')
+
+    expect(
+      wrapper.vm.decryptSpiralAntiClockwiseInwards(4, 'YALPCONITORDIEDONEEL')
+    ).toBe('playcodeonlineeditor')
+  })
+
+  it('encryptSpiralClockwiseOutwards correctly', () => {
+    expect(
+      wrapper.vm.encryptSpiralClockwiseOutwards(
+        5,
+        'javascriptisaprogramminglanguagexxx'
+      )
+    ).toBe('NRAPAGUGNIGSRIPTRMLAXXXEGAMOICJAVAS')
+
+    expect(wrapper.vm.encryptSpiralClockwiseOutwards(4, 'javascriptxx')).toBe(
+      'CRIXXTPSJAVA'
+    )
+  })
+
+  it('decryptSpiralClockwiseOutwards correctly', () => {
+    expect(
+      wrapper.vm.decryptSpiralClockwiseOutwards(
+        5,
+        'NRAPAGUGNIGSRIPTRMLAXXXEGAMOICJAVAS'
+      )
+    ).toBe('javascriptisaprogramminglanguagexxx')
+
+    expect(wrapper.vm.decryptSpiralClockwiseOutwards(4, 'CRIXXTPSJAVA')).toBe(
+      'javascriptxx'
+    )
+  })
 })

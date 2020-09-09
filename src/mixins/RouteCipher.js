@@ -53,6 +53,17 @@ export default {
           encrypt: 'encryptSpiralAntiClockwiseOutwards',
           decrypt: 'decryptSpiralAntiClockwiseOutwards',
           text: 'Spirála zevnitř proti směru hodinových ručiček'
+        },
+        {
+          encrypt: 'encryptSpiralAntiClockwiseInwards',
+          decrypt: 'decryptSpiralAntiClockwiseInwards',
+          text:
+            'Spirála z pravého horního rohu ve proti směru hodinových ručiček'
+        },
+        {
+          encrypt: 'encryptSpiralClockwiseOutwards',
+          decrypt: 'decryptSpiralClockwiseOutwards',
+          text: 'Spirála zevnitř ve směru hodinových ručiček'
         }
       ]
     },
@@ -338,8 +349,7 @@ export default {
         //průchod doprava
         if (rowBegin <= rowEnd) {
           for (let i = colBegin; i <= colEnd; i++) {
-            const index = rowBegin * cols + i
-            order.push(index)
+            order.push(rowBegin * cols + i)
           }
         }
         rowBegin++
@@ -370,6 +380,78 @@ export default {
       const rows = cipher.length / cols
       return this.routeDecrypt(
         this.getOrderSpiralClockwise(cols, rows).reverse(),
+        cipher
+      )
+    },
+
+    getOrderSpiralAntiClockwise(cols, rows) {
+      let rowBegin = 0
+      let rowEnd = rows - 1
+      let colBegin = 0
+      let colEnd = cols - 1
+      let order = []
+
+      while (rowBegin <= rowEnd && colBegin <= colEnd) {
+        // průchod doleva
+        for (let i = colEnd; i >= colBegin; i--) {
+          order.push(rowBegin * cols + i)
+        }
+        rowBegin++
+
+        // průchod dolů
+        for (let i = rowBegin; i <= rowEnd; i++) {
+          order.push(i * cols + colBegin)
+        }
+        colBegin++
+
+        // průchod doprava
+        if (rowBegin <= rowEnd) {
+          for (let i = colBegin; i <= colEnd; i++) {
+            order.push(rowEnd * cols + i)
+          }
+        }
+        rowEnd--
+
+        // průchod nahoru
+        if (colBegin <= colEnd) {
+          for (let i = rowEnd; i >= rowBegin; i--) {
+            order.push(i * cols + colEnd)
+          }
+        }
+        colEnd--
+      }
+
+      return order
+    },
+
+    encryptSpiralAntiClockwiseInwards(cols, text) {
+      const rows = text.length / cols
+      return this.routeEncrypt(
+        this.getOrderSpiralAntiClockwise(cols, rows),
+        text
+      )
+    },
+
+    decryptSpiralAntiClockwiseInwards(cols, cipher) {
+      const rows = cipher.length / cols
+      return this.routeDecrypt(
+        this.getOrderSpiralAntiClockwise(cols, rows),
+        cipher
+      )
+    },
+
+    encryptSpiralClockwiseOutwards(cols, text) {
+      const rows = text.length / cols
+      return this.routeEncrypt(
+        this.getOrderSpiralAntiClockwise(cols, rows).reverse(),
+        text
+      )
+    },
+
+    decryptSpiralClockwiseOutwards(cols, cipher) {
+      const rows = cipher.length / cols
+      return this.routeDecrypt(
+        this.getOrderSpiralAntiClockwise(cols, rows).reverse(),
         cipher
       )
     }
