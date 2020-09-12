@@ -22,7 +22,7 @@
 
 .navbar {
   min-height: 80px;
-  background-color: #679b9b;
+  background-color: #7e8a97;
 }
 
 .navbar-brand {

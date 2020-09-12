@@ -55,15 +55,18 @@
 </template>
 
 <script>
-import RailFenceCipher from '@/mixins/RailFenceCipher'
 import KeyNumberInput from '@/components/common/convert/KeyNumberInput'
 import PlainTextArea from '@/components/common/convert/PlainTextArea'
 import CipherTextArea from '@/components/common/convert/CipherTextArea'
 import EncryptionGrid from '@/components/railfence/EncryptionGrid'
 
+import {
+  encrypt as railFenceEncrypt,
+  decrypt as railFenceDecrypt
+} from '@/ciphers/RailFence'
+
 export default {
   name: 'RailFenceConvert',
-  mixins: [RailFenceCipher],
   components: {
     'key-number-input': KeyNumberInput,
     'plain-text-area': PlainTextArea,
@@ -96,21 +99,19 @@ export default {
     },
     encrypt() {
       this.isGridDisplayed = this.plainText.length < 200
-      this.cipherText = this.railFenceEncrypt(this.keyValue, this.plainText)
+      this.cipherText = railFenceEncrypt(this.keyValue, this.plainText)
     },
     decrypt() {
       this.isGridDisplayed = this.cipherText.length < 200
-      this.plainText = this.railFenceDecrypt(this.keyValue, this.cipherText)
+      this.plainText = railFenceDecrypt(this.keyValue, this.cipherText)
     },
     displayGrid() {
       const message = 'Zobrazení může chvíli trvat. Pokračovat?'
-      if (confirm(message)) {
-        this.isGridDisplayed = true
-      }
+      if (confirm(message)) this.isGridDisplayed = true
     }
   },
   computed: {
-    isKeyValueValid: function() {
+    isKeyValueValid() {
       return this.keyValue > 1
     }
   }

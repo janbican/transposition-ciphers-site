@@ -16,12 +16,11 @@
 </template>
 
 <script>
-import RailFenceCipher from '@/mixins/RailFenceCipher'
 import CipherTextArea from '@/components/common/convert/CipherTextArea'
+import { decrypt } from '@/ciphers/RailFence'
 
 export default {
   name: 'RailFenceSolve',
-  mixins: [RailFenceCipher],
   components: {
     'cipher-text-area': CipherTextArea
   },
@@ -35,7 +34,7 @@ export default {
     solve() {
       this.results = []
       for (let i = 2; i < this.cipherText.length; i++) {
-        this.results.push(this.railFenceDecrypt(i, this.cipherText))
+        this.results.push(decrypt(i, this.cipherText))
       }
     }
   }

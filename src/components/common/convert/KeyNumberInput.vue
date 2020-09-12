@@ -6,6 +6,7 @@
         type="number"
         :value="value"
         :state="isValid"
+        :formatter="formatter"
         @input="valueChanged"
       ></b-form-input>
 
@@ -29,6 +30,9 @@ export default {
     valueChanged(value) {
       this.$emit('input', value)
       this.$emit('valueChanged', event)
+    },
+    formatter(value) {
+      return value == '' ? 0 : value
     }
   }
 }
