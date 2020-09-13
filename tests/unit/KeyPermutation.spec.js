@@ -12,7 +12,7 @@ describe('KeyPermutations', () => {
     expect(keyPermutation('mravenec')).toEqual([4, 6, 0, 7, 2, 5, 3, 1])
   })
 
-  it('permutations with repeated letters works correctly', () => {
+  it('gets permutation with duplicate indices', () => {
     expect(keyPermutationDuplicate('keyword')).toEqual([2, 1, 6, 5, 3, 4, 0])
     expect(keyPermutationDuplicate('tomato')).toEqual([3, 2, 1, 0, 3, 2])
     expect(keyPermutationDuplicate('aacbb')).toEqual([0, 0, 2, 1, 1])

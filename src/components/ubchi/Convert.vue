@@ -61,17 +61,19 @@
 </template>
 
 <script>
-import UbchiCipher from '@/mixins/UbchiCipher'
 import MultipleKeyInput from '@/components/common/convert/MultipleKeyInput'
 import PlainTextArea from '@/components/common/convert/PlainTextArea'
 import CipherTextArea from '@/components/common/convert/CipherTextArea'
 import ColumnarTable from '@/components/columnar/ColumnarTable'
 
+import {
+  encrypt as ubchiEncrypt,
+  decrypt as ubchiDecrypt
+} from '@/ciphers/Ubchi'
 import { keyPermutation } from '@/ciphers/KeyPermutation'
 
 export default {
   name: 'UchiConvert',
-  mixins: [UbchiCipher],
   components: {
     'multiple-key-input': MultipleKeyInput,
     'plain-text-area': PlainTextArea,
@@ -105,7 +107,7 @@ export default {
     },
     encrypt() {
       this.areTablesVisible = this.plainText.length < 200
-      const [partCipherText, cipherText] = this.ubchiEncrypt(
+      const [partCipherText, cipherText] = ubchiEncrypt(
         this.keyPermutation,
         this.numOfKeyWords,
         this.plainText
@@ -115,7 +117,7 @@ export default {
     },
     decrypt() {
       this.areTablesVisible = this.cipherText.length < 200
-      const [partCipherText, plainText] = this.ubchiDecrypt(
+      const [partCipherText, plainText] = ubchiDecrypt(
         this.keyPermutation,
         this.numOfKeyWords,
         this.cipherText
@@ -125,9 +127,7 @@ export default {
     },
     displayTable() {
       const message = 'Zobrazení může chvíli trvat. Pokračovat?'
-      if (confirm(message)) {
-        this.areTablesVisible = true
-      }
+      if (confirm(message)) this.areTablesVisible = true
     }
   },
   computed: {

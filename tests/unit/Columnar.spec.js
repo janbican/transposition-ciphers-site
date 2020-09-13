@@ -1,7 +1,7 @@
 import { encrypt, decrypt } from '@/ciphers/Columnar'
 
 describe('Columnar', () => {
-  it('encrypts message correctly', () => {
+  it('encrypts message', () => {
     expect(encrypt([3, 0, 1, 4, 2], 'thisistranspositioncipher')).toBe(
       'HTPIPIROOHINICRTSSTISASNE'
     )
@@ -16,7 +16,7 @@ describe('Columnar', () => {
     )
   })
 
-  it('decrypt message correctly', () => {
+  it('decrypts message', () => {
     expect(decrypt([3, 0, 1, 4, 2], 'HTPIPIROOHINICRTSSTISASNE')).toBe(
       'thisistranspositioncipher'
     )
