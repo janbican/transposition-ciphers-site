@@ -1,26 +1,14 @@
-import { shallowMount } from '@vue/test-utils'
-import Vue from 'vue'
-import FleissnerGrille from '@/mixins/FleissnerGrille'
-
-const component = Vue.component('MockComponent', {
-  template: '<div></div>',
-  mixins: [FleissnerGrille]
-})
-
-const wrapper = shallowMount(component)
+import { encrypt, decrypt } from '@/ciphers/FleissnerGrille'
 
 describe('Fleissner', () => {
-  it('encrypts message correctly', () => {
+  it('encrypts message', () => {
     let grille = [
       [1, 2, 1, 2],
       [2, 1, 2, 2],
       [2, 2, 2, 2],
       [2, 2, 1, 2]
     ]
-
-    expect(wrapper.vm.fleissnerEncrypt(grille, 'transpositionxxx')).toBe(
-      'TIRSNAPXOXTSXINO'
-    )
+    expect(encrypt(grille, 'transpositionxxx')).toBe('TIRSNAPXOXTSXINO')
 
     grille = [
       [2, 1, 2, 1, 2],
@@ -29,23 +17,31 @@ describe('Fleissner', () => {
       [2, 2, 2, 1, 2],
       [2, 2, 2, 2, 1]
     ]
+    expect(encrypt(grille, 'wewillattackinthemorning')).toBe(
+      'IWAEORNTNTWITHIANLCKEGML'
+    )
 
-    expect(
-      wrapper.vm.fleissnerEncrypt(grille, 'wewillattackinthemorning')
-    ).toBe('IWAEORNTNTWITHIANLCKEGML')
+    grille = [
+      [1, 2, 2, 2, 2, 2],
+      [2, 2, 1, 2, 2, 2],
+      [2, 1, 2, 2, 2, 1],
+      [2, 2, 1, 2, 2, 2],
+      [2, 2, 2, 2, 1, 1],
+      [2, 2, 1, 2, 1, 2]
+    ]
+    expect(encrypt(grille, 'nekteristudentiuzdostavajiznamkyxxxx')).toBe(
+      'NONSAUTAEDMKEKNVTTAYEXJXIUXIRIXZSDTZ'
+    )
   })
 
-  it('encrypts message correctly', () => {
+  it('decrypts message', () => {
     let grille = [
       [1, 2, 1, 2],
       [2, 1, 2, 2],
       [2, 2, 2, 2],
       [2, 2, 1, 2]
     ]
-
-    expect(wrapper.vm.fleissnerDecrypt(grille, 'TIRSNAPXOXTSXINO')).toBe(
-      'transpositionxxx'
-    )
+    expect(decrypt(grille, 'TIRSNAPXOXTSXINO')).toBe('transpositionxxx')
 
     grille = [
       [2, 1, 2, 1, 2],
@@ -54,9 +50,20 @@ describe('Fleissner', () => {
       [2, 2, 2, 1, 2],
       [2, 2, 2, 2, 1]
     ]
+    expect(decrypt(grille, 'IWAEORNTNTWITHIANLCKEGML')).toBe(
+      'wewillattackinthemorning'
+    )
 
-    expect(
-      wrapper.vm.fleissnerDecrypt(grille, 'IWAEORNTNTWITHIANLCKEGML')
-    ).toBe('wewillattackinthemorning')
+    grille = [
+      [1, 2, 2, 2, 2, 2],
+      [2, 2, 1, 2, 2, 2],
+      [2, 1, 2, 2, 2, 1],
+      [2, 2, 1, 2, 2, 2],
+      [2, 2, 2, 2, 1, 1],
+      [2, 2, 1, 2, 1, 2]
+    ]
+    expect(decrypt(grille, 'NONSAUTAEDMKEKNVTTAYEXJXIUXIRIXZSDTZ')).toBe(
+      'nekteristudentiuzdostavajiznamkyxxxx'
+    )
   })
 })

@@ -43,14 +43,17 @@
 </template>
 
 <script>
-import FleissnerGrille from '@/mixins/FleissnerGrille'
 import Grille from '@/components/fleissner/Grille'
 import PlainTextArea from '@/components/common/convert/PlainTextArea'
 import CipherTextArea from '@/components/common/convert/CipherTextArea'
 
+import {
+  encrypt as fleissnerEncrypt,
+  decrypt as fleissnerDecrypt
+} from '@/ciphers/FleissnerGrille'
+
 export default {
   name: 'FleissnerConvert',
-  mixins: [FleissnerGrille],
   components: {
     grille: Grille,
     'plain-text-area': PlainTextArea,
@@ -81,7 +84,7 @@ export default {
     encrypt() {
       this.cipherText = ''
       if (this.isPlainTextInvalid) return
-      this.cipherText = this.fleissnerEncrypt(
+      this.cipherText = fleissnerEncrypt(
         this.copyGrille(this.completeGrille),
         this.plainText
       )
@@ -89,7 +92,7 @@ export default {
     decrypt() {
       this.plainText = ''
       if (this.isCipherTextInvalid) return
-      this.plainText = this.fleissnerDecrypt(
+      this.plainText = fleissnerDecrypt(
         this.copyGrille(this.completeGrille),
         this.cipherText
       )
