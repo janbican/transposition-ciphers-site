@@ -54,17 +54,19 @@
 </template>
 
 <script>
-import ColumnarCipher from '@/mixins/ColumnarCipher'
 import KeyInput from '@/components/common/convert/KeyInput'
 import PlainTextArea from '@/components/common/convert/PlainTextArea'
 import CipherTextArea from '@/components/common/convert/CipherTextArea'
 import ColumnarTable from '@/components/columnar/ColumnarTable'
 
+import {
+  encrypt as columnarEncrypt,
+  decrypt as columnarDecrypt
+} from '@/ciphers/Columnar'
 import { keyPermutation } from '@/ciphers/KeyPermutation'
 
 export default {
   name: 'ColumnarConvert',
-  mixins: [ColumnarCipher],
   components: {
     'key-input': KeyInput,
     'plain-text-area': PlainTextArea,
@@ -97,17 +99,11 @@ export default {
     },
     encrypt() {
       this.isTableDisplayed = this.plainText.length < 200
-      this.cipherText = this.columnarEncrypt(
-        this.keyPermutation,
-        this.plainText
-      )
+      this.cipherText = columnarEncrypt(this.keyPermutation, this.plainText)
     },
     decrypt() {
       this.isTableDisplayed = this.cipherText.length < 200
-      this.plainText = this.columnarDecrypt(
-        this.keyPermutation,
-        this.cipherText
-      )
+      this.plainText = columnarDecrypt(this.keyPermutation, this.cipherText)
     },
     displayTable() {
       const message = 'Zobrazení může chvíli trvat. Pokračovat?'
