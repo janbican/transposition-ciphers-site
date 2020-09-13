@@ -17,12 +17,13 @@
   </b-navbar>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+@import '@/assets/scss/_variables.scss';
 
 .navbar {
   min-height: 80px;
-  background-color: #7e8a97;
+  background-color: $main-color;
 }
 
 .navbar-brand {
