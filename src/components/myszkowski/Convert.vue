@@ -55,15 +55,16 @@
 
 <script>
 import MyszkowskiCipher from '@/mixins/MyszkowskiCipher'
-import KeyPermutations from '@/mixins/KeyPermutations'
 import KeyInput from '@/components/common/convert/KeyInput'
 import PlainTextArea from '@/components/common/convert/PlainTextArea'
 import CipherTextArea from '@/components/common/convert/CipherTextArea'
 import ColumnarTable from '@/components/columnar/ColumnarTable'
 
+import { keyPermutationDuplicate } from '@/ciphers/KeyPermutation'
+
 export default {
   name: 'ColumnarConvert',
-  mixins: [MyszkowskiCipher, KeyPermutations],
+  mixins: [MyszkowskiCipher],
   components: {
     'key-input': KeyInput,
     'plain-text-area': PlainTextArea,
@@ -107,14 +108,12 @@ export default {
     },
     displayTable() {
       const message = 'Zobrazení může chvíli trvat. Pokračovat?'
-      if (confirm(message)) {
-        this.isTableDisplayed = true
-      }
+      if (confirm(message)) this.isTableDisplayed = true
     }
   },
   computed: {
     keyPermutation: function() {
-      return this.getKeyPermutationRepeated(this.keyValue)
+      return keyPermutationDuplicate(this.keyValue)
     },
     isKeyValueValid: function() {
       return this.keyValue.length > 1

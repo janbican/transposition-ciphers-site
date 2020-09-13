@@ -55,15 +55,16 @@
 
 <script>
 import ColumnarCipher from '@/mixins/ColumnarCipher'
-import KeyPermutations from '@/mixins/KeyPermutations'
 import KeyInput from '@/components/common/convert/KeyInput'
 import PlainTextArea from '@/components/common/convert/PlainTextArea'
 import CipherTextArea from '@/components/common/convert/CipherTextArea'
 import ColumnarTable from '@/components/columnar/ColumnarTable'
 
+import { keyPermutation } from '@/ciphers/KeyPermutation'
+
 export default {
   name: 'ColumnarConvert',
-  mixins: [ColumnarCipher, KeyPermutations],
+  mixins: [ColumnarCipher],
   components: {
     'key-input': KeyInput,
     'plain-text-area': PlainTextArea,
@@ -116,10 +117,10 @@ export default {
     }
   },
   computed: {
-    keyPermutation: function() {
-      return this.getKeyPermutation(this.keyValue)
+    keyPermutation() {
+      return keyPermutation(this.keyValue)
     },
-    isKeyValueValid: function() {
+    isKeyValueValid() {
       return this.keyValue.length > 1
     }
   }

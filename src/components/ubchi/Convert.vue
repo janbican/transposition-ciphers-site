@@ -62,15 +62,16 @@
 
 <script>
 import UbchiCipher from '@/mixins/UbchiCipher'
-import KeyPermutations from '@/mixins/KeyPermutations'
 import MultipleKeyInput from '@/components/common/convert/MultipleKeyInput'
 import PlainTextArea from '@/components/common/convert/PlainTextArea'
 import CipherTextArea from '@/components/common/convert/CipherTextArea'
 import ColumnarTable from '@/components/columnar/ColumnarTable'
 
+import { keyPermutation } from '@/ciphers/KeyPermutation'
+
 export default {
   name: 'UchiConvert',
-  mixins: [UbchiCipher, KeyPermutations],
+  mixins: [UbchiCipher],
   components: {
     'multiple-key-input': MultipleKeyInput,
     'plain-text-area': PlainTextArea,
@@ -130,19 +131,19 @@ export default {
     }
   },
   computed: {
-    keyArray: function() {
+    keyArray() {
       return this.keyValue.trim().split(' ')
     },
-    keyWithoutSpaces: function() {
+    keyWithoutSpaces() {
       return this.keyArray.join('')
     },
-    numOfKeyWords: function() {
+    numOfKeyWords() {
       return this.keyArray.length
     },
-    keyPermutation: function() {
-      return this.getKeyPermutation(this.keyWithoutSpaces)
+    keyPermutation() {
+      return keyPermutation(this.keyWithoutSpaces)
     },
-    isKeyValueValid: function() {
+    isKeyValueValid() {
       return this.keyWithoutSpaces.length > 1
     }
   }
