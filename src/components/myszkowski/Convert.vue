@@ -66,7 +66,7 @@ import {
 import { keyPermutationDuplicate } from '@/ciphers/KeyPermutation'
 
 export default {
-  name: 'ColumnarConvert',
+  name: 'MyszkowskiConvert',
   components: {
     'key-input': KeyInput,
     'plain-text-area': PlainTextArea,
@@ -98,12 +98,15 @@ export default {
       this.decrypt()
     },
     encrypt() {
-      this.isTableDisplayed = this.plainText.length < 200
       this.cipherText = myszkowskiEncrypt(this.keyPermutation, this.plainText)
+      this.tryDisplayTable()
     },
     decrypt() {
-      this.isTableDisplayed = this.cipherText.length < 200
       this.plainText = myszkowskiDecrypt(this.keyValue, this.cipherText)
+      this.tryDisplayTable()
+    },
+    tryDisplayTable() {
+      this.isTableDisplayed = this.plainText.length < 200
     },
     displayTable() {
       const message = 'Zobrazení může chvíli trvat. Pokračovat?'

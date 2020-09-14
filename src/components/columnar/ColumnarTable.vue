@@ -44,7 +44,7 @@ export default {
     text: String
   },
   computed: {
-    rows: function() {
+    rows() {
       if (!this.isValid) return []
       const rowSize = this.keyValue.length
       return this.text.match(new RegExp('.{1,' + rowSize + '}', 'g'))
