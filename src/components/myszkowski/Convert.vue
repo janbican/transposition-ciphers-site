@@ -54,17 +54,19 @@
 </template>
 
 <script>
-import MyszkowskiCipher from '@/mixins/MyszkowskiCipher'
 import KeyInput from '@/components/common/convert/KeyInput'
 import PlainTextArea from '@/components/common/convert/PlainTextArea'
 import CipherTextArea from '@/components/common/convert/CipherTextArea'
 import ColumnarTable from '@/components/columnar/ColumnarTable'
 
+import {
+  encrypt as myszkowskiEncrypt,
+  decrypt as myszkowskiDecrypt
+} from '@/ciphers/Myszkowski'
 import { keyPermutationDuplicate } from '@/ciphers/KeyPermutation'
 
 export default {
   name: 'ColumnarConvert',
-  mixins: [MyszkowskiCipher],
   components: {
     'key-input': KeyInput,
     'plain-text-area': PlainTextArea,
@@ -97,14 +99,11 @@ export default {
     },
     encrypt() {
       this.isTableDisplayed = this.plainText.length < 200
-      this.cipherText = this.myszkowskiEncrypt(
-        this.keyPermutation,
-        this.plainText
-      )
+      this.cipherText = myszkowskiEncrypt(this.keyPermutation, this.plainText)
     },
     decrypt() {
       this.isTableDisplayed = this.cipherText.length < 200
-      this.plainText = this.myszkowskiDecrypt(this.keyValue, this.cipherText)
+      this.plainText = myszkowskiDecrypt(this.keyValue, this.cipherText)
     },
     displayTable() {
       const message = 'Zobrazení může chvíli trvat. Pokračovat?'
@@ -112,10 +111,10 @@ export default {
     }
   },
   computed: {
-    keyPermutation: function() {
+    keyPermutation() {
       return keyPermutationDuplicate(this.keyValue)
     },
-    isKeyValueValid: function() {
+    isKeyValueValid() {
       return this.keyValue.length > 1
     }
   }
