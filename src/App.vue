@@ -1,13 +1,15 @@
 <template>
   <div id="app">
     <NavBar />
-    <b-container class="content">
-      <b-row class="justify-content-md-center">
-        <b-col col md="10">
-          <router-view />
-        </b-col>
-      </b-row>
-    </b-container>
+    <section>
+      <b-container>
+        <b-row class="justify-content-md-center">
+          <b-col col md="10">
+            <router-view />
+          </b-col>
+        </b-row>
+      </b-container>
+    </section>
   </div>
 </template>
 

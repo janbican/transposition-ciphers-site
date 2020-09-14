@@ -1,0 +1,25 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+  padding-bottom: 2em;
+}
+
+section {
+  padding: 2em 1em;
+}
+
+h4 {
+  margin: 1.4em 0;
+  color: #9b6667;
+}
+
+h5 {
+  text-align: center;
+  border-bottom: 0;
+}
+
+input:focus,
+textarea:focus {
+  outline: 0px !important;
+  -webkit-appearance: none;
+  box-shadow: none !important;
+}
