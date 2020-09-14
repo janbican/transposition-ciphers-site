@@ -98,18 +98,19 @@ export default {
       this.decrypt()
     },
     encrypt() {
-      this.isTableDisplayed = this.plainText.length < 200
       this.cipherText = columnarEncrypt(this.keyPermutation, this.plainText)
+      this.tryDisplayTable()
     },
     decrypt() {
-      this.isTableDisplayed = this.cipherText.length < 200
       this.plainText = columnarDecrypt(this.keyPermutation, this.cipherText)
+      this.tryDisplayTable()
+    },
+    tryDisplayTable() {
+      this.isTableDisplayed = this.plainText.length < 200
     },
     displayTable() {
       const message = 'Zobrazení může chvíli trvat. Pokračovat?'
-      if (confirm(message)) {
-        this.isTableDisplayed = true
-      }
+      if (confirm(message)) this.isTableDisplayed = true
     }
   },
   computed: {
