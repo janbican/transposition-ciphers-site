@@ -1,5 +1,30 @@
 import { encrypt, decrypt } from '@/ciphers/route/Common'
 
+export function verticalCiphers() {
+  return [
+    {
+      encrypt: encryptFromTopLeft,
+      decrypt: decryptFromTopLeft,
+      text: 'Vertikální z levého horního rohu'
+    },
+    {
+      encrypt: encryptFromTopRight,
+      decrypt: decryptFromTopRight,
+      text: 'Vertikální z pravého horního rohu'
+    },
+    {
+      encrypt: encryptFromBottomLeft,
+      decrypt: decryptFromBottomLeft,
+      text: 'Vertikální z levého dolního rohu'
+    },
+    {
+      encrypt: encryptFromBottomRight,
+      decrypt: decryptFromBottomRight,
+      text: 'Vertikální z pravého dolního rohu'
+    }
+  ]
+}
+
 function orderFromLeft(cols, rows, down) {
   const order = []
   let index = down ? 0 : cols * (rows - 1)

@@ -1,5 +1,30 @@
 import { encrypt, decrypt } from '@/ciphers/route/Common'
 
+export function spiralCiphers() {
+  return [
+    {
+      encrypt: encryptClockwiseInwards,
+      decrypt: decryptClockwiseInwards,
+      text: 'Spirála z pravého horního rohu ve směru hodinových ručiček'
+    },
+    {
+      encrypt: encryptAntiClockwiseOutwards,
+      decrypt: decryptAntiClockwiseOutwards,
+      text: 'Spirála zevnitř proti směru hodinových ručiček'
+    },
+    {
+      encrypt: encryptAntiClockwiseInwards,
+      decrypt: decryptAntiClockwiseInwards,
+      text: 'Spirála z pravého horního rohu ve proti směru hodinových ručiček'
+    },
+    {
+      encrypt: encryptClockwiseOutwards,
+      decrypt: decryptClockwiseOutwards,
+      text: 'Spirála zevnitř ve směru hodinových ručiček'
+    }
+  ]
+}
+
 function orderClockwise(cols, rows, reverse) {
   let rowBegin = 0
   let rowEnd = rows - 1

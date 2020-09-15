@@ -67,15 +67,15 @@
 </template>
 
 <script>
-import RouteCipher from '@/mixins/RouteCipher'
 import KeyNumberInput from '@/components/common/convert/KeyNumberInput'
 import RoutePicker from '@/components/route/RoutePicker'
 import PlainTextArea from '@/components/common/convert/PlainTextArea'
 import CipherTextArea from '@/components/common/convert/CipherTextArea'
 
+import { routeCiphers } from '@/ciphers/Route'
+
 export default {
   name: 'RouteConvert',
-  mixins: [RouteCipher],
   components: {
     'key-number-input': KeyNumberInput,
     'route-picker': RoutePicker,
@@ -86,7 +86,7 @@ export default {
     return {
       isEncrypting: true,
       numOfCols: 4,
-      routes: this.getRoutes(),
+      routes: routeCiphers(),
       route: null,
       plainText: '',
       cipherText: ''
@@ -118,49 +118,43 @@ export default {
     encrypt() {
       this.cipherText = ''
       if (this.isPlainTextInvalid) return
-      const method = this.route.encrypt
-      this.cipherText = this[method](this.numOfCols, this.plainText)
+      const encryptFunc = this.route.encrypt
+      this.cipherText = encryptFunc(this.numOfCols, this.plainText)
     },
     decrypt() {
       this.plainText = ''
       if (this.isCipherTextInvalid) return
-      const method = this.route.decrypt
-      this.plainText = this[method](this.numOfCols, this.cipherText)
+      const decryptFunc = this.route.decrypt
+      this.plainText = decryptFunc(this.numOfCols, this.cipherText)
     },
     completePlainText() {
       const length = this.plainText.length
       const remainder = this.numOfCols - (length % this.numOfCols)
       this.plainText += 'x'.repeat(remainder)
       this.encrypt()
+    },
+    invalidTextFeedback(length) {
+      const remainder = this.numOfCols - (length % this.numOfCols)
+      return (
+        'Neúplná tabulka - ' + length + '/' + (length + remainder) + ' písmen'
+      )
     }
   },
   computed: {
     isNumOfColsValid() {
       return this.numOfCols > 1
     },
-
     isPlainTextInvalid() {
       return this.isEncrypting && this.plainText.length % this.numOfCols !== 0
     },
-
     isCipherTextInvalid() {
       return !this.isEncrypting && this.cipherText.length % this.numOfCols !== 0
     },
-
     invalidPlainTextFeedback() {
-      const length = this.plainText.length
-      const remainder = this.numOfCols - (length % this.numOfCols)
-      return (
-        'Neúplná tabulka - ' + length + '/' + (length + remainder) + ' písmen'
-      )
+      return this.invalidTextFeedback(this.plainText.length)
     },
-
     invalidCipherTextFeedback() {
-      const length = this.cipherText.length
-      const remainder = this.numOfCols - (length % this.numOfCols)
-      return (
-        'Neúplná tabulka - ' + length + '/' + (length + remainder) + ' písmen'
-      )
+      return this.invalidTextFeedback(this.cipherText.length)
     }
   }
 }
