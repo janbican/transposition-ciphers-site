@@ -16,7 +16,7 @@ export default {
     }
   },
   computed: {
-    activeClass: function() {
+    activeClass() {
       const value = this.grille[this.row][this.col]
       if (value === 0) return ''
       return value === 1 ? 'activated' : 'deactivated'

@@ -84,69 +84,44 @@ export default {
     encrypt() {
       this.cipherText = ''
       if (this.isPlainTextInvalid) return
-      this.cipherText = fleissnerEncrypt(
-        this.copyGrille(this.completeGrille),
-        this.plainText
-      )
+      this.cipherText = fleissnerEncrypt(this.completeGrille, this.plainText)
     },
     decrypt() {
       this.plainText = ''
       if (this.isCipherTextInvalid) return
-      this.plainText = fleissnerDecrypt(
-        this.copyGrille(this.completeGrille),
-        this.cipherText
-      )
-    },
-    copyGrille(grille) {
-      const copy = []
-      for (const row of grille) {
-        copy.push(row.slice(0))
-      }
-      return copy
+      this.plainText = fleissnerDecrypt(this.completeGrille, this.cipherText)
     },
     completePlainText() {
       const remainder = this.maxTextLength - this.plainText.length
       this.plainText += 'x'.repeat(remainder)
       this.encrypt()
+    },
+    invalidTextFeedback(length) {
+      return (
+        'Nedostatečná délka - ' + length + '/' + this.maxTextLength + ' písmen'
+      )
     }
   },
   computed: {
-    isGrilleComplete: function() {
+    isGrilleComplete() {
       return this.completeGrille !== null
     },
-
-    maxTextLength: function() {
+    maxTextLength() {
       if (this.completeGrille == null) return 0
       const size = this.completeGrille.length
       return size * size - (size % 2 == 1 ? 1 : 0)
     },
-
-    isPlainTextInvalid: function() {
+    isPlainTextInvalid() {
       return this.isEncrypting && this.maxTextLength != this.plainText.length
     },
-
-    isCipherTextInvalid: function() {
+    isCipherTextInvalid() {
       return !this.isEncrypting && this.maxTextLength != this.cipherText.length
     },
-
-    invalidPlainTextFeedback: function() {
-      return (
-        'Nedostatečná délka - ' +
-        this.plainText.length +
-        '/' +
-        this.maxTextLength +
-        ' písmen'
-      )
+    invalidPlainTextFeedback() {
+      return this.invalidTextFeedback(this.plainText.length)
     },
-
-    invalidCipherTextFeedback: function() {
-      return (
-        'Nedostatečná délka - ' +
-        this.cipherText.length +
-        '/' +
-        this.maxTextLength +
-        ' písmen'
-      )
+    invalidCipherTextFeedback() {
+      return this.invalidTextFeedback(this.cipherText.length)
     }
   }
 }

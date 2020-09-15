@@ -47,19 +47,18 @@ export default {
       grille: null
     }
   },
-  created: function() {
-    this.grille = this.createFreshGrille()
+  created() {
+    this.grille = this.emptyGrille()
   },
   methods: {
     sizeChanged() {
-      this.grille = this.createFreshGrille()
+      this.grille = this.emptyGrille()
       this.count = 0
 
       // parent dostává buď kompletní mřížku nebo null
       this.$emit('change', null)
     },
-
-    createFreshGrille() {
+    emptyGrille() {
       const grille = []
       for (let i = 0; i < this.size; i++) {
         grille.push(new Array(this.size).fill(0))
@@ -73,20 +72,14 @@ export default {
 
       return grille
     },
-
     cellClicked(row, col) {
       const value = this.grille[row][col]
       if (value === 0) this.cutCellOut(row, col)
-      else if (value == 1) this.fillCell(row, col)
+      else if (value === 1) this.fillCell(row, col)
 
       // parent dostává buď kompletní mřížku nebo null
-      this.$emit('change', this.isComplete() ? this.grille : null)
+      this.$emit('change', this.isComplete ? this.grille : null)
     },
-
-    isComplete() {
-      return Math.floor((this.size * this.size) / 4) === this.count
-    },
-
     cutCellOut(row, col) {
       this.grille[row][col] = 1
       this.grille[col][this.size - 1 - row] = 2
@@ -100,7 +93,6 @@ export default {
       // aktualizuje počet vystřihnutých políček
       this.count += 1
     },
-
     fillCell(row, col) {
       this.grille[row][col] = 0
       this.grille[col][this.size - 1 - row] = 0
@@ -116,8 +108,11 @@ export default {
     }
   },
   computed: {
-    isSizeValid: function() {
+    isSizeValid() {
       return this.size >= 4
+    },
+    isComplete() {
+      return Math.floor((this.size * this.size) / 4) === this.count
     }
   }
 }

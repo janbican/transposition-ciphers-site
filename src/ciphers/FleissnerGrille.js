@@ -1,8 +1,9 @@
-// mřížka je v průběhu výpočtu modifikována
+// na počátku je vytvořena kopie mřížky
 // grille je 2-dim pole s číselnýma hodnotama
 // 1 reprezentuje vybrané pole
 // 2 reprezentuje nevybrané pole
 export function encrypt(grille, text) {
+  grille = copyGrille(grille)
   const size = grille.length
   const cipherArray = new Array(size * size)
 
@@ -29,26 +30,9 @@ export function encrypt(grille, text) {
   return cipherArray.join('').toUpperCase()
 }
 
-// pootočí mřížku o 90% ve směru hodinových ručiček
-// operace se provádí na vstupní mřížce
-function rotate(grille) {
-  const size = grille.length
-  const x = Math.floor(size / 2)
-  const y = size - 1
-
-  for (let i = 0; i < x; i++) {
-    for (let j = i; j < y - i; j++) {
-      const temp = grille[i][j]
-      grille[i][j] = grille[y - j][i]
-      grille[y - j][i] = grille[y - i][y - j]
-      grille[y - i][y - j] = grille[j][y - i]
-      grille[j][y - i] = temp
-    }
-  }
-}
-
-// mřížka je v průběhu výpočtu modifikována
+// na počátku je vytvořena kopie mřížky
 export function decrypt(grille, cipher) {
+  grille = copyGrille(grille)
   const size = grille.length
   const middle = (size * size) / 2
   const isOdd = size % 2 == 1
@@ -77,4 +61,31 @@ export function decrypt(grille, cipher) {
   }
 
   return plainText.toLowerCase()
+}
+
+// vytvoří kopii mřížky
+function copyGrille(grille) {
+  const copy = []
+  for (const row of grille) {
+    copy.push(row.slice(0))
+  }
+  return copy
+}
+
+// pootočí mřížku o 90% ve směru hodinových ručiček
+// operace se provádí na vstupní mřížce
+function rotate(grille) {
+  const size = grille.length
+  const x = Math.floor(size / 2)
+  const y = size - 1
+
+  for (let i = 0; i < x; i++) {
+    for (let j = i; j < y - i; j++) {
+      const temp = grille[i][j]
+      grille[i][j] = grille[y - j][i]
+      grille[y - j][i] = grille[y - i][y - j]
+      grille[y - i][y - j] = grille[j][y - i]
+      grille[j][y - i] = temp
+    }
+  }
 }
