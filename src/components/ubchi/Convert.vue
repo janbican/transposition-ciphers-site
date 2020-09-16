@@ -106,7 +106,6 @@ export default {
       this.decrypt()
     },
     encrypt() {
-      this.areTablesVisible = this.plainText.length < 200
       const [partCipherText, cipherText] = ubchiEncrypt(
         this.keyPermutation,
         this.numOfKeyWords,
@@ -114,9 +113,9 @@ export default {
       )
       this.partCipherText = partCipherText
       this.cipherText = cipherText
+      this.tryDisplayTable()
     },
     decrypt() {
-      this.areTablesVisible = this.cipherText.length < 200
       const [partCipherText, plainText] = ubchiDecrypt(
         this.keyPermutation,
         this.numOfKeyWords,
@@ -124,6 +123,10 @@ export default {
       )
       this.partCipherText = partCipherText
       this.plainText = plainText
+      this.tryDisplayTable()
+    },
+    tryDisplayTable() {
+      this.areTablesVisible = this.plainText.length < 200
     },
     displayTable() {
       const message = 'Zobrazení může chvíli trvat. Pokračovat?'
@@ -131,6 +134,7 @@ export default {
     }
   },
   computed: {
+    // pole s jednotlivými slovy klíče
     keyArray() {
       return this.keyValue.trim().split(' ')
     },
