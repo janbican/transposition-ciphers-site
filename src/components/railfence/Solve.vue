@@ -9,7 +9,9 @@
 
     <b-row class="mt-5">
       <b-col col>
-        <p v-for="result in results" :key="result">{{ result }}</p>
+        <p v-for="result in results" :key="result.key">
+          Klíč: {{ result.key }} | {{ result.text }}
+        </p>
       </b-col>
     </b-row>
   </div>
@@ -34,7 +36,8 @@ export default {
     solve() {
       this.results = []
       for (let i = 2; i < this.cipherText.length; i++) {
-        this.results.push(decrypt(i, this.cipherText))
+        const result = { key: i, text: decrypt(i, this.cipherText) }
+        this.results.push(result)
       }
     }
   }
