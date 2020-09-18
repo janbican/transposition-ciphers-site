@@ -9,9 +9,7 @@
 
     <b-row class="mt-5">
       <b-col col>
-        <p v-for="result in results" :key="result.key">
-          Klíč: {{ result.key }} | {{ result.text }}
-        </p>
+        <p>otevřený text: {{ this.plainText }}</p>
       </b-col>
     </b-row>
   </div>
@@ -19,7 +17,7 @@
 
 <script>
 import CipherTextArea from '@/components/common/convert/CipherTextArea'
-import { decrypt } from '@/ciphers/RailFence'
+import { load, solve } from '@/solve/RailFenceSolver'
 
 export default {
   name: 'RailFenceSolve',
@@ -29,16 +27,15 @@ export default {
   data() {
     return {
       cipherText: '',
-      results: null
+      plainText: ''
     }
+  },
+  created() {
+    load()
   },
   methods: {
     solve() {
-      this.results = []
-      for (let i = 2; i < this.cipherText.length; i++) {
-        const result = { key: i, text: decrypt(i, this.cipherText) }
-        this.results.push(result)
-      }
+      this.plainText = solve(this.cipherText)
     }
   }
 }
