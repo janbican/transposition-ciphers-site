@@ -2,7 +2,11 @@ import {
   encryptFromTopLeft,
   decryptFromTopLeft,
   encryptFromBottomRight,
-  decryptFromBottomRight
+  decryptFromBottomRight,
+  encryptFromTopRight,
+  decryptFromTopRight,
+  encryptFromBottomLeft,
+  decryptFromBottomLeft
 } from '@/ciphers/route/Diagonal'
 
 describe('Diagonal RouteCipher', () => {
@@ -48,6 +52,50 @@ describe('Diagonal RouteCipher', () => {
     )
     expect(decryptFromBottomRight(5, 'XIXXHRCECENAHAMGSPMIIINAE')).toBe(
       'enigmaisaciphermachinexxx'
+    )
+  })
+  it('encrypts message from top right', () => {
+    expect(encryptFromTopRight(3, 'enigmaisciphermachine')).toBe(
+      'IANEMCHSGIPMHRIECENAI'
+    )
+    expect(encryptFromTopRight(5, 'diagonalroutecipherx')).toBe(
+      'OOGARIXCLIDAERETNUHP'
+    )
+    expect(encryptFromTopRight(5, 'thisistranspositioncipher')).toBe(
+      'INSIAICSRHTTONREOPSSIHPTI'
+    )
+  })
+  it('decrypts message from top right', () => {
+    expect(decryptFromTopRight(3, 'IANEMCHSGIPMHRIECENAI')).toBe(
+      'enigmaisciphermachine'
+    )
+    expect(decryptFromTopRight(5, 'OOGARIXCLIDAERETNUHP')).toBe(
+      'diagonalroutecipherx'
+    )
+    expect(decryptFromTopRight(5, 'INSIAICSRHTTONREOPSSIHPTI')).toBe(
+      'thisistranspositioncipher'
+    )
+  })
+  it('encrypts message from bottom left', () => {
+    expect(encryptFromBottomLeft(3, 'enigmaisciphermachine')).toBe(
+      'IANECEIRHMPIGSHCMENAI'
+    )
+    expect(encryptFromBottomLeft(5, 'diagonalroutecipherx')).toBe(
+      'PUHETNDAERXCLIARIOGO'
+    )
+    expect(encryptFromBottomLeft(5, 'thisistranspositioncipher')).toBe(
+      'ITPHISSPOERNOTTHRSCIAISNI'
+    )
+  })
+  it('decrypts message from bottom left', () => {
+    expect(decryptFromBottomLeft(3, 'IANECEIRHMPIGSHCMENAI')).toBe(
+      'enigmaisciphermachine'
+    )
+    expect(decryptFromBottomLeft(5, 'PUHETNDAERXCLIARIOGO')).toBe(
+      'diagonalroutecipherx'
+    )
+    expect(decryptFromBottomLeft(5, 'ITPHISSPOERNOTTHRSCIAISNI')).toBe(
+      'thisistranspositioncipher'
     )
   })
 })
