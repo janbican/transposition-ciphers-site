@@ -17,7 +17,7 @@
 
 <script>
 import CipherTextArea from '@/components/common/convert/CipherTextArea'
-import { load, solve } from '@/solve/RailFenceSolver'
+import { loadDictionary, solve } from '@/solve/RailFenceSolver'
 
 export default {
   name: 'RailFenceSolve',
@@ -31,7 +31,7 @@ export default {
     }
   },
   created() {
-    load()
+    loadDictionary()
   },
   methods: {
     solve() {

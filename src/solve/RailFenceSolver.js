@@ -1,19 +1,20 @@
-import dictionary from 'raw-loader!@/solve/dictionary.txt'
-import wordsByFreq from 'raw-loader!@/solve/words-by-freq.txt'
-
 import { decrypt } from '@/ciphers/RailFence'
 
-const dictMap = new Map()
+const dict = new Map()
 
 let maxWordLen = 0
 let wordCost = {}
 let maxCost = 9e999
 
-export function load() {
-  let words = dictionary.split('\r\n')
-  words.forEach(word => dictMap.set(word.toLowerCase(), null))
+export async function loadDictionary() {
+  // aby došlo k importu až je potřeba
+  const dictionary = await import('raw-loader!@/solve/dict.txt')
+  const wordsByFreq = await import('raw-loader!@/solve/words-by-freq.txt')
 
-  words = wordsByFreq.split('\n')
+  let words = dictionary.default.split('\n')
+  words.forEach(word => dict.set(word, null))
+
+  words = wordsByFreq.default.split('\n')
   words.forEach((word, index) => {
     wordCost[word] = Math.log((index + 1) * Math.log(words.length))
     if (word.length > maxWordLen) maxWordLen = word.length
@@ -21,16 +22,20 @@ export function load() {
   })
 }
 
+// hrubou silou
+// dešifrování postupně všemi přijatelnými klíči
 export function solve(cipher) {
   for (let i = 2; i <= cipher.length / 2; i++) {
     const plainText = decrypt(i, cipher)
-    const words = splitSentence(plainText.substring(0, 50))
-    if (isEnglish(words)) return plainText
+    // nalezení možných slov
+    const words = findWords(plainText.substring(0, 50))
+    // pokud obsahuje určitou míru anglických slov, je řešení vráceno
+    if (isEnglish(words)) return findWords(plainText).join(' ')
   }
   return 'bez výsledku'
 }
 
-function splitSentence(string) {
+function findWords(string) {
   const words = []
   for (const word of splitWords(string)) {
     words.push(word)
@@ -65,10 +70,7 @@ function splitWords(s) {
   let out = []
   let i = s.length
   while (i > 0) {
-    // let c = best_match(i)[0]
     let k = best_match(i)[1]
-    //if (c == cost[i])
-    //    console.log("Alert: " + c);
 
     let newToken = true
     if (s.slice(i - k, i) != "'") {
@@ -98,7 +100,7 @@ function getEnglishCount(words) {
 
   let matches = 0
   for (const word of words) {
-    if (dictMap.has(word)) {
+    if (dict.has(word)) {
       matches += 1
     }
   }
@@ -107,7 +109,5 @@ function getEnglishCount(words) {
 }
 
 function isEnglish(words, { wordPercentage = 40 } = {}) {
-  const result = getEnglishCount(words) * 100 >= wordPercentage
-  console.log(result)
-  return result
+  return getEnglishCount(words) * 100 >= wordPercentage
 }
