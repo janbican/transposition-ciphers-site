@@ -33,6 +33,9 @@ const routes = [
   {
     path: '/',
     name: 'home',
+    meta: {
+      title: 'Transpoziční šifry'
+    },
     component: Home
   },
   {
@@ -46,11 +49,17 @@ const routes = [
       {
         path: 'description',
         name: 'columnar.description',
+        meta: {
+          title: 'Sloupcová transpozice | Popis'
+        },
         component: ColumnarDescription
       },
       {
         path: 'convert',
         name: 'columnar.convert',
+        meta: {
+          title: 'Sloupcová transpozice | Převod'
+        },
         component: ColumnarConvert
       }
     ]
@@ -66,16 +75,25 @@ const routes = [
       {
         path: 'description',
         name: 'railfence.description',
+        meta: {
+          title: 'Rail Fence šifra | Popis'
+        },
         component: RailFenceDescription
       },
       {
         path: 'convert',
         name: 'railfence.convert',
+        meta: {
+          title: 'Rail Fence šifra | Převod'
+        },
         component: RailFenceConvert
       },
       {
         path: 'solve',
         name: 'railfence.solve',
+        meta: {
+          title: 'Rail Fence šifra | Prolomení'
+        },
         component: RailFenceSolve
       }
     ]
@@ -91,11 +109,17 @@ const routes = [
       {
         path: 'description',
         name: 'ubchi.description',
+        meta: {
+          title: 'ÜBCHI šifra | Popis'
+        },
         component: UbchiDescription
       },
       {
         path: 'convert',
         name: 'ubchi.convert',
+        meta: {
+          title: 'ÜBCHI šifra | Převod'
+        },
         component: UbchiConvert
       }
     ]
@@ -111,11 +135,17 @@ const routes = [
       {
         path: 'description',
         name: 'myszkowski.description',
+        meta: {
+          title: 'Myszkowskiho transpozice | Popis'
+        },
         component: MyszkowskiDescription
       },
       {
         path: 'convert',
         name: 'myszkowski.convert',
+        meta: {
+          title: 'Myszkowskiho transpozice | Převod'
+        },
         component: MyszkowskiConvert
       }
     ]
@@ -131,11 +161,17 @@ const routes = [
       {
         path: 'description',
         name: 'fleissner.description',
+        meta: {
+          title: 'Fleissnerova mřížka | Popis'
+        },
         component: FleissnerDescription
       },
       {
         path: 'convert',
         name: 'fleissner.convert',
+        meta: {
+          title: 'Fleissnerova mřížka | Převod'
+        },
         component: FleissnerConvert
       }
     ]
@@ -151,11 +187,17 @@ const routes = [
       {
         path: 'description',
         name: 'route.description',
+        meta: {
+          title: 'Route šifra | Popis'
+        },
         component: RouteDescription
       },
       {
         path: 'convert',
         name: 'route.convert',
+        meta: {
+          title: 'Route šifra | Převod'
+        },
         component: RouteConvert
       }
     ]
@@ -166,6 +208,11 @@ const router = new VueRouter({
   mode: 'history',
   linkActiveClass: 'active',
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title || 'Transpoziční šifry'
+  next()
 })
 
 export default router
