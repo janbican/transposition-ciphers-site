@@ -3,13 +3,20 @@
     <b-row>
       <b-col col>
         <cipher-text-area v-model="cipherText" :value="cipherText" />
-        <b-button variant="outline-info" @click="solve">Solve</b-button>
+        <b-button variant="outline-info" @click="solve">Prolomit</b-button>
       </b-col>
     </b-row>
 
     <b-row class="mt-5">
       <b-col col>
-        <p>otevřený text: {{ this.plainText }}</p>
+        <label>Otevřený text (možnosti):</label>
+        <div
+          v-for="plainText in candidates"
+          :key="plainText"
+          class="candidate-container"
+        >
+          <p>{{ plainText }}</p>
+        </div>
       </b-col>
     </b-row>
   </div>
@@ -17,7 +24,7 @@
 
 <script>
 import CipherTextArea from '@/components/common/convert/CipherTextArea'
-import { loadDictionary, solve } from '@/solve/RailFenceSolver'
+import { loadSolveData, solve } from '@/solve/RailFenceSolver'
 
 export default {
   name: 'RailFenceSolve',
@@ -27,16 +34,23 @@ export default {
   data() {
     return {
       cipherText: '',
-      plainText: ''
+      candidates: null
     }
   },
   created() {
-    loadDictionary()
+    loadSolveData()
   },
   methods: {
     solve() {
-      this.plainText = solve(this.cipherText)
+      this.candidates = solve(this.cipherText)
     }
   }
 }
 </script>
+
+<style scoped>
+.candidate-container {
+  padding: 1em 0 0;
+  border-top: 1px solid #cccccc;
+}
+</style>
