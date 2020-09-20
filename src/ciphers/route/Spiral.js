@@ -5,22 +5,26 @@ export function spiralCiphers() {
     {
       encrypt: encryptClockwiseInwards,
       decrypt: decryptClockwiseInwards,
-      text: 'Spirála z pravého horního rohu ve směru hodinových ručiček'
+      text: 'Spirála z pravého horního rohu ve směru hodinových ručiček',
+      img: 'spiral-clockwise-top-right.png'
     },
     {
       encrypt: encryptAntiClockwiseOutwards,
       decrypt: decryptAntiClockwiseOutwards,
-      text: 'Spirála zevnitř proti směru hodinových ručiček'
+      text: 'Spirála zevnitř proti směru hodinových ručiček',
+      img: 'spiral-anticlockwise-middle.png'
     },
     {
       encrypt: encryptAntiClockwiseInwards,
       decrypt: decryptAntiClockwiseInwards,
-      text: 'Spirála z pravého horního rohu ve proti směru hodinových ručiček'
+      text: 'Spirála z pravého horního rohu proti směru hodinových ručiček',
+      img: 'spiral-anticlockwise-top-right.png'
     },
     {
       encrypt: encryptClockwiseOutwards,
       decrypt: decryptClockwiseOutwards,
-      text: 'Spirála zevnitř ve směru hodinových ručiček'
+      text: 'Spirála zevnitř ve směru hodinových ručiček',
+      img: 'spiral-clockwise-middle.png'
     }
   ]
 }

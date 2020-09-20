@@ -5,22 +5,26 @@ export function verticalCiphers() {
     {
       encrypt: encryptFromTopLeft,
       decrypt: decryptFromTopLeft,
-      text: 'Vertikální z levého horního rohu'
+      text: 'Vertikální z levého horního rohu',
+      img: 'spiral-clockwise-middle.png'
     },
     {
       encrypt: encryptFromTopRight,
       decrypt: decryptFromTopRight,
-      text: 'Vertikální z pravého horního rohu'
+      text: 'Vertikální z pravého horního rohu',
+      img: 'spiral-clockwise-middle.png'
     },
     {
       encrypt: encryptFromBottomLeft,
       decrypt: decryptFromBottomLeft,
-      text: 'Vertikální z levého dolního rohu'
+      text: 'Vertikální z levého dolního rohu',
+      img: 'spiral-clockwise-middle.png'
     },
     {
       encrypt: encryptFromBottomRight,
       decrypt: decryptFromBottomRight,
-      text: 'Vertikální z pravého dolního rohu'
+      text: 'Vertikální z pravého dolního rohu',
+      img: 'spiral-clockwise-middle.png'
     }
   ]
 }

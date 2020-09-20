@@ -9,7 +9,7 @@
         class="text-center"
         @click="routeClicked(route)"
       >
-        <img src="@/assets/images/mrizka.png" alt="" />
+        <img :src="require(`@/assets/images/route/${route.img}`)" alt="" />
       </b-card>
     </b-card-group>
   </div>
@@ -40,6 +40,6 @@ export default {
 }
 
 img {
-  width: 60%;
+  width: 80%;
 }
 </style>

@@ -5,22 +5,26 @@ export function diagonalCiphers() {
     {
       encrypt: encryptFromTopLeft,
       decrypt: decryptFromTopLeft,
-      text: 'Diagonála z levého horního rohu'
+      text: 'Diagonála z levého horního rohu',
+      img: 'diagonal-top-left.png'
     },
     {
       encrypt: encryptFromBottomRight,
       decrypt: decryptFromBottomRight,
-      text: 'Diagonála z pravého dolního rohu'
+      text: 'Diagonála z pravého dolního rohu',
+      img: 'diagonal-bottom-right.png'
     },
     {
       encrypt: encryptFromTopRight,
       decrypt: decryptFromTopRight,
-      text: 'Diagonála z pravého horního rohu'
+      text: 'Diagonála z pravého horního rohu',
+      img: 'diagonal-top-right.png'
     },
     {
       encrypt: encryptFromBottomLeft,
       decrypt: decryptFromBottomLeft,
-      text: 'Diagonála z levého dolního rohu'
+      text: 'Diagonála z levého dolního rohu',
+      img: 'diagonal-bottom-left.png'
     }
   ]
 }

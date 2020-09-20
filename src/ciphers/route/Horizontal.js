@@ -5,22 +5,26 @@ export function horizontalCiphers() {
     {
       encrypt: encryptFromTopLeft,
       decrypt: decryptFromTopLeft,
-      text: 'Horizontální z levého horního rohu'
+      text: 'Horizontální z levého horního rohu',
+      img: 'horizontal-top-left.png'
     },
     {
       encrypt: encryptFromTopRight,
       decrypt: decryptFromTopRight,
-      text: 'Horizontální z pravého horního rohu'
+      text: 'Horizontální z pravého horního rohu',
+      img: 'horizontal-top-right.png'
     },
     {
       encrypt: encryptFromBottomLeft,
       decrypt: decryptFromBottomLeft,
-      text: 'Horizontální z levého dolního rohu'
+      text: 'Horizontální z levého dolního rohu',
+      img: 'horizontal-bottom-left.png'
     },
     {
       encrypt: encryptFromBottomRight,
       decrypt: decryptFromBottomRight,
-      text: 'Horizontální z pravého dolního rohu'
+      text: 'Horizontální z pravého dolního rohu',
+      img: 'horizontal-bottom-right.png'
     }
   ]
 }
