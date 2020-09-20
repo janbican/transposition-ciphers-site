@@ -29,7 +29,14 @@ export function diagonalCiphers() {
   ]
 }
 
-function partsFromLeft(cols, rows) {
+// vrací seznam indexů po diagonálách
+// diagonály zprava doleva
+// příklad:
+// 0 1 2
+// 3 4 5
+// 6 7 8
+// return [[0], [1, 3], [2, 4, 6], [5, 7], [8]]
+function partsRightToLeft(cols, rows) {
   const parts = []
 
   // loop přes všechny části
@@ -53,32 +60,14 @@ function partsFromLeft(cols, rows) {
   return parts
 }
 
-function orderFromTopLeft(cols, rows) {
-  const parts = partsFromLeft(cols, rows)
-  const order = []
-
-  for (let i = 0; i < parts.length; i++) {
-    const part = i % 2 === 0 ? parts[i] : parts[i].reverse()
-    for (const item of part) order.push(item)
-  }
-
-  return order
-}
-
-function orderFromBottomRight(cols, rows) {
-  const parts = partsFromLeft(cols, rows)
-  const order = []
-  const remainder = parts.length % 2 === 0 ? 0 : 1
-
-  for (let i = parts.length - 1; i >= 0; i--) {
-    const part = i % 2 === remainder ? parts[i] : parts[i].reverse()
-    for (const item of part) order.push(item)
-  }
-
-  return order
-}
-
-function partsFromRight(cols, rows) {
+// vrací seznam indexů po diagonálách
+// diagonály zleva doprava
+// příklad:
+// 0 1 2
+// 3 4 5
+// 6 7 8
+// return [[6], [3, 7], [0, 4, 8], [1, 5], [2]]
+function partsLeftToRight(cols, rows) {
   const parts = []
 
   for (let i = cols + rows - 2; i >= 0; i--) {
@@ -99,8 +88,39 @@ function partsFromRight(cols, rows) {
   return parts
 }
 
+// průchod po diagonálách
+// každá s lichým indexem je obrácena
+function orderFromTopLeft(cols, rows) {
+  const parts = partsRightToLeft(cols, rows)
+  const order = []
+
+  for (let i = 0; i < parts.length; i++) {
+    const part = i % 2 === 0 ? parts[i] : parts[i].reverse()
+    for (const item of part) order.push(item)
+  }
+
+  return order
+}
+
+// průchod po diagonálách
+// obrácené diagonály na základě počtu diagonál
+function orderFromBottomRight(cols, rows) {
+  const parts = partsRightToLeft(cols, rows)
+  const order = []
+  const remainder = parts.length % 2 === 0 ? 0 : 1
+
+  for (let i = parts.length - 1; i >= 0; i--) {
+    const part = i % 2 === remainder ? parts[i] : parts[i].reverse()
+    for (const item of part) order.push(item)
+  }
+
+  return order
+}
+
+// průchod po diagonálách
+// obrácené diagonály na základě počtu diagonál
 function orderFromTopRight(cols, rows) {
-  const parts = partsFromRight(cols, rows)
+  const parts = partsLeftToRight(cols, rows)
   const order = []
   const remainder = parts.length % 2 === 0 ? 1 : 0
 
@@ -112,8 +132,10 @@ function orderFromTopRight(cols, rows) {
   return order
 }
 
+// průchod po diagonálách
+// každá se sudým indexem je obrácena
 function orderFromBottomLeft(cols, rows) {
-  const parts = partsFromRight(cols, rows)
+  const parts = partsLeftToRight(cols, rows)
   const order = []
 
   for (let i = 0; i < parts.length; i++) {
