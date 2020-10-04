@@ -72,7 +72,7 @@ import RoutePicker from '@/components/route/RoutePicker'
 import PlainTextArea from '@/components/common/convert/PlainTextArea'
 import CipherTextArea from '@/components/common/convert/CipherTextArea'
 
-import { routeCiphers } from '@/ciphers/Route'
+import { routeCiphers } from '@/composables/route-list'
 
 export default {
   name: 'RouteConvert',
@@ -119,13 +119,17 @@ export default {
       this.cipherText = ''
       if (this.isPlainTextInvalid) return
       const encryptFunc = this.route.encrypt
-      this.cipherText = encryptFunc(this.numOfCols, this.plainText)
+      this.cipherText = encryptFunc(this.numOfCols, this.plainText, {
+        normalize: false
+      })
     },
     decrypt() {
       this.plainText = ''
       if (this.isCipherTextInvalid) return
       const decryptFunc = this.route.decrypt
-      this.plainText = decryptFunc(this.numOfCols, this.cipherText)
+      this.plainText = decryptFunc(this.numOfCols, this.cipherText, {
+        normalize: false
+      })
     },
     completePlainText() {
       const length = this.plainText.length

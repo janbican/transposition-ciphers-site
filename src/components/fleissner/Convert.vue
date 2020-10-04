@@ -47,10 +47,7 @@ import Grille from '@/components/fleissner/Grille'
 import PlainTextArea from '@/components/common/convert/PlainTextArea'
 import CipherTextArea from '@/components/common/convert/CipherTextArea'
 
-import {
-  encrypt as fleissnerEncrypt,
-  decrypt as fleissnerDecrypt
-} from '@/ciphers/FleissnerGrille'
+import { fleissner } from 'transposition-ciphers'
 
 export default {
   name: 'FleissnerConvert',
@@ -69,9 +66,17 @@ export default {
   },
   methods: {
     grilleChanged(grille) {
-      this.completeGrille = grille
       this.plainText = ''
       this.cipherText = ''
+      if (grille == null) {
+        this.completeGrille = null
+        return
+      }
+
+      this.completeGrille = []
+      for (const row of grille) {
+        this.completeGrille.push(row.map(value => (value === 1 ? true : false)))
+      }
     },
     plainTextChanged() {
       this.isEncrypting = true
@@ -84,12 +89,16 @@ export default {
     encrypt() {
       this.cipherText = ''
       if (this.isPlainTextInvalid) return
-      this.cipherText = fleissnerEncrypt(this.completeGrille, this.plainText)
+      this.cipherText = fleissner.encrypt(this.completeGrille, this.plainText, {
+        normalize: false
+      })
     },
     decrypt() {
       this.plainText = ''
       if (this.isCipherTextInvalid) return
-      this.plainText = fleissnerDecrypt(this.completeGrille, this.cipherText)
+      this.plainText = fleissner.decrypt(this.completeGrille, this.cipherText, {
+        normalize: false
+      })
     },
     completePlainText() {
       const remainder = this.maxTextLength - this.plainText.length

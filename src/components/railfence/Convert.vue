@@ -60,10 +60,7 @@ import PlainTextArea from '@/components/common/convert/PlainTextArea'
 import CipherTextArea from '@/components/common/convert/CipherTextArea'
 import EncryptionGrid from '@/components/railfence/EncryptionGrid'
 
-import {
-  encrypt as railFenceEncrypt,
-  decrypt as railFenceDecrypt
-} from '@/ciphers/RailFence'
+import { railfence } from 'transposition-ciphers'
 
 export default {
   name: 'RailFenceConvert',
@@ -99,11 +96,15 @@ export default {
     },
     encrypt() {
       this.isGridDisplayed = this.plainText.length < 200
-      this.cipherText = railFenceEncrypt(this.keyValue, this.plainText)
+      this.cipherText = railfence.encrypt(this.keyValue, this.plainText, {
+        normalize: false
+      })
     },
     decrypt() {
       this.isGridDisplayed = this.cipherText.length < 200
-      this.plainText = railFenceDecrypt(this.keyValue, this.cipherText)
+      this.plainText = railfence.decrypt(this.keyValue, this.cipherText, {
+        normalize: false
+      })
     },
     displayGrid() {
       const message = 'Zobrazení může chvíli trvat. Pokračovat?'

@@ -24,7 +24,7 @@
 
 <script>
 import CipherTextArea from '@/components/common/convert/CipherTextArea'
-import { loadSolveData, solve } from '@/solve/RailFenceSolver'
+import { loadSolveData, solve } from '@/solve/railfence-solver'
 
 export default {
   name: 'RailFenceSolve',

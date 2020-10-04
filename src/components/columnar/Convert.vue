@@ -59,11 +59,8 @@ import PlainTextArea from '@/components/common/convert/PlainTextArea'
 import CipherTextArea from '@/components/common/convert/CipherTextArea'
 import ColumnarTable from '@/components/columnar/ColumnarTable'
 
-import {
-  encrypt as columnarEncrypt,
-  decrypt as columnarDecrypt
-} from '@/ciphers/Columnar'
-import { keyPermutation } from '@/ciphers/KeyPermutation'
+import { columnar } from 'transposition-ciphers'
+import { keyPermutation } from 'transposition-ciphers'
 
 export default {
   name: 'ColumnarConvert',
@@ -98,11 +95,19 @@ export default {
       this.decrypt()
     },
     encrypt() {
-      this.cipherText = columnarEncrypt(this.keyPermutation, this.plainText)
+      this.cipherText = columnar.encryptByPermutation(
+        this.keyPermutation,
+        this.plainText,
+        { normalize: false }
+      )
       this.tryDisplayTable()
     },
     decrypt() {
-      this.plainText = columnarDecrypt(this.keyPermutation, this.cipherText)
+      this.plainText = columnar.decryptByPermutation(
+        this.keyPermutation,
+        this.cipherText,
+        { normalize: false }
+      )
       this.tryDisplayTable()
     },
     tryDisplayTable() {
@@ -115,7 +120,7 @@ export default {
   },
   computed: {
     keyPermutation() {
-      return keyPermutation(this.keyValue)
+      return keyPermutation(this.keyValue, { normalize: false })
     },
     isKeyValueValid() {
       return this.keyValue.length > 1

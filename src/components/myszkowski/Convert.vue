@@ -59,11 +59,8 @@ import PlainTextArea from '@/components/common/convert/PlainTextArea'
 import CipherTextArea from '@/components/common/convert/CipherTextArea'
 import ColumnarTable from '@/components/columnar/ColumnarTable'
 
-import {
-  encrypt as myszkowskiEncrypt,
-  decrypt as myszkowskiDecrypt
-} from '@/ciphers/Myszkowski'
-import { keyPermutationDuplicate } from '@/ciphers/KeyPermutation'
+import { myszkowski } from 'transposition-ciphers'
+import { keyPermutationDuplicate } from 'transposition-ciphers'
 
 export default {
   name: 'MyszkowskiConvert',
@@ -98,11 +95,17 @@ export default {
       this.decrypt()
     },
     encrypt() {
-      this.cipherText = myszkowskiEncrypt(this.keyPermutation, this.plainText)
+      this.cipherText = myszkowski.encryptByPermutation(
+        this.keyPermutation,
+        this.plainText,
+        { normalize: false }
+      )
       this.tryDisplayTable()
     },
     decrypt() {
-      this.plainText = myszkowskiDecrypt(this.keyValue, this.cipherText)
+      this.plainText = myszkowski.decrypt(this.keyValue, this.cipherText, {
+        normalize: false
+      })
       this.tryDisplayTable()
     },
     tryDisplayTable() {
@@ -115,7 +118,7 @@ export default {
   },
   computed: {
     keyPermutation() {
-      return keyPermutationDuplicate(this.keyValue)
+      return keyPermutationDuplicate(this.keyValue, { normalize: false })
     },
     isKeyValueValid() {
       return this.keyValue.length > 1

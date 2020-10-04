@@ -15,8 +15,7 @@
     </p>
 
     <p>
-      Tato bakalářská práce se zabývá zásadními transpozičními šiframi, popisuje
-      je a zkoumá možnost jejich prolomení.
+      Tato bakalářská práce se zabývá zásadními transpozičními šiframi.
     </p>
   </div>
 </template>

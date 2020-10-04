@@ -66,11 +66,8 @@ import PlainTextArea from '@/components/common/convert/PlainTextArea'
 import CipherTextArea from '@/components/common/convert/CipherTextArea'
 import ColumnarTable from '@/components/columnar/ColumnarTable'
 
-import {
-  encrypt as ubchiEncrypt,
-  decrypt as ubchiDecrypt
-} from '@/ciphers/Ubchi'
-import { keyPermutation } from '@/ciphers/KeyPermutation'
+import { ubchi } from 'transposition-ciphers'
+import { keyPermutation } from 'transposition-ciphers'
 
 export default {
   name: 'UchiConvert',
@@ -106,20 +103,20 @@ export default {
       this.decrypt()
     },
     encrypt() {
-      const [partCipherText, cipherText] = ubchiEncrypt(
+      const [partCipherText, cipherText] = ubchi.encryptByPermutation(
         this.keyPermutation,
-        this.numOfKeyWords,
-        this.plainText
+        this.plainText,
+        { numOfWords: this.numOfKeyWords, normalize: false }
       )
       this.partCipherText = partCipherText
       this.cipherText = cipherText
       this.tryDisplayTable()
     },
     decrypt() {
-      const [partCipherText, plainText] = ubchiDecrypt(
+      const [partCipherText, plainText] = ubchi.decryptByPermutation(
         this.keyPermutation,
-        this.numOfKeyWords,
-        this.cipherText
+        this.cipherText,
+        { numOfWords: this.numOfKeyWords, normalize: false }
       )
       this.partCipherText = partCipherText
       this.plainText = plainText
@@ -145,7 +142,7 @@ export default {
       return this.keyArray.length
     },
     keyPermutation() {
-      return keyPermutation(this.keyWithoutSpaces)
+      return keyPermutation(this.keyWithoutSpaces, { normalize: false })
     },
     isKeyValueValid() {
       return this.keyWithoutSpaces.length > 1

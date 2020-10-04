@@ -1,4 +1,4 @@
-import { decrypt } from '@/ciphers/RailFence'
+import { railfence } from 'transposition-ciphers'
 import { loadWordsByFrequency, findWords } from '@/solve/findwords/FindWords'
 import { loadDictionary, isEnglish } from '@/solve/englishcheck/EnglishCheck'
 
@@ -14,7 +14,7 @@ export function loadSolveData() {
 export function solve(cipher) {
   const candidates = []
   for (let i = 2; i <= cipher.length / 2; i++) {
-    const plainText = decrypt(i, cipher)
+    const plainText = railfence.decrypt(i, cipher)
     // nalezení možných slov
     const words = findWords(plainText.substring(0, 50))
     // pokud obsahuje určitou míru anglických slov, je řešení vráceno
